@@ -1,5 +1,4 @@
 import React from "react";
-import { Card } from "react-native-shadow-cards";
 
 import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView} from "react-native";
 
@@ -20,7 +19,7 @@ const UpdateDeleteList = ({ navigation }) => {
       </Text>
       <TouchableOpacity
         style={[styles.containerx, styles.materialButtonDark]}
-        onPress={() => navigation.navigate("UpdateList")}
+        onPress={() => navigation.navigate("UpdateBlogs")}
       >
         <Text style={styles.addnewblog}>EDIT</Text>
       </TouchableOpacity>
@@ -90,6 +89,12 @@ const UpdateDeleteList = ({ navigation }) => {
             marginLeft: 150,
             marginBottom:15,
          },
+         addnewblog: {
+          color: "black",
+          fontWeight: "bold",
+          fontSize: 18,
+          lineHeight: 18,
+          },    
 
          materialButtonDarka: {
             height: 50,
@@ -125,15 +130,7 @@ const UpdateDeleteList = ({ navigation }) => {
           marginBottom:15,
        },
 
-            addnewblog: {
-            color: "black",
-            fontWeight: "bold",
-            fontSize: 18,
-            lineHeight: 18,
-            
-  },
-
-            containerx: {
+          containerx: {
             backgroundColor: "#C2DFFF",
             justifyContent: "center",
             alignItems: "center",
