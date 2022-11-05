@@ -71,7 +71,6 @@ const BlogsList = ({ navigation }) => {
           marginTop: 10,
           fontSize: 12,
           fontWeight: "bold",
-          fontFamily: "Times New Roman",
         }}
       >
         Marine life, sea life, or ocean life is the plants, 
@@ -94,7 +93,6 @@ const BlogsList = ({ navigation }) => {
           marginTop: 10,
           fontSize: 15,
           fontWeight: "bold",
-          fontFamily: "Times New Roman",
         }}
       >
         Protect The Ocean
@@ -108,7 +106,6 @@ const BlogsList = ({ navigation }) => {
           marginTop: 10,
           fontSize: 12,
           fontWeight: "bold",
-          fontFamily: "Times New Roman",
         }}
       >
        Under the Name Coral, We Find Different Species, Some of Which Live in the Mediterranean. 
