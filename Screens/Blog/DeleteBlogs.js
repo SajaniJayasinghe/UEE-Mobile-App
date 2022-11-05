@@ -4,8 +4,15 @@ import Icon from 'react-native-vector-icons/Entypo';
 import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView} from "react-native";
 
 const DeleteBlogs = ({ navigation }) => {
+
     return (
         <View style={styles.container}>
+            <Image
+        style={styles.tiny}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
              <Text
         style={{
           color: "#151B54",
@@ -23,7 +30,8 @@ const DeleteBlogs = ({ navigation }) => {
         source={{
           uri: "https://media.istockphoto.com/photos/sea-life-on-beautiful-coral-reef-with-blacktail-butterflyfish-on-red-picture-id1364050573?b=1&k=20&m=1364050573&s=170667a&w=0&h=RU5Bi5gDzop_fvqiQXAk7elW3l8mS0t52VjLwl29bc0=",
         }}
-      />  
+      /> 
+      <ScrollView style={{ display: "flex", flexDirection: "column" }}>
 <Text
         style={{
           color: "#000000",
@@ -39,18 +47,32 @@ const DeleteBlogs = ({ navigation }) => {
       e water. It was not until the middle of the 18th century that it was recognized as an animal that was classified in the large 
       family of stinging animals, the Cnidaria.
         </Text>
+        </ScrollView> 
         <TouchableOpacity
         style={[styles.containerx, styles.materialButtonDark]}
         onPress={() => navigation.navigate("UpdateList")}
       >
         <Text style={styles.addnewblog}>See More</Text>
       </TouchableOpacity>
+     
       </View>
         );
     };
     const styles = StyleSheet.create({
         container: {
           flex: 1,
+        },
+        tiny: {
+          width: 470,
+          height: 100,
+          marginLeft: -15,
+          marginTop: -50,
+        },
+        tiny1: {
+          width: 470,
+          height: 40,
+          marginLeft: -15,
+          marginTop: -50,
         },
         blog1: {
           width: 350,

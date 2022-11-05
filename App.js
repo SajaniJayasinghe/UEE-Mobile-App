@@ -22,7 +22,6 @@ export default function App() {
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="BlogsList" component={BlogsList} />
-      <Stack.Screen name="BlogsList" component={BlogsList} />
       <Stack.Screen name="UpdateList" component={UpdateDeleteList} />
       <Stack.Screen name="UpdateBlogs" component={UpdateBlogs} />
       <Stack.Screen name="DeleteBlogs" component={DeleteBlogs} />
