@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import BlogsList from "./Screens/Blog/BlogsList";
 import UpdateDeleteList from "./Screens/Blog/UpdateDeleteList";
 import UpdateBlogs from "./Screens/Blog/UpdateBlogs";
+import DeleteBlogs from "./Screens/Blog/DeleteBlogs";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -15,6 +16,7 @@ export default function App() {
       <Stack.Screen name="BlogsList" component={BlogsList} />
       <Stack.Screen name="UpdateList" component={UpdateDeleteList} />
       <Stack.Screen name="UpdateBlogs" component={UpdateBlogs} />
+      <Stack.Screen name="DeleteBlogs" component={DeleteBlogs} />
       </Stack.Navigator>
     </NavigationContainer>
   );
