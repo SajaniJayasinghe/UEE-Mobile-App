@@ -116,7 +116,9 @@ export default function Dashboard({ navigation }) {
             </Text>
           </Card>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Donations")}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("DisplayAllDonation")}
+        >
           <Card
             style={{
               padding: 50,
