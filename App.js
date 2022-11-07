@@ -4,7 +4,6 @@ import LoadingScreen from "./Screens/CommonScreen/LoadingScreen";
 import HomeScreen from "./Screens/CommonScreen/HomeScreen";
 import SignInScreen from "./Screens/CommonScreen/SignInScreen";
 import SignUpScreen from "./Screens/CommonScreen/SignUpScreen";
-import Dashboard from "./Screens/CommonScreen/Dashboard";
 import BlogsList from "./Screens/Blog/BlogsList";
 import UpdateDeleteList from "./Screens/Blog/UpdateDeleteList";
 import UpdateBlogs from "./Screens/Blog/UpdateBlogs";
@@ -24,7 +23,6 @@ export default function App() {
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="SignInScreen" component={SignInScreen} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
-        <Stack.Screen name="Dashboard" component={Dashboard} />
         <Stack.Screen name="AddDonations" component={AddDonations} />
         <Stack.Screen
           name="DisplayAllDonation"
