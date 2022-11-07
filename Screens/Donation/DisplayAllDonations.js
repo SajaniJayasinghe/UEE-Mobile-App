@@ -21,29 +21,17 @@ export default function DisplayAllDonations({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
+        style={styles.tinyLogo1}
+        source={{
+          uri: "https://cdn.dribbble.com/users/3012156/screenshots/10975204/media/d02e71ce742a1dcfe3bf88e26ff03ac1.png?compress=1&resize=400x300&vertical=top",
+        }}
+      />
+      <Image
         style={styles.tinyLogo}
         source={{
           uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
         }}
       />
-      <Image
-        style={styles.tinyLogo1}
-        source={{
-          uri: "https://scoutlife.org/wp-content/uploads/2019/07/greenseaturtle.jpg?w=640",
-        }}
-      />
-      <Text
-        style={{
-          fontWeight: "900",
-          textAlign: "center",
-          fontSize: 26,
-          marginTop: -25,
-          fontColor: "black",
-        }}
-      >
-        All Donations
-      </Text>
-
       <SearchBar
         placeholder="Search here"
         fontColor="#000000"
@@ -58,6 +46,18 @@ export default function DisplayAllDonations({ navigation }) {
         }}
         onChangeText={(text) => console.log(text)}
       />
+      <Text
+        style={{
+          fontWeight: "900",
+          textAlign: "center",
+          fontSize: 26,
+          marginTop: 215,
+          fontColor: "black",
+        }}
+      >
+        All Donations
+      </Text>
+
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
         {donations.map((donations, index) => (
           <View style={styles.bus2} key={donations + index}>
@@ -130,12 +130,13 @@ const styles = StyleSheet.create({
     width: 450,
     height: 50,
     marginLeft: -15,
-    marginTop: 0,
+    marginTop: -355,
   },
   tinyLogo1: {
     width: 470,
-    height: 190,
+    height: 280,
     marginLeft: -15,
     marginBottom: 30,
+    marginTop: 30,
   },
 });

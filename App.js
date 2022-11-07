@@ -11,6 +11,8 @@ import UpdateBlogs from "./Screens/Blog/UpdateBlogs";
 import DeleteBlogs from "./Screens/Blog/DeleteBlogs";
 import AddDonations from "./Screens/Donation/AddDonations";
 import DisplayAllDonations from "./Screens/Donation/DisplayAllDonations";
+import UserProfile from "./Screens/CommonScreen/UserProfile";
+import UserDashboard from "./Screens/CommonScreen/UserDashboard";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -28,10 +30,12 @@ export default function App() {
           name="DisplayAllDonation"
           component={DisplayAllDonations}
         />
+        <Stack.Screen name="UserProfile" component={UserProfile} />
         <Stack.Screen name="BlogsList" component={BlogsList} />
         <Stack.Screen name="UpdateList" component={UpdateDeleteList} />
         <Stack.Screen name="UpdateBlogs" component={UpdateBlogs} />
         <Stack.Screen name="DeleteBlogs" component={DeleteBlogs} />
+        <Stack.Screen name="UserDashboard" component={UserDashboard} />
       </Stack.Navigator>
     </NavigationContainer>
   );

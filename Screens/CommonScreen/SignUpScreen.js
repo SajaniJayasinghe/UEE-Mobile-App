@@ -5,9 +5,9 @@ import {
   Image,
   Text,
   TextInput,
+  ScrollView,
   TouchableOpacity,
 } from "react-native";
-import axios from "axios";
 
 export default function SignUpScreen({ navigation }) {
   return (
@@ -21,59 +21,57 @@ export default function SignUpScreen({ navigation }) {
       <Image
         style={styles.tinyLogo2}
         source={{
-          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667591659/Turtle-ocean-scaled-1200x630-cropped_jfdsik.jpg",
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667591663/pexels-richard-segal-1618606_tunym1.jpg",
         }}
       />
-      <Text style={styles.loginText}>Enter Your Full Name</Text>
-      <TextInput
-        placeholder="Full Name"
-        style={styles.textInput2}
-        // onChange={(e) => setEmail(e.nativeEvent.text)}
-        // value={email}
-      ></TextInput>
-
-      <Text style={styles.loginText}>Enter Your Phone Number</Text>
-      <TextInput
-        placeholder="Phone Number"
-        style={styles.textInput2}
-        // onChange={(e) => setEmail(e.nativeEvent.text)}
-        // value={email}
-      ></TextInput>
-
-      <Text style={styles.loginText}>Enter Your Email</Text>
-      <TextInput
-        placeholder="E-mail Address"
-        style={styles.textInput2}
-        // onChange={(e) => setEmail(e.nativeEvent.text)}
-        // value={email}
-      ></TextInput>
-
-      <Text style={styles.loginText}>Enter Your Password</Text>
-      <TextInput
-        secureTextEntry
-        placeholder="Password"
-        style={styles.textInput2}
-        // onChange={(e) => setPwd(e.nativeEvent.text)}
-        // value={pwd}
-      ></TextInput>
-
-      <Text style={styles.loginText}>Enter Confirm Password</Text>
-      <TextInput
-        secureTextEntry
-        placeholder="Confirm Password"
-        style={styles.textInput2}
-        // onChange={(e) => setPwd(e.nativeEvent.text)}
-        // value={pwd}
-      ></TextInput>
-
-      <TouchableOpacity
-        style={[styles.containerx, styles.ButtonDark]}
-        // onPress={() => {
-        //   loginUser();
-        // }}
+      <Text
+        style={{
+          fontSize: 28,
+          marginLeft: 130,
+          marginTop: -20,
+          fontWeight: "bold",
+          marginBottom: 30,
+        }}
       >
-        <Text style={styles.loginText3}>Register</Text>
-      </TouchableOpacity>
+        SignUp Page
+      </Text>
+      <ScrollView style={{ display: "flex", flexDirection: "column" }}>
+        <Text style={styles.loginText}>Enter Your Full Name</Text>
+        <TextInput
+          placeholder="Full Name"
+          style={styles.textInput2}
+        ></TextInput>
+
+        <Text style={styles.loginText}>Enter Your Phone Number</Text>
+        <TextInput
+          placeholder="Phone Number"
+          style={styles.textInput2}
+        ></TextInput>
+
+        <Text style={styles.loginText}>Enter Your Email</Text>
+        <TextInput
+          placeholder="E-mail Address"
+          style={styles.textInput2}
+        ></TextInput>
+
+        <Text style={styles.loginText}>Enter Your Password</Text>
+        <TextInput
+          secureTextEntry
+          placeholder="Password"
+          style={styles.textInput2}
+        ></TextInput>
+
+        <Text style={styles.loginText}>Enter Confirm Password</Text>
+        <TextInput
+          secureTextEntry
+          placeholder="Confirm Password"
+          style={styles.textInput2}
+        ></TextInput>
+
+        <TouchableOpacity style={[styles.containerx, styles.ButtonDark]}>
+          <Text style={styles.loginText3}>Register</Text>
+        </TouchableOpacity>
+      </ScrollView>
       <Image
         style={styles.tinyLogo4}
         source={{
@@ -90,13 +88,13 @@ const styles = StyleSheet.create({
   },
   tinyLogo: {
     width: 470,
-    height: 100,
+    height: 90,
     marginLeft: -15,
     marginTop: -50,
   },
   tinyLogo2: {
     width: 470,
-    height: 230,
+    height: 150,
     marginLeft: -15,
     marginBottom: 30,
   },
@@ -105,7 +103,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 18,
     marginBottom: -10,
-    marginLeft: 44,
+    marginLeft: 54,
+    marginTop: 5,
   },
   textInput2: {
     height: 40,
@@ -117,6 +116,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 45,
     marginBottom: 10,
+    borderRadius: 25,
   },
   ButtonDark: {
     height: 50,

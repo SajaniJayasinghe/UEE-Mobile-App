@@ -21,16 +21,26 @@ export default function SignInScreen({ navigation }) {
       <Image
         style={styles.tinyLogo2}
         source={{
-          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667591659/Scuba-Divers-Ocean-roles-41_gnkedv.jpg",
+          uri: "https://www.absolutearts.com/portfolio3/g/garyboswellart/sea_turtles_over_reef-1560688826l.jpg",
         }}
       />
+
+      <Text
+        style={{
+          fontSize: 28,
+          marginLeft: 130,
+          marginTop: 30,
+          fontWeight: "bold",
+          marginBottom: 10,
+        }}
+      >
+        SignIn Page
+      </Text>
       <Text style={styles.loginTex2}>Enter Your Email</Text>
 
       <TextInput
         placeholder="E-mail Address"
         style={styles.textInput2}
-        // onChange={(e) => setEmail(e.nativeEvent.text)}
-        // value={email}
       ></TextInput>
 
       <Text style={styles.loginText}>Enter Your Password</Text>
@@ -38,16 +48,11 @@ export default function SignInScreen({ navigation }) {
         secureTextEntry
         placeholder="Password"
         style={styles.textInput}
-        // onChange={(e) => setPwd(e.nativeEvent.text)}
-        // value={pwd}
       ></TextInput>
 
       <TouchableOpacity
         style={[styles.containerx, styles.ButtonDark]}
-        // onPress={() => {
-        //   loginUser();
-        // }}
-        onPress={() => navigation.navigate("Dashboard")}
+        onPress={() => navigation.navigate("UserDashboard")}
       >
         <Text style={styles.loginText3}>Login</Text>
       </TouchableOpacity>
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
     width: 450,
     height: 60,
     marginLeft: -15,
-    marginTop: 90,
+    marginTop: 110,
   },
   loginText: {
     color: "black",
@@ -91,22 +96,24 @@ const styles = StyleSheet.create({
   },
   textInput: {
     color: "#121212",
-    height: 55,
+    height: 50,
     width: 334,
     textAlign: "center",
     borderColor: "#000000",
     fontSize: 18,
-    marginTop: 22,
+    borderRadius: 25,
+    marginTop: 12,
     marginLeft: 45,
     borderWidth: 1,
   },
 
   textInput2: {
-    height: 55,
+    height: 50,
     width: 334,
     textAlign: "center",
     fontSize: 18,
-    marginTop: 20,
+    borderRadius: 25,
+    marginTop: 10,
     marginLeft: 45,
     borderWidth: 1,
   },
@@ -125,7 +132,7 @@ const styles = StyleSheet.create({
   },
   tinyLogo2: {
     width: 470,
-    height: 300,
+    height: 240,
     marginLeft: -15,
   },
 
@@ -141,7 +148,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 0,
     marginTop: 30,
-    marginLeft: 120,
+    marginLeft: 130,
   },
   containerx: {
     marginTop: -20,
