@@ -12,6 +12,7 @@ import AddDonations from "./Screens/Donation/AddDonations";
 import DisplayAllDonations from "./Screens/Donation/DisplayAllDonations";
 import UserProfile from "./Screens/CommonScreen/UserProfile";
 import UserDashboard from "./Screens/CommonScreen/UserDashboard";
+import UpdateUserProfile from "./Screens/CommonScreen/UpdateUserProfile";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -34,6 +35,7 @@ export default function App() {
         <Stack.Screen name="UpdateBlogs" component={UpdateBlogs} />
         <Stack.Screen name="DeleteBlogs" component={DeleteBlogs} />
         <Stack.Screen name="UserDashboard" component={UserDashboard} />
+        <Stack.Screen name="UpdateUserProfile" component={UpdateUserProfile} />
       </Stack.Navigator>
     </NavigationContainer>
   );

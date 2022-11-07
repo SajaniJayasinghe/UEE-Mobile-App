@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 
 import axios from "axios";
 
@@ -72,7 +65,7 @@ export default function UserProfile({ route, navigation }) {
 
         <TouchableOpacity
           style={[styles.containerx, styles.ButtonDark1]}
-          onPress={() => navigation.navigate(" ")}
+          onPress={() => navigation.navigate("UpdateUserProfile")}
         >
           <Text style={styles.loginText3}>Update Profile</Text>
         </TouchableOpacity>
