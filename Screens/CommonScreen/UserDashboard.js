@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Card } from "react-native-shadow-cards";
 
-export default function Dashboard({ navigation }) {
+export default function UserDashboard({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
@@ -25,29 +25,10 @@ export default function Dashboard({ navigation }) {
           uri: "https://ychef.files.bbci.co.uk/960_540/p07mw81t.jpg",
         }}
       />
-      <TouchableOpacity onPress={() => navigation.navigate("UserProfile")}>
-        <Image
-          style={{
-            marginBottom: 10,
-            marginTop: -23,
-            width: 50,
-            height: 50,
-            marginLeft: 360,
-          }}
-          source={{
-            uri: "https://img.freepik.com/premium-vector/user-icon-human-person-symbol-social-profile-icon-avatar-login-sign-web-user-symbol-neumorphic-ui-ux-white-user-interface-web-button-neumorphism-vector-eps-10_399089-2757.jpg?w=2000",
-          }}
-        />
-      </TouchableOpacity>
-      <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        <TouchableOpacity onPress={() => navigation.navigate("Organization")}>
-          <Card
-            style={{
-              padding: 50,
-              marginLeft: 20,
-              marginBottom: 30,
-            }}
-          >
+
+      <View style={styles.rect3Row}>
+        <View style={styles.rect3}>
+          <TouchableOpacity onPress={() => navigation.navigate("Organization")}>
             <Image
               style={styles.tinyLogo5}
               source={{
@@ -67,17 +48,10 @@ export default function Dashboard({ navigation }) {
             >
               Organization
             </Text>
-          </Card>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Events")}>
-          <Card
-            style={{
-              padding: 50,
-              marginTop: -10,
-              marginLeft: 20,
-              marginBottom: 30,
-            }}
-          >
+          </TouchableOpacity>
+        </View>
+        <View style={styles.rect4}>
+          <TouchableOpacity onPress={() => navigation.navigate("Events")}>
             <Image
               style={styles.tinyLogo6}
               source={{
@@ -91,24 +65,18 @@ export default function Dashboard({ navigation }) {
                 marginTop: 20,
                 marginBottom: -30,
                 fontSize: 25,
-                marginLeft: -20,
                 fontWeight: "bold",
                 fontFamily: "Times New Roman",
               }}
             >
               Events
             </Text>
-          </Card>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Blogs")}>
-          <Card
-            style={{
-              padding: 50,
-              marginTop: -10,
-              marginLeft: 20,
-              marginBottom: 30,
-            }}
-          >
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.rect5Row}>
+        <View style={styles.rect5}>
+          <TouchableOpacity onPress={() => navigation.navigate("Blogs")}>
             <Image
               style={styles.tinyLogo7}
               source={{
@@ -122,25 +90,17 @@ export default function Dashboard({ navigation }) {
                 marginTop: 20,
                 marginBottom: -30,
                 fontSize: 25,
-                marginLeft: -20,
                 fontWeight: "bold",
                 fontFamily: "Times New Roman",
               }}
             >
               Blogs
             </Text>
-          </Card>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("DisplayAllDonation")}
-        >
-          <Card
-            style={{
-              padding: 50,
-              marginTop: -10,
-              marginLeft: 20,
-              marginBottom: 30,
-            }}
+          </TouchableOpacity>
+        </View>
+        <View style={styles.rect6}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("DisplayAllDonation")}
           >
             <Image
               style={styles.tinyLogo7}
@@ -161,40 +121,10 @@ export default function Dashboard({ navigation }) {
             >
               Donations
             </Text>
-          </Card>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
+      </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate("AddDonations")}>
-          <Card
-            style={{
-              padding: 50,
-              marginTop: -10,
-              marginLeft: 20,
-              marginBottom: 30,
-            }}
-          >
-            <Image
-              style={styles.tinyLogo7}
-              source={{
-                uri: "https://t3.ftcdn.net/jpg/03/67/50/06/360_F_367500669_mGI3qrf6o3SmsPNKaitUfOPgshAy8Qdk.jpg",
-              }}
-            />
-            <Text
-              style={{
-                color: "#000000",
-                textAlign: "center",
-                marginTop: 20,
-                marginBottom: -30,
-                fontSize: 25,
-                fontWeight: "bold",
-                fontFamily: "Times New Roman",
-              }}
-            >
-              Add Donations
-            </Text>
-          </Card>
-        </TouchableOpacity>
-      </ScrollView>
       <Image
         style={styles.tinyLogo4}
         source={{
@@ -209,13 +139,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  loginText: {
-    color: "black",
-    fontSize: 38,
-    lineHeight: 18,
-    marginBottom: -20,
-    marginLeft: 700,
-  },
+
   tinyLogo: {
     width: 450,
     height: 40,
@@ -226,46 +150,31 @@ const styles = StyleSheet.create({
     width: 470,
     height: 230,
     marginLeft: -15,
-    marginBottom: 30,
+    marginBottom: -300,
   },
   tinyLogo5: {
-    width: 300,
+    width: 170,
     height: 140,
     marginBottom: -20,
-    marginTop: -40,
-    marginLeft: 2,
+    marginTop: 2,
+    borderRadius: 25,
+    marginLeft: 3,
   },
   tinyLogo6: {
     width: 130,
     height: 120,
     marginBottom: -20,
-    marginTop: -40,
-    marginLeft: 70,
+    marginTop: 25,
+    borderRadius: 25,
+    marginLeft: 40,
   },
   tinyLogo7: {
-    width: 200,
-    height: 100,
+    width: 160,
+    height: 120,
     marginBottom: -20,
-    marginTop: -40,
-    marginLeft: 55,
-  },
-  loginText: {
-    color: "black",
-    fontSize: 18,
-    lineHeight: 18,
-    marginBottom: -10,
-    marginLeft: 44,
-  },
-  textInput2: {
-    height: 40,
-    width: 334,
-    backgroundColor: "#fff",
-    textAlign: "center",
-    fontSize: 18,
-    borderWidth: 1,
-    marginTop: 20,
-    marginLeft: 45,
-    marginBottom: 10,
+    marginTop: 25,
+    borderRadius: 25,
+    marginLeft: 20,
   },
   ButtonDark: {
     height: 50,
@@ -296,15 +205,96 @@ const styles = StyleSheet.create({
     paddingLeft: 26,
     paddingRight: 16,
   },
-  loginText3: {
-    color: "black",
-    fontSize: 18,
-    lineHeight: 18,
-  },
+
   tinyLogo4: {
     width: 450,
     height: 50,
     marginLeft: -15,
-    marginTop: 20,
+    marginTop: 80,
+  },
+  rect3: {
+    width: 194,
+    height: 179,
+    backgroundColor: "rgba(255,255,255,1)",
+    borderRadius: 22,
+    shadowColor: "rgba(208,194,194,1)",
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    elevation: 39,
+    shadowOpacity: 1,
+    shadowRadius: 13,
+  },
+  rect4: {
+    width: 194,
+    height: 179,
+    backgroundColor: "rgba(255,255,255,1)",
+    borderRadius: 22,
+    shadowColor: "rgba(208,194,194,1)",
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    elevation: 39,
+    shadowOpacity: 1,
+    shadowRadius: 13,
+    marginLeft: 12,
+  },
+  image2: {
+    width: 121,
+    height: 119,
+    marginTop: 36,
+    marginLeft: 19,
+  },
+  rect3Row: {
+    height: 169,
+    flexDirection: "row",
+    marginTop: 364,
+    marginLeft: 14,
+    marginRight: 22,
+    marginBottom: 14,
+  },
+  rect5: {
+    width: 194,
+    height: 179,
+    backgroundColor: "rgba(255,255,255,1)",
+    borderRadius: 22,
+    shadowColor: "rgba(208,194,194,1)",
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    elevation: 39,
+    shadowOpacity: 1,
+    shadowRadius: 13,
+  },
+  rect6: {
+    width: 194,
+    height: 179,
+    backgroundColor: "rgba(255,255,255,1)",
+    borderRadius: 22,
+    shadowColor: "rgba(208,194,194,1)",
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    elevation: 39,
+    shadowOpacity: 1,
+    shadowRadius: 13,
+    marginLeft: 12,
+  },
+  rect5Row: {
+    height: 169,
+    flexDirection: "row",
+    marginTop: 14,
+    marginLeft: 14,
+    marginRight: 22,
+  },
+  rect7: {
+    width: 393,
+    height: 45,
+    backgroundColor: "#E6E6E6",
+    marginTop: -718,
   },
 });

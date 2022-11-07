@@ -4,6 +4,7 @@ import {
   View,
   Image,
   Text,
+  Alert,
   ScrollView,
   TextInput,
   TouchableOpacity,
@@ -12,7 +13,12 @@ import axios from "axios";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { Dropdown } from "react-native-element-dropdown";
 
-export default function Donations({ navigation }) {
+export default function Donations({ route, navigation }) {
+  const [donatorName, setdonatorName] = useState("");
+  const [depositeDate, setdepositeDate] = useState("");
+  const [receipt, setreceipt] = useState("");
+  const [amount, setamount] = useState("");
+  const [paymenttype, setpaymenttype] = useState("");
   const [value, setValue] = useState(null);
 
   const data = [
@@ -36,6 +42,32 @@ export default function Donations({ navigation }) {
     );
   };
 
+  const addDonation = () => {
+    const URL = `https://life-below-water.herokuapp.com/api/donation/adddonation/${organizationID}/${eventID}`;
+
+    const payload = {
+      donatorName: donatorName,
+      depositeDate: depositeDate,
+      receipt: receipt,
+      amount: amount,
+    };
+
+    axios
+      .post(URL, payload)
+      .then((res) => {
+        Alert.alert("Donation Added Successfull");
+        navigation.navigate("Dashboard");
+      })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert(
+          "Error",
+          "Donation added Unsuccessful",
+          [{ text: "Check Again" }],
+          { cancelable: false }
+        );
+      });
+  };
   return (
     <View style={styles.container}>
       <Image
@@ -81,7 +113,7 @@ export default function Donations({ navigation }) {
           value={value}
           renderItem={renderItem}
           onChange={(item) => {
-            setrole(item.value);
+            setpaymenttype(item.value);
           }}
           renderLeftIcon={() => (
             <AntDesign
@@ -96,31 +128,39 @@ export default function Donations({ navigation }) {
         <Text style={styles.loginText}>Name Of Donator</Text>
         <TextInput
           placeholder="Name Of Donator"
+          onChange={(e) => setdonatorName(e.nativeEvent.text)}
+          value={donatorName}
           style={styles.textInput2}
         ></TextInput>
 
         <Text style={styles.loginText}>Enter Deposite Date</Text>
         <TextInput
           placeholder="Enter Deposite Date"
+          onChange={(e) => setdepositeDate(e.nativeEvent.text)}
+          value={depositeDate}
           style={styles.textInput2}
         ></TextInput>
 
         <Text style={styles.loginText}>Please Upload Your Receipt</Text>
         <TextInput
           placeholder="Enter Deposite Date"
+          onChange={(e) => setreceipt(e.nativeEvent.text)}
+          value={receipt}
           style={styles.textInput2}
         ></TextInput>
 
         <Text style={styles.loginText}>Enter Your Amount</Text>
         <TextInput
           placeholder="Enter Your Amount"
+          onChange={(e) => setamount(e.nativeEvent.text)}
+          value={amount}
           style={styles.textInput2}
         ></TextInput>
         <TouchableOpacity
           style={[styles.containerx, styles.ButtonDark]}
-          // onPress={() => {
-          //   loginUser();
-          // }}
+          onPress={() => {
+            addDonation();
+          }}
         >
           <Text style={styles.loginText3}>Donate</Text>
         </TouchableOpacity>
