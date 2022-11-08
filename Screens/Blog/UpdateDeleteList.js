@@ -72,7 +72,7 @@ const UpdateDeleteList = ({ navigation }) => {
         </ScrollView> 
       <TouchableOpacity
         style={[styles.containerxb, styles.materialButtonDarkb]}
-        onPress={() => navigation.navigate("UpdateList")}
+        onPress={() => navigation.navigate("AdditionalVideosImages")}
       >
         <Text style={styles.addnewblog}>See More</Text>
       </TouchableOpacity>

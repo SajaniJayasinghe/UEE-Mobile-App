@@ -9,10 +9,10 @@ export default function BlogsList({ navigation }) {
 
   useEffect(() => {
     axios
-      .get("https://life-below-water.herokuapp.com//api/blog//getblog")
+      .get("https://life-below-water.herokuapp.com/api/blog//getblog")
       .then((res) => {
         if (res.data.success) {
-          setbus(res.data.existingBusRoutes);
+          setblog(res.data.existingBlogs);
         }
       });
   }, []);
@@ -39,7 +39,7 @@ export default function BlogsList({ navigation }) {
       </Text>
       <TouchableOpacity
         style={[styles.containerx, styles.materialButtonDark]}
-        onPress={() => navigation.navigate("UpdateList")}
+        onPress={() => navigation.navigate("AddBlog")}
       >
         <Text style={styles.addnewblog}>Add New Blog</Text>
       </TouchableOpacity>

@@ -9,6 +9,8 @@ import BlogsList from "./Screens/Blog/BlogsList";
 import UpdateDeleteList from "./Screens/Blog/UpdateDeleteList";
 import UpdateBlogs from "./Screens/Blog/UpdateBlogs";
 import DeleteBlogs from "./Screens/Blog/DeleteBlogs";
+import AddBlog from "./Screens/Blog/AddBlog";
+import AdditionalVideosImages from "./Screens/Blog/AdditionalVideosImages";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -25,6 +27,8 @@ export default function App() {
       <Stack.Screen name="UpdateList" component={UpdateDeleteList} />
       <Stack.Screen name="UpdateBlogs" component={UpdateBlogs} />
       <Stack.Screen name="DeleteBlogs" component={DeleteBlogs} />
+      <Stack.Screen name="AddBlog" component={AddBlog} />
+      <Stack.Screen name="AdditionalVideosImages" component={AdditionalVideosImages} />
       </Stack.Navigator>
     </NavigationContainer>
   );
