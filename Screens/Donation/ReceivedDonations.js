@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import SearchBar from "react-native-dynamic-search-bar";
 
 export default function ReceivedDonations({ navigation }) {
   return (
@@ -18,6 +19,21 @@ export default function ReceivedDonations({ navigation }) {
         }}
       />
       <Text style={styles.loginText1}>Received Donations</Text>
+      <SearchBar
+        placeholder="Search here"
+        fontColor="#000000"
+        iconColor="#000000"
+        shadowColor="#000000"
+        cancelIconColor="#000000"
+        onPress={() => alert("onPress")}
+        style={{
+          borderWidth: 1,
+          width: 380,
+          marginBottom: 10,
+          marginTop: 10,
+        }}
+        onChangeText={(text) => console.log(text)}
+      />
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
         <View style={styles.rect1}>
           <View style={styles.eventNameColumnRow}>
@@ -44,7 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   rect1: {
-    width: 354,
+    width: 384,
     height: 86,
     marginTop: -30,
     position: "absolute",
@@ -59,7 +75,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 13,
     // top: 363,
-    marginLeft: 40,
+    marginLeft: 20,
     marginTop: 20,
   },
   eventName: {
