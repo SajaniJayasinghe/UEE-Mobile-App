@@ -6,10 +6,52 @@ import {
   Text,
   TextInput,
   ScrollView,
+  Alert,
   TouchableOpacity,
 } from "react-native";
+import axios from "axios";
 
 export default function SignUpScreen({ navigation }) {
+  const [name, setname] = useState("");
+  const [email, setemail] = useState("");
+  const [phoneNumber, setphoneNumber] = useState("");
+  const [password, setpassword] = useState("");
+  const [cpassword, setcpassword] = useState("");
+  const [role, setrole] = useState("");
+
+  const onSignup = async () => {
+    if (password == cpassword) {
+      const payload = {
+        name: name,
+        email: email,
+        phoneNumber: phoneNumber,
+        password: password,
+        role: role,
+      };
+
+      await axios
+        .post(
+          "https://life-below-water.herokuapp.com/api/user/registeruser",
+          payload
+        )
+        .then((res) => {
+          if (res.data.status) {
+            Alert.alert("Success", "User Registered Successfully");
+            setTimeout(() => {
+              navigation.push("SignInScreen");
+            }, 2000);
+          } else {
+            Alert.alert("Error", "User Registration Failed");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      Alert.alert("Error", "Password and Confirm Password should be same");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Image
@@ -40,18 +82,24 @@ export default function SignUpScreen({ navigation }) {
         <TextInput
           placeholder="Full Name"
           style={styles.textInput2}
+          onChange={(e) => setname(e.nativeEvent.text)}
+          value={name}
         ></TextInput>
 
         <Text style={styles.loginText}>Enter Your Phone Number</Text>
         <TextInput
           placeholder="Phone Number"
           style={styles.textInput2}
+          onChange={(e) => setphoneNumber(e.nativeEvent.text)}
+          value={phoneNumber}
         ></TextInput>
 
         <Text style={styles.loginText}>Enter Your Email</Text>
         <TextInput
           placeholder="E-mail Address"
           style={styles.textInput2}
+          onChange={(e) => setemail(e.nativeEvent.text)}
+          value={email}
         ></TextInput>
 
         <Text style={styles.loginText}>Enter Your Password</Text>
@@ -59,6 +107,8 @@ export default function SignUpScreen({ navigation }) {
           secureTextEntry
           placeholder="Password"
           style={styles.textInput2}
+          onChange={(e) => setpassword(e.nativeEvent.text)}
+          value={password}
         ></TextInput>
 
         <Text style={styles.loginText}>Enter Confirm Password</Text>
@@ -66,10 +116,14 @@ export default function SignUpScreen({ navigation }) {
           secureTextEntry
           placeholder="Confirm Password"
           style={styles.textInput2}
+          onChange={(e) => setcpassword(e.nativeEvent.text)}
+          value={cpassword}
         ></TextInput>
 
         <TouchableOpacity style={[styles.containerx, styles.ButtonDark]}>
-          <Text style={styles.loginText3}>Register</Text>
+          <Text style={styles.loginText3} onPress={onSignup}>
+            Register
+          </Text>
         </TouchableOpacity>
       </ScrollView>
       <Image
@@ -107,7 +161,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   textInput2: {
-    height: 40,
+    height: 35,
     width: 334,
     backgroundColor: "#fff",
     textAlign: "center",
