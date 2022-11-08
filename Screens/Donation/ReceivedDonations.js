@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     elevation: 39,
     shadowOpacity: 1,
     shadowRadius: 13,
-    // top: 363,
     marginLeft: 20,
     marginTop: 20,
   },
@@ -89,7 +88,7 @@ const styles = StyleSheet.create({
     color: "#121212",
     height: 28,
     width: 133,
-    marginTop: 8,
+    marginTop: 3,
     marginLeft: 20,
   },
   eventNameColumn: {
