@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Card } from "react-native-shadow-cards";
 import SearchBar from "react-native-dynamic-search-bar";
-
-
 import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView} from "react-native";
 
-const BlogsList = ({ navigation }) => {
+export default function BlogsList({ navigation }) {
+  const [blog, setblog] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://life-below-water.herokuapp.com//api/blog//getblog")
+      .then((res) => {
+        if (res.data.success) {
+          setbus(res.data.existingBusRoutes);
+        }
+      });
+  }, []);
+
     return (
         <View style={styles.container}>
+           <Image
+        style={styles.tiny}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
              <Text
         style={{
           color: "#151B54",
@@ -30,10 +47,12 @@ const BlogsList = ({ navigation }) => {
         <SearchBar
         placeholder="Search here"
         fontColor="#000000"
-        backgroundColor="#DBE9FA"
         iconColor="#000000"
         shadowColor="#000000"
         cancelIconColor="#000000"
+        style={{
+          borderWidth:1,
+        }}
         onPress={() => alert("onPress")}
         onChangeText={(text) => console.log(text)}
        />
@@ -71,7 +90,6 @@ const BlogsList = ({ navigation }) => {
           marginTop: 10,
           fontSize: 12,
           fontWeight: "bold",
-          fontFamily: "Times New Roman",
         }}
       >
         Marine life, sea life, or ocean life is the plants, 
@@ -94,7 +112,6 @@ const BlogsList = ({ navigation }) => {
           marginTop: 10,
           fontSize: 15,
           fontWeight: "bold",
-          fontFamily: "Times New Roman",
         }}
       >
         Protect The Ocean
@@ -108,7 +125,6 @@ const BlogsList = ({ navigation }) => {
           marginTop: 10,
           fontSize: 12,
           fontWeight: "bold",
-          fontFamily: "Times New Roman",
         }}
       >
        Under the Name Coral, We Find Different Species, Some of Which Live in the Mediterranean. 
@@ -116,6 +132,12 @@ const BlogsList = ({ navigation }) => {
        Coral at the Oceanographic Institute.
         </Text>
       </Card>
+      <Image
+        style={styles.tiny1}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
       </ScrollView>
       </View>
       
@@ -125,6 +147,18 @@ const BlogsList = ({ navigation }) => {
     const styles = StyleSheet.create({
         container: {
           flex: 1,
+        },
+        tiny: {
+          width: 470,
+          height: 100,
+          marginLeft: -15,
+          marginTop: -50,
+        },
+        tiny1: {
+          width: 470,
+          height: 40,
+          marginLeft: -15,
+          marginTop: -50,
         },
         blog1: {
             width: 350,
@@ -189,4 +223,3 @@ const BlogsList = ({ navigation }) => {
   },
     });
     
-    export default BlogsList ;

@@ -1,18 +1,18 @@
 import React from "react";
 import Icon from 'react-native-vector-icons/Entypo';
-import Icona from 'react-native-vector-icons/AntDesign';
 
 import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView} from "react-native";
 
-const UpdateDeleteList = ({ navigation }) => {
+const DeleteBlogs = ({ navigation }) => {
+
     return (
         <View style={styles.container}>
-           <Image
+            <Image
         style={styles.tiny}
         source={{
           uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
         }}
-        />
+      />
              <Text
         style={{
           color: "#151B54",
@@ -25,41 +25,19 @@ const UpdateDeleteList = ({ navigation }) => {
       >
        Saving Marine Life
       </Text>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("UpdateBlogs")}
-      >
-        <Icon 
-      name="edit" 
-      size={30} 
-      color="#0020C2"
-      style={{marginLeft:280,marginTop:20}} />
-        
-      </TouchableOpacity>
-
-      <TouchableOpacity
-       
-        onPress={() => navigation.navigate("DeleteBlogs")}
-      >
-        <Icona
-      name="delete" 
-      size={30} 
-      color="#E41B17"
-      style={{marginLeft:330,marginTop:-30}} />
-      </TouchableOpacity>
-
       <Image
         style={styles.blog1}
         source={{
           uri: "https://media.istockphoto.com/photos/sea-life-on-beautiful-coral-reef-with-blacktail-butterflyfish-on-red-picture-id1364050573?b=1&k=20&m=1364050573&s=170667a&w=0&h=RU5Bi5gDzop_fvqiQXAk7elW3l8mS0t52VjLwl29bc0=",
         }}
-      />  
-        <ScrollView style={{ display: "flex", flexDirection: "column" }}>
+      /> 
+      <ScrollView style={{ display: "flex", flexDirection: "column" }}>
 <Text
         style={{
           color: "#000000",
           marginRight:15,
           marginLeft:20,
-          marginTop: 15,
+          marginTop: 25,
           fontSize: 15,
           fontWeight: "bold",
         }}
@@ -70,17 +48,13 @@ const UpdateDeleteList = ({ navigation }) => {
       family of stinging animals, the Cnidaria.
         </Text>
         </ScrollView> 
-      <TouchableOpacity
-        style={[styles.containerxb, styles.materialButtonDarkb]}
+        <TouchableOpacity
+        style={[styles.containerx, styles.materialButtonDark]}
         onPress={() => navigation.navigate("UpdateList")}
       >
         <Text style={styles.addnewblog}>See More</Text>
       </TouchableOpacity>
-      <Image
-        style={styles.tiny1}
-        source={{
-          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
-        }}/>
+     
       </View>
         );
     };
@@ -96,25 +70,19 @@ const UpdateDeleteList = ({ navigation }) => {
         },
         tiny1: {
           width: 470,
-          height: 50,
+          height: 40,
           marginLeft: -15,
-          marginTop: -5,
+          marginTop: -50,
         },
         blog1: {
-            width: 350,
-            height: 220,
-            marginLeft: 19,
-            marginTop: 20,
-          },
-         addnewblog: {
-          color: "black",
-          fontWeight: "bold",
-          fontSize: 18,
-          lineHeight: 18,
-          },    
-         materialButtonDarkb: {
+          width: 350,
+          height: 240,
+          marginLeft: 19,
+          marginTop: 20,
+        },
+        materialButtonDark: {
           height: 50,
-          width: 130,
+          width: 160,
           borderRadius: 130,
           shadowColor: "rgba(0,0,0,1)",
           shadowOffset: {
@@ -124,41 +92,36 @@ const UpdateDeleteList = ({ navigation }) => {
           elevation: 5,
           shadowOpacity: 1,
           shadowRadius: 0,
-          marginTop: 15,
-          marginLeft: 240,
+          marginTop: 25,
+          marginLeft: 220,
           marginBottom:15,
        },
 
-  containerxb: {
-  backgroundColor: "#C2DFFF",
-  justifyContent: "center",
-  alignItems: "center",
-  flexDirection: "row",
-  borderRadius: 2,
-  shadowColor: "#000",
-  shadowOffset: {
-  width: 0,
-  height: 1,
+          addnewblog: {
+          color: "black",
+          fontWeight: "bold",
+          fontSize: 18,
+          lineHeight: 18,
+          
+       },
+       containerx: {
+        backgroundColor: "#C2DFFF",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "row",
+        borderRadius: 2,
+        shadowColor: "#000",
+        shadowOffset: {
+        width: 0,
+        height: 1,
 },
-shadowOpacity: 0.35,
-shadowRadius: 5,
-elevation: 2,
-minWidth: 88,
-paddingLeft: 26,
-paddingRight: 16,
-
+     shadowOpacity: 0.35,
+     shadowRadius: 5,
+     elevation: 2,
+     minWidth: 88,
+     paddingLeft: 26,
+     paddingRight: 16,
+     
 },
-  
-  log2: {
-    width: 389,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: -10,
-    marginLeft: -10,
-    flexDirection: "row",
-  },
     });
-  
-
-    export default UpdateDeleteList ;
+    export default DeleteBlogs;
