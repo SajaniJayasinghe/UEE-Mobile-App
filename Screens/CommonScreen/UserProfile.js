@@ -2,8 +2,77 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function UserProfile({ route, navigation }) {
+  const [token, settoken] = useState("");
+
+  const getToken = async () => {
+    settoken(await AsyncStorage.getItem("token"));
+  };
+  useEffect(() => {
+    getToken();
+    if (!!!route.prams) {
+    }
+  }, []);
+
+  const [profile, setProfile] = useState({});
+  const getprofile = async () => {
+    await axios
+      .get(`https://life-below-water.herokuapp.com/api/user/userprofile`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.status);
+        setProfile(res.data.user);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
+  const onLogOut = async () => {
+    Alert.alert("Are you sure you want to logout?", "", [
+      {
+        text: "Ok",
+        onPress: async () => {
+          await AsyncStorage.clear();
+          navigation.push("UserDashboard");
+        },
+      },
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+      },
+    ]);
+  };
+
+  const deleteProfile = async (id) => {
+    Alert.alert("Are you sure?", "This will permanently delete your profile!", [
+      {
+        text: "OK",
+        onPress: async () => {
+          const Token = await AsyncStorage.getItem("token");
+          axios
+            .delete(`https://life-below-water.herokuapp.com/api/user/`, {
+              headers: {
+                Authorization: Token,
+              },
+            })
+            .then((res) => {
+              navigation.push("LoadingPage");
+              getprofile();
+            })
+            .catch((e) => {
+              console.error(e);
+            });
+        },
+      },
+    ]);
+  };
+
   return (
     <View style={styles.container}>
       <Image
@@ -44,6 +113,7 @@ export default function UserProfile({ route, navigation }) {
         >
           Name :
         </Text>
+        <Text style={styles.loremIpsum3}>{/* {user.phoneNo} */}</Text>
         <Text
           style={{
             marginLeft: 70,
@@ -53,6 +123,7 @@ export default function UserProfile({ route, navigation }) {
         >
           Email Address :
         </Text>
+        <Text style={styles.loremIpsum3}>{/* {user.phoneNo} */}</Text>
         <Text
           style={{
             marginLeft: 70,
@@ -62,6 +133,7 @@ export default function UserProfile({ route, navigation }) {
         >
           Phone Number :
         </Text>
+        <Text style={styles.loremIpsum3}>{/* {user.phoneNo} */}</Text>
 
         <TouchableOpacity
           style={[styles.containerx, styles.ButtonDark1]}
@@ -210,5 +282,9 @@ const styles = StyleSheet.create({
     height: 50,
     marginLeft: -15,
     marginTop: 40,
+  },
+  loremIpsum3: {
+    color: "#121212",
+    width: 1000,
   },
 });
