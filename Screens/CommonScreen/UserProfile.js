@@ -56,11 +56,14 @@ export default function UserProfile({ route, navigation }) {
         onPress: async () => {
           const Token = await AsyncStorage.getItem("token");
           axios
-            .delete(`https://life-below-water.herokuapp.com/api/user/`, {
-              headers: {
-                Authorization: Token,
-              },
-            })
+            .delete(
+              `https://life-below-water.herokuapp.com/api/user/deleteuser`,
+              {
+                headers: {
+                  Authorization: Token,
+                },
+              }
+            )
             .then((res) => {
               navigation.push("LoadingPage");
               getprofile();

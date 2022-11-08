@@ -12,31 +12,30 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function SignInScreen({ navigation }) {
-  // const [email, setEmail] = useState("");
-  // const [password, setpassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setpassword] = useState("");
 
-  // const storetoken = async (value) => {
-  //   await AsyncStorage.setItem("token", value);
-  // };
+  const storetoken = async (value) => {
+    await AsyncStorage.setItem("token", value);
+  };
 
-  // const loginUser = async () => {
-  //   const URL = "https://life-below-water.herokuapp.com/api/user/login";
-  //   await axios
-  //     .post(URL, { email: email, password: password })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       if (res.data.status) {
-  //         AsyncStorage.clear();
-  //         storetoken(res.data.token);
-  //         navigation.navigate("UserDashboard", {
-  //           userId: res.data.userId,
-  //         });
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       Alert.alert("Loging Faild");
-  //     });
-  // };
+  const loginUser = async () => {
+    const URL = "https://life-below-water.herokuapp.com/api/user/login";
+    await axios
+      .post(URL, { email: email, password: password })
+      .then((res) => {
+        // console.log(res.data);
+        if (res.data) {
+          AsyncStorage.clear();
+          console.log(res.data);
+          storetoken(res.data.token);
+          navigation.navigate("UserDashboard");
+        }
+      })
+      .catch((error) => {
+        Alert.alert("Loging Faild");
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -69,8 +68,8 @@ export default function SignInScreen({ navigation }) {
       <TextInput
         placeholder="E-mail Address"
         style={styles.textInput2}
-        // onChange={(e) => setEmail(e.nativeEvent.text)}
-        // value={email}
+        onChange={(e) => setEmail(e.nativeEvent.text)}
+        value={email}
       ></TextInput>
 
       <Text style={styles.loginText}>Enter Your Password</Text>
@@ -78,16 +77,15 @@ export default function SignInScreen({ navigation }) {
         secureTextEntry
         placeholder="Password"
         style={styles.textInput}
-        // onChange={(e) => setpassword(e.nativeEvent.text)}
-        // value={password}
+        onChange={(e) => setpassword(e.nativeEvent.text)}
+        value={password}
       ></TextInput>
 
       <TouchableOpacity
         style={[styles.containerx, styles.ButtonDark]}
-        // onPress={() => {
-        //   loginUser();
-        // }}
-        onPress={() => navigation.navigate("UserDashboard")}
+        onPress={() => {
+          loginUser();
+        }}
       >
         <Text style={styles.loginText3}>Login</Text>
       </TouchableOpacity>
