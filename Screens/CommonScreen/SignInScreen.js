@@ -56,6 +56,7 @@ export default function SignInScreen({ navigation }) {
       >
         <Text style={styles.loginText3}>Login</Text>
       </TouchableOpacity>
+
       <Image
         style={styles.tinyLogo4}
         source={{

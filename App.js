@@ -13,6 +13,9 @@ import DisplayAllDonations from "./Screens/Donation/DisplayAllDonations";
 import UserProfile from "./Screens/CommonScreen/UserProfile";
 import UserDashboard from "./Screens/CommonScreen/UserDashboard";
 import UpdateUserProfile from "./Screens/CommonScreen/UpdateUserProfile";
+import EditDonations from "./Screens/Donation/EditDonations";
+import DonationsList from "./Screens/Donation/DonationsList";
+import ReceivedDonations from "./Screens/Donation/ReceivedDonations";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -29,6 +32,9 @@ export default function App() {
           name="DisplayAllDonation"
           component={DisplayAllDonations}
         />
+        <Stack.Screen name="EditDonations" component={EditDonations} />
+        <Stack.Screen name="DonationsList" component={DonationsList} />
+        <Stack.Screen name="ReceivedDonations" component={ReceivedDonations} />
         <Stack.Screen name="UserProfile" component={UserProfile} />
         <Stack.Screen name="BlogsList" component={BlogsList} />
         <Stack.Screen name="UpdateList" component={UpdateDeleteList} />

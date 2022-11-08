@@ -6,6 +6,12 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
+        style={styles.tinyLogo}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
+      <Image
         style={styles.logo}
         source={{
           uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667594463/Ellipse_1_deso78.png",
@@ -15,9 +21,6 @@ export default function HomeScreen({ navigation }) {
       <TouchableOpacity
         style={[styles.containerx, styles.ButtonDark]}
         onPress={() => navigation.navigate("SignInScreen")}
-        // onPress={() => {
-        //   loginUser();
-        // }}
       >
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
@@ -28,6 +31,12 @@ export default function HomeScreen({ navigation }) {
       >
         <Text style={styles.loginText}>Register</Text>
       </TouchableOpacity>
+      <Image
+        style={styles.tinyLogo4}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
     </View>
   );
 }
@@ -35,6 +44,18 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  tinyLogo: {
+    width: 470,
+    height: 100,
+    marginLeft: -15,
+    marginTop: -50,
+  },
+  tinyLogo4: {
+    width: 450,
+    height: 60,
+    marginLeft: -15,
+    marginTop: 200,
   },
   logo: {
     width: 250,

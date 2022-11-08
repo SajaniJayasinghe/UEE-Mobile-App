@@ -15,7 +15,7 @@ export default function UserDashboard({ navigation }) {
       <Image
         style={styles.tinyLogo1}
         source={{
-          uri: "https://ychef.files.bbci.co.uk/960_540/p07mw81t.jpg",
+          uri: "https://images4.alphacoders.com/968/968510.jpg",
         }}
       />
       <TouchableOpacity onPress={() => navigation.navigate("UserProfile")}>
@@ -96,7 +96,7 @@ export default function UserDashboard({ navigation }) {
         </View>
         <View style={styles.rect6}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("DisplayAllDonation")}
+            onPress={() => navigation.navigate("ReceivedDonations")}
           >
             <Image
               style={styles.tinyLogo7}
@@ -138,19 +138,20 @@ const styles = StyleSheet.create({
   icon: {
     color: "#ffff",
     fontSize: 30,
-    marginTop: 37,
+    marginTop: 10,
+    marginBottom: 20,
     marginLeft: 380,
   },
 
   tinyLogo: {
     width: 450,
-    height: 40,
+    height: 50,
     marginLeft: -15,
     marginTop: 0,
   },
   tinyLogo1: {
     width: 470,
-    height: 230,
+    height: 250,
     marginLeft: -15,
     marginBottom: -300,
   },
@@ -212,11 +213,11 @@ const styles = StyleSheet.create({
     width: 450,
     height: 50,
     marginLeft: -15,
-    marginTop: 10,
+    marginTop: -40,
   },
   rect3: {
     width: 194,
-    height: 180,
+    height: 200,
     backgroundColor: "rgba(255,255,255,1)",
     borderRadius: 22,
     shadowColor: "rgba(208,194,194,1)",
@@ -231,7 +232,7 @@ const styles = StyleSheet.create({
   },
   rect4: {
     width: 194,
-    height: 180,
+    height: 200,
     backgroundColor: "rgba(255,255,255,1)",
     borderRadius: 22,
     shadowColor: "rgba(208,194,194,1)",
@@ -252,7 +253,7 @@ const styles = StyleSheet.create({
     marginLeft: 19,
   },
   rect3Row: {
-    height: 169,
+    height: 200,
     flexDirection: "row",
     marginTop: 364,
     marginLeft: 14,
@@ -261,7 +262,7 @@ const styles = StyleSheet.create({
   },
   rect5: {
     width: 194,
-    height: 179,
+    height: 200,
     backgroundColor: "rgba(255,255,255,1)",
     borderRadius: 22,
     shadowColor: "rgba(208,194,194,1)",
@@ -276,7 +277,7 @@ const styles = StyleSheet.create({
   },
   rect6: {
     width: 194,
-    height: 179,
+    height: 200,
     backgroundColor: "rgba(255,255,255,1)",
     borderRadius: 22,
     shadowColor: "rgba(208,194,194,1)",
