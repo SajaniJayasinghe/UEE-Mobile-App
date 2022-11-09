@@ -1,117 +1,208 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView, TextInput,Card, Alert } from "react-native";
 
-import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView, TextInput,Card } from "react-native";
+export default function AddBlog({ route, navigation }) {
+  const [blogName, setblogName] = useState("");
+  const [description, setdescription] = useState("");
+  const [blogImage, setblogImage] = useState("");
+  const newblog = () => {
+    const URL = `https://life-below-water.herokuapp.com/api/blog/addblog`;
 
-const AddBlog = ({ navigation }) => {
+    const payload = {
+      blogName: blogName,
+      description: description,
+      blogImage: blogImage,
+    };
+
+    axios
+      .post(URL, payload)
+      .then((res) => {
+        Alert.alert("Blog Added Successfully");
+        navigation.navigate("BlogsList");
+      })
+      .catch((error) => {
+        console.log(error);
+        Alert.alert(
+          "Error",
+          "Blog adding Unsuccessful",
+          [{ text: "Check Again" }],
+          { cancelable: false }
+        );
+      });
+    };
+
+
     return (
         <View style={styles.container}>
-             <TextInput style = {styles.input}
-               underlineColorAndroid = "transparent"
-               placeholder = "Enter Blog Name"
-               placeholderTextColor = "#000000"
-               autoCapitalize = "none"
-               />
-  
-      <Image
-        style={styles.blog1}
-        source={{
-          uri: "https://t3.ftcdn.net/jpg/02/70/22/86/360_F_270228625_yujevz1E4E45qE1mJe3DyyLPZDmLv4Uj.jpg",
-        }}
-      />
- <Text
+           <Text
         style={{
-          color: "#000000",
+          fontWeight: "800",
           textAlign: "center",
-          marginTop: 40,
-          marginLeft:-220,
-          fontSize: 20,
-          fontWeight: "bold",
+          fontSize: 26,
+          marginLeft: -10,
+          marginTop: 30,
         }}
       >
-        Blog Content
+        Create Blog
       </Text>
-      <TextInput style = {styles.input1}
-               underlineColorAndroid = "transparent"
-               autoCapitalize = "none"
-               />
- <TouchableOpacity
-        style={[styles.containerx, styles.materialButtonDark]}
-        onPress={() => navigation.navigate("BlogsList")}
+      <View>
+        <Text
+          style={{
+            fontWeight: "800",
+            //   opacity: 0.6,
+            textAlign: "left",
+            fontSize: 20,
+            marginLeft: 20,
+            marginTop: 20,
+          }}
+        >
+          Blog Name
+        </Text>
+        <TextInput
+          keyboardType="Blog Name"
+          style={styles.input}
+          onChange={(e) => setblogName(e.nativeEvent.text)}
+          value={blogName}
+        />
+
+        <Text
+          style={{
+            fontWeight: "800",
+            //   opacity: 0.6,
+            textAlign: "left",
+            fontSize: 20,
+            marginLeft: 20,
+            marginTop: 20,
+          }}
+        >
+          Description
+        </Text>
+        <TextInput
+          keyboardType="Description"
+          style={styles.input2}
+          onChange={(e) => setdescription(e.nativeEvent.text)}
+          value={description}
+        />
+        <Text
+          style={{
+            fontWeight: "800",
+            //   opacity: 0.6,
+            textAlign: "left",
+            fontSize: 20,
+            marginLeft: 20,
+            marginTop: 100,
+          }}
+        >
+          Add Image
+        </Text>
+        <TextInput
+          keyboardType="Description"
+          style={styles.input2}
+          onChange={(e) => setblogImage(e.nativeEvent.text)}
+          value={blogImage}
+        />
+      </View>
+      <TouchableOpacity
+        style={[styles.containerx, styles.ButtonDark]}
+        onPress={() => {
+          newblog();
+        }}
       >
-        <Text style={styles.addnewblog}>ADD BLOG</Text>
+        <Text style={styles.letsGetStarted}> CREATE BLOG </Text>
       </TouchableOpacity>
-
-        </View>
-        );
-    };
-    const styles = StyleSheet.create({
-        container: {
-          flex: 1,
-        },
-        input: {
-            margin: 15,
-            height: 40,
-            borderColor: '#000000',
-            borderWidth: 1
-         },
-         blog1: {
-            width: 380,
-            height: 250,
-            marginLeft: 9,
-            marginTop: 40,
-          },
-          input1: {
-            margin: 15,
-            height: 140,
-            borderColor: '#000000',
-            borderWidth: 1
-         },
-         materialButtonDark: {
-            height: 50,
-            width: 160,
-            borderRadius: 130,
-            shadowColor: "rgba(0,0,0,1)",
-            shadowOffset: {
-              width: 3,
-              height: 3,
-            },
-            elevation: 5,
-            shadowOpacity: 1,
-            shadowRadius: 0,
-            marginTop: 25,
-            marginLeft: 130,
-            marginBottom:15,
-         },
-
-            addnewblog: {
-            color: "black",
-            fontWeight: "bold",
-            fontSize: 18,
-            lineHeight: 18,
-            
+    </View>
+  );
+}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  input: {
+    height: 50,
+    margin: 12,
+    marginTop: 20,
+    borderWidth: 1,
+    padding: 10,
+    marginLeft: 60,
+    width: 290,
+  },
+  input2: {
+    height: 125,
+    margin: 12,
+    marginTop: 15,
+    borderWidth: 1,
+    padding: 10,
+    marginLeft: 60,
+    width: 290,
+    marginBottom: -70,
+  },
+  loginlogo: {
+    width: 440,
+    height: 300,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    marginLeft: 0,
+    marginTop: -35,
+  },
+  logo1: {
+    width: 300,
+    height: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 60,
+    marginRight: 60,
+    flexDirection: "row",
+    marginBottom: 30,
   },
 
-            containerx: {
-            backgroundColor: "#C2DFFF",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "row",
-            borderRadius: 2,
-            shadowColor: "#000",
-            shadowOffset: {
-            width: 0,
-            height: 1,
+  ButtonDark: {
+    height: 50,
+    width: 170,
+    borderRadius: 100,
+    shadowOffset: {
+      width: 3,
+      height: 3,
     },
-         shadowOpacity: 0.35,
-         shadowRadius: 5,
-         elevation: 2,
-         minWidth: 88,
-         paddingLeft: 26,
-         paddingRight: 16,
-         
+    elevation: 5,
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    marginLeft: 200,
+    marginTop: 150,
   },
-        
-    });
-  
-
-    export default AddBlog;
+  containerx: {
+    backgroundColor: "#ADDFFF",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    elevation: 2,
+    minWidth: 88,
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
+  text: {
+    color: "black",
+    marginTop: 5,
+  },
+  loginText: {
+    color: "black",
+    fontSize: 19,
+  },
+  loading: {
+    width: 150,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 50,
+    marginLeft: 140,
+    flexDirection: "row",
+  },
+  letsGetStarted: {
+    fontSize: 20,
+  },
+});
