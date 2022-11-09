@@ -14,9 +14,7 @@ export default function AdminDashboard({ navigation }) {
 
       <Image
         style={styles.tinyLogo1}
-        source={{
-          uri: "https://images4.alphacoders.com/968/968510.jpg",
-        }}
+        source={require("../../assets/userdashboard.jpeg")}
       />
       <TouchableOpacity onPress={() => navigation.navigate("UserProfile")}>
         <Icon name="user-circle" style={styles.icon}></Icon>
@@ -24,7 +22,7 @@ export default function AdminDashboard({ navigation }) {
 
       <View style={styles.rect3Row}>
         <View style={styles.rect3}>
-          <TouchableOpacity onPress={() => navigation.navigate("Organization")}>
+          <TouchableOpacity onPress={() => navigation.navigate("")}>
             <Image
               style={styles.tinyLogo5}
               source={{
@@ -47,7 +45,7 @@ export default function AdminDashboard({ navigation }) {
           </TouchableOpacity>
         </View>
         <View style={styles.rect4}>
-          <TouchableOpacity onPress={() => navigation.navigate("Events")}>
+          <TouchableOpacity onPress={() => navigation.navigate("")}>
             <Image
               style={styles.tinyLogo6}
               source={{
@@ -72,7 +70,7 @@ export default function AdminDashboard({ navigation }) {
       </View>
       <View style={styles.rect5Row}>
         <View style={styles.rect5}>
-          <TouchableOpacity onPress={() => navigation.navigate("Blogs")}>
+          <TouchableOpacity onPress={() => navigation.navigate("")}>
             <Image
               style={styles.tinyLogo7}
               source={{

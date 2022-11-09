@@ -129,7 +129,7 @@ export default function UserProfile({ route, navigation }) {
         >
           Full Name :
         </Text>
-        <TextInput style={styles.textView}>{profile.name}</TextInput>
+        <Text style={styles.textView}>{profile.name}</Text>
         <Text
           style={{
             marginLeft: 65,
@@ -140,7 +140,7 @@ export default function UserProfile({ route, navigation }) {
         >
           Email Address :
         </Text>
-        <TextInput style={styles.textView}>{profile.email}</TextInput>
+        <Text style={styles.textView}>{profile.email}</Text>
 
         <Text
           style={{
@@ -153,7 +153,7 @@ export default function UserProfile({ route, navigation }) {
           Phone Number :
         </Text>
 
-        <TextInput style={styles.textView}>{profile.phoneNumber}</TextInput>
+        <Text style={styles.textView}>{profile.phoneNumber}</Text>
 
         <TouchableOpacity
           style={[styles.containerx, styles.ButtonDark1]}

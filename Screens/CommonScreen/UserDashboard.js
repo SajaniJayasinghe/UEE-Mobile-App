@@ -97,7 +97,7 @@ export default function UserDashboard({ navigation }) {
         </View>
         <View style={styles.rect6}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("ReceivedDonations")}
+          // onPress={() => navigation.navigate("ReceivedDonations")}
           >
             <Image
               style={styles.tinyLogo7}

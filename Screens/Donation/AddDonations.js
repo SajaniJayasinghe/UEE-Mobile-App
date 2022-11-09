@@ -22,8 +22,8 @@ export default function Donations({ route, navigation }) {
   const [value, setValue] = useState(null);
 
   const data = [
-    { label: "Cash Payment", value: "CashPayment" },
-    { label: "Online Transaction", value: "OnlineTransfer" },
+    { label: "Cash", value: "Cash" },
+    { label: "Online", value: "Online" },
   ];
 
   const renderItem = (item) => {

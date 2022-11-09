@@ -96,7 +96,6 @@ export default function SignInScreen({ navigation }) {
         onPress={() => {
           loginUser();
         }}
-        // onPress={() => navigation.navigate("UserDashboard")}
       >
         <Text style={styles.loginText3}>Login</Text>
       </TouchableOpacity>
