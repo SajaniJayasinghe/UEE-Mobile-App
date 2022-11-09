@@ -14,9 +14,10 @@ export default function UserDashboard({ navigation }) {
 
       <Image
         style={styles.tinyLogo1}
-        source={{
-          uri: "https://images4.alphacoders.com/968/968510.jpg",
-        }}
+        // source={{
+        //   uri: "https://images4.alphacoders.com/968/968510.jpg",
+        // }}
+        source={require("../../assets/userdashboard.jpeg")}
       />
       <TouchableOpacity onPress={() => navigation.navigate("UserProfile")}>
         <Icon name="user-circle" style={styles.icon}></Icon>

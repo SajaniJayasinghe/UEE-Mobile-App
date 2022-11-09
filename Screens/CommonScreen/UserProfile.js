@@ -113,13 +113,7 @@ export default function UserProfile({ route, navigation }) {
 
         <TouchableOpacity
           style={[styles.containerx, styles.ButtonDark1]}
-          onPress={() =>
-            navigation.navigate("UpdateUserProfile", {
-              userId: route.params.userId,
-              role: route.params.role,
-              userId: user._id,
-            })
-          }
+          onPress={() => navigation.navigate("UpdateUserProfile", {})}
         >
           <Text style={styles.loginText3}>Update Profile</Text>
         </TouchableOpacity>
