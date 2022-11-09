@@ -24,44 +24,26 @@ const SpecificEventAdmin = ({ navigation }) => {
       <Text
         style={{
           color: "#000000",
-          textAlign: "center",
+          textAlign: "left",
           marginTop: 10,
-          fontSize: 20,
+          fontSize: 15,
           fontWeight: "bold",
         }}
       >
         Mangroove restore
       </Text>
-      <Icon
-        name="edit"
-        size={30}
-        color="#900"
-        style={{ marginLeft: 300, marginTop: 20 }}
-      />
+      <Icon name="edit" size={30} color="#900" style={{ marginLeft: 100 }} />
 
-      <Icona
-        name="delete"
-        size={30}
-        color="#900"
-        style={{ marginLeft: 340, marginTop: -30 }}
-      />
+      <Icona name="delete" size={30} color="#900" style={{ marginLeft: 260 }} />
 
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
         <TouchableOpacity onPress={() => navigation.navigate("UpdateList")}>
-          <Card
-            style={{
-              padding: 30,
-              margin: 15,
-              height: 250,
-              width: 350,
-              marginLeft: 25,
-            }}
-          >
+          <Card style={{ padding: 100, margin: 25, height: 400, width: 350 }}>
             <Text
               style={{
                 color: "#000000",
                 textAlign: "left",
-
+                marginTop: 10,
                 fontSize: 15,
                 fontWeight: "bold",
               }}
@@ -114,11 +96,9 @@ const styles = StyleSheet.create({
   },
   event1: {
     width: 350,
-    height: 300,
-
-    marginLeft: 25,
-
-    marginTop: 10,
+    height: 150,
+    marginLeft: -99,
+    marginTop: -100,
   },
 });
 

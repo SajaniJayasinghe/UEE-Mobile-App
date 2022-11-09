@@ -22,8 +22,13 @@ import Organizations from "./Screens/Organizations/Organizations";
 import SpecificOrganization from "./Screens/Organizations/SpecificOrganization";
 import Members from "./Screens/Organizations/Members";
 import DeleteBlogs from "./Screens/Blog/DeleteBlogs";
+
+import AddDonations from "./Screens/Donation/AddDonations";
+import SpecificEventUser from "./Screens/Events/SpecificEventUser";
+
 import AddBlog from "./Screens/Blog/AddBlog";
 import AdditionalVideosImages from "./Screens/Blog/AdditionalVideosImages";
+
 
 
 export default function App() {
@@ -51,12 +56,14 @@ export default function App() {
         <Stack.Screen name="SignInScreen" component={SignInScreen} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
+        <Stack.Screen name="AddDonations" component={AddDonations} />
         <Stack.Screen name="BlogsList" component={BlogsList} />
+
         <Stack.Screen name="UpdateList" component={UpdateDeleteList} />
         <Stack.Screen name="UpdateBlogs" component={UpdateBlogs} />
         <Stack.Screen name="DeleteBlogs" component={DeleteBlogs} />
-      <Stack.Screen name="AddBlog" component={AddBlog} />
-      <Stack.Screen name="AdditionalVideosImages" component={AdditionalVideosImages} />
+        <Stack.Screen name="AddBlog" component={AddBlog} />
+        <Stack.Screen name="AdditionalVideosImages" component={AdditionalVideosImages} />
 
       </Stack.Navigator>
     </NavigationContainer>

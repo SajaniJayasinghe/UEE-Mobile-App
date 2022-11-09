@@ -39,6 +39,19 @@ export default function Dashboard({ navigation }) {
                 uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667591657/tipos_de_organizaciones_-_qu_es-_definicin_y_concepto_2021_economy-wikicom.jpg_kibhno.webp",
               }}
             />
+            <Text
+              style={{
+                color: "#000000",
+                textAlign: "center",
+                marginTop: 20,
+                marginBottom: -30,
+                fontSize: 25,
+                fontWeight: "bold",
+                fontFamily: "Times New Roman",
+              }}
+            >
+              Organization
+            </Text>
           </Card>
         </TouchableOpacity>
         {/* <TouchableOpacity onPress={() => navigation.navigate("Events")}> */}
@@ -56,6 +69,20 @@ export default function Dashboard({ navigation }) {
                 uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667591654/events-special-cyan-blue-round-button-isolated-abstract-illustration-105913592_tn4sw0.jpg",
               }}
             />
+            <Text
+              style={{
+                color: "#000000",
+                textAlign: "center",
+                marginTop: 20,
+                marginBottom: -30,
+                fontSize: 25,
+                marginLeft: -20,
+                fontWeight: "bold",
+                fontFamily: "Times New Roman",
+              }}
+            >
+              Events
+            </Text>
           </Card>
         {/* </TouchableOpacity> */}
         <TouchableOpacity onPress={() => navigation.navigate("BlogsList")}>
@@ -73,6 +100,20 @@ export default function Dashboard({ navigation }) {
                 uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667591653/creer-un-blog_j6okyn.jpg",
               }}
             />
+            <Text
+              style={{
+                color: "#000000",
+                textAlign: "center",
+                marginTop: 20,
+                marginBottom: -30,
+                fontSize: 25,
+                marginLeft: -20,
+                fontWeight: "bold",
+                fontFamily: "Times New Roman",
+              }}
+            >
+              Blogs
+            </Text>
           </Card>
         </TouchableOpacity>
         {/* <TouchableOpacity onPress={() => navigation.navigate("Donations")}> */}
@@ -90,6 +131,19 @@ export default function Dashboard({ navigation }) {
                 uri: "https://t3.ftcdn.net/jpg/03/67/50/06/360_F_367500669_mGI3qrf6o3SmsPNKaitUfOPgshAy8Qdk.jpg",
               }}
             />
+            <Text
+              style={{
+                color: "#000000",
+                textAlign: "center",
+                marginTop: 20,
+                marginBottom: -30,
+                fontSize: 25,
+                fontWeight: "bold",
+                fontFamily: "Times New Roman",
+              }}
+            >
+              Donations
+            </Text>
           </Card>
         {/* </TouchableOpacity> */}
       </ScrollView>
@@ -112,7 +166,7 @@ const styles = StyleSheet.create({
     fontSize: 38,
     lineHeight: 18,
     marginBottom: -20,
-    marginLeft: 400,
+    marginLeft: 700,
   },
   tinyLogo: {
     width: 450,
@@ -138,7 +192,7 @@ const styles = StyleSheet.create({
     height: 120,
     marginBottom: -20,
     marginTop: -40,
-    marginLeft: 75,
+    marginLeft: 70,
   },
   tinyLogo7: {
     width: 200,
