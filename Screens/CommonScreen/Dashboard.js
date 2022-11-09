@@ -25,7 +25,7 @@ export default function Dashboard({ navigation }) {
         }}
       />
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        {/* <TouchableOpacity onPress={() => navigation.navigate("Organization")}> */}
+        <TouchableOpacity onPress={() => navigation.navigate("AllOrganizations")}>
           <Card
             style={{
               padding: 50,
@@ -53,7 +53,7 @@ export default function Dashboard({ navigation }) {
               Organization
             </Text>
           </Card>
-        {/* </TouchableOpacity> */}
+        </TouchableOpacity>
         {/* <TouchableOpacity onPress={() => navigation.navigate("Events")}> */}
           <Card
             style={{

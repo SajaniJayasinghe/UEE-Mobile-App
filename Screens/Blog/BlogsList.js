@@ -9,10 +9,10 @@ export default function BlogsList({ navigation }) {
 
   useEffect(() => {
     axios
-      .get("https://life-below-water.herokuapp.com//api/blog//getblog")
+      .get("https://life-below-water.herokuapp.com/api/blog/getblog")
       .then((res) => {
         if (res.data.success) {
-          setbus(res.data.existingBusRoutes);
+          setblog(res.data.existingBlogs);
         }
       });
   }, []);
@@ -39,7 +39,7 @@ export default function BlogsList({ navigation }) {
       </Text>
       <TouchableOpacity
         style={[styles.containerx, styles.materialButtonDark]}
-        onPress={() => navigation.navigate("UpdateList")}
+        onPress={() => navigation.navigate("AddBlog")}
       >
         <Text style={styles.addnewblog}>Add New Blog</Text>
       </TouchableOpacity>
@@ -56,11 +56,14 @@ export default function BlogsList({ navigation }) {
         onPress={() => alert("onPress")}
         onChangeText={(text) => console.log(text)}
        />
-      <ScrollView style={{ display: "flex", flexDirection: "column" }}>
+       <ScrollView>
+        <View style={{ display: "flex", flexDirection: "column", padding: 25 }}>
+          {blog.map((blog, index) => (
+            <View key={blog + index}>
       <TouchableOpacity
        onPress={() => navigation.navigate("UpdateList")}>
       <Card
-       style={{ padding: 100, margin: 25, height:300, width:350}}
+       style={{ padding: 100, margin:-4, height:300, width:350, marginBottom:30}}
       
       >
       <Image
@@ -69,75 +72,34 @@ export default function BlogsList({ navigation }) {
           uri: "https://media.istockphoto.com/photos/sea-life-on-beautiful-coral-reef-with-blacktail-butterflyfish-on-red-picture-id1364050573?b=1&k=20&m=1364050573&s=170667a&w=0&h=RU5Bi5gDzop_fvqiQXAk7elW3l8mS0t52VjLwl29bc0=",
         }}
       />
-       <Text
-        style={{
-          color: "#000000",
-          textAlign: "center",
-          marginTop: 10,
-          fontSize: 15,
-          fontWeight: "bold",
-       
-        }}
-      >
-        Saving Marine Life
-      </Text>
+         <Text
+                  style={{
+                    marginVertical: 5,
+                    fontSize: 20,
 
-      <Text
-        style={{
-          color: "#000000",
-          marginRight:-85,
-          marginLeft:-60,
-          marginTop: 10,
-          fontSize: 12,
-          fontWeight: "bold",
-        }}
-      >
-        Marine life, sea life, or ocean life is the plants, 
-        animals and other organisms that live in the salt water of seas or oceans, 
-        or the brackish water of coastal
-        </Text>
+                    flexDirection: "row",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  {blog.blogName}
+                </Text>
+                <Text
+                  style={{
+                    marginVertical: 5,
+                    fontSize: 20,
+
+                    flexDirection: "row",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  {blog.description}
+                </Text>
       </Card>
       </TouchableOpacity>
-      <Card style={{ padding: 100, margin: 25, height:300, width:350}}>
-      <Image
-        style={styles.blog1}
-        source={{
-          uri: "https://oceana.org/wp-content/uploads/sites/18/cephalopods.jpg",
-        }}
-      />
-       <Text
-        style={{
-          color: "#000000",
-          textAlign: "center",
-          marginTop: 10,
-          fontSize: 15,
-          fontWeight: "bold",
-        }}
-      >
-        Protect The Ocean
-      </Text>
-
-      <Text
-        style={{
-          color: "#000000",
-          marginRight:-85,
-          marginLeft:-60,
-          marginTop: 10,
-          fontSize: 12,
-          fontWeight: "bold",
-        }}
-      >
-       Under the Name Coral, We Find Different Species, Some of Which Live in the Mediterranean. 
-       What Is Coral? Coral: Plant or Animal? 
-       Coral at the Oceanographic Institute.
-        </Text>
-      </Card>
-      <Image
-        style={styles.tiny1}
-        source={{
-          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
-        }}
-      />
+     
+            </View>
+          ))}
+        </View>
       </ScrollView>
       </View>
       
