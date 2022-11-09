@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default function UserDashboard({ navigation }) {
+export default function AdminDashboard({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
@@ -14,10 +14,9 @@ export default function UserDashboard({ navigation }) {
 
       <Image
         style={styles.tinyLogo1}
-        // source={{
-        //   uri: "https://images4.alphacoders.com/968/968510.jpg",
-        // }}
-        source={require("../../assets/userdashboard.jpeg")}
+        source={{
+          uri: "https://images4.alphacoders.com/968/968510.jpg",
+        }}
       />
       <TouchableOpacity onPress={() => navigation.navigate("UserProfile")}>
         <Icon name="user-circle" style={styles.icon}></Icon>

@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  Alert,
+} from "react-native";
 
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -16,37 +24,20 @@ export default function UserProfile({ route, navigation }) {
     }
   }, []);
 
-  const [profile, setProfile] = useState({});
+  const [profile, setProfile] = useState("");
+
   const getprofile = async () => {
+    const userToken = await AsyncStorage.getItem("token");
+    console.log(userToken);
     await axios
-      .get(`https://life-below-water.herokuapp.com/api/user/userprofile`, {
+      .get("https://life-below-water.herokuapp.com/api/user/userprofile", {
         headers: {
-          Authorization: token,
+          Authorization: userToken,
         },
       })
       .then((res) => {
-        console.log(res.data.status);
-        setProfile(res.data.user);
-      })
-      .catch((e) => {
-        console.error(e);
+        setProfile(res.data.User);
       });
-  };
-
-  const onLogOut = async () => {
-    Alert.alert("Are you sure you want to logout?", "", [
-      {
-        text: "Ok",
-        onPress: async () => {
-          await AsyncStorage.clear();
-          navigation.push("UserDashboard");
-        },
-      },
-      {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-      },
-    ]);
   };
 
   const deleteProfile = async (id) => {
@@ -54,13 +45,16 @@ export default function UserProfile({ route, navigation }) {
       {
         text: "OK",
         onPress: async () => {
-          const Token = await AsyncStorage.getItem("token");
+          const userToken = await AsyncStorage.getItem("token");
           axios
-            .delete(`https://life-below-water.herokuapp.com/api/user/`, {
-              headers: {
-                Authorization: Token,
-              },
-            })
+            .delete(
+              `https://life-below-water.herokuapp.com/api/user/deleteuser`,
+              {
+                headers: {
+                  Authorization: userToken,
+                },
+              }
+            )
             .then((res) => {
               navigation.push("LoadingPage");
               getprofile();
@@ -72,6 +66,27 @@ export default function UserProfile({ route, navigation }) {
       },
     ]);
   };
+
+  const onLogOut = async () => {
+    Alert.alert("Are you sure you want to logout?", "", [
+      {
+        text: "Ok",
+        onPress: async () => {
+          await AsyncStorage.clear();
+          navigation.push("SignInScreen");
+        },
+      },
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+      },
+    ]);
+  };
+
+  console.log(profile);
+  useEffect(() => {
+    getprofile();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -96,7 +111,7 @@ export default function UserProfile({ route, navigation }) {
         style={{
           marginVertical: 2,
           fontSize: 25,
-          marginTop: 10,
+          marginTop: 0,
           marginLeft: 170,
           fontWeight: "bold",
         }}
@@ -106,52 +121,57 @@ export default function UserProfile({ route, navigation }) {
       <View style={styles.no1}>
         <Text
           style={{
-            marginLeft: 70,
+            marginLeft: 65,
             fontSize: 20,
-            marginTop: 50,
+            marginTop: 10,
+            marginRight: 20,
           }}
         >
-          Name :
+          Full Name :
         </Text>
-        <Text style={styles.loremIpsum3}>{/* {user.phoneNo} */}</Text>
+        <TextInput style={styles.textView}>{profile.name}</TextInput>
         <Text
           style={{
-            marginLeft: 70,
+            marginLeft: 65,
             fontSize: 20,
             marginTop: 20,
+            marginRight: 20,
           }}
         >
           Email Address :
         </Text>
-        <Text style={styles.loremIpsum3}>{/* {user.phoneNo} */}</Text>
+        <TextInput style={styles.textView}>{profile.email}</TextInput>
+
         <Text
           style={{
-            marginLeft: 70,
+            marginLeft: 65,
             fontSize: 20,
             marginTop: 20,
+            marginRight: 20,
           }}
         >
           Phone Number :
         </Text>
-        <Text style={styles.loremIpsum3}>{/* {user.phoneNo} */}</Text>
+
+        <TextInput style={styles.textView}>{profile.phoneNumber}</TextInput>
 
         <TouchableOpacity
           style={[styles.containerx, styles.ButtonDark1]}
-          onPress={() => navigation.navigate("UpdateUserProfile")}
+          onPress={() => navigation.navigate("UpdateUserProfile", {})}
         >
           <Text style={styles.loginText3}>Update Profile</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.containerx, styles.ButtonDark]}
-          onPress={() => navigation.navigate(" ")}
+          onPress={() => deleteProfile(profile._id)}
         >
           <Text style={styles.loginText3}>Delete Profile</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.containerx, styles.ButtonDark]}
-          onPress={() => navigation.navigate(" ")}
+          onPress={onLogOut}
         >
           <Text style={styles.loginText3}>Log Out </Text>
         </TouchableOpacity>
@@ -241,7 +261,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 0,
     marginTop: 10,
-    marginLeft: 110,
+    marginLeft: 100,
   },
   ButtonDark1: {
     height: 50,
@@ -254,8 +274,8 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 1,
     shadowRadius: 0,
-    marginTop: 100,
-    marginLeft: 110,
+    marginTop: 20,
+    marginLeft: 100,
   },
   containerx: {
     marginTop: -20,
@@ -286,5 +306,21 @@ const styles = StyleSheet.create({
   loremIpsum3: {
     color: "#121212",
     width: 1000,
+  },
+  no1: {
+    color: "rgba(155,155,155,1)",
+    fontSize: 29,
+    marginTop: 4,
+  },
+  textView: {
+    marginLeft: 65,
+    height: 40,
+    padding: 10,
+    marginTop: 2,
+    width: 300,
+    fontSize: 16,
+    borderWidth: 1,
+    backgroundColor: "#ffff",
+    textAlign: "left",
   },
 });
