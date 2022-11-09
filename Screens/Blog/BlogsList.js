@@ -63,7 +63,7 @@ export default function BlogsList({ navigation }) {
       <TouchableOpacity
        onPress={() => navigation.navigate("UpdateList")}>
       <Card
-       style={{ padding: 100, margin:-4, height:300, width:350}}
+       style={{ padding: 100, margin:-4, height:300, width:350, marginBottom:30}}
       
       >
       <Image
