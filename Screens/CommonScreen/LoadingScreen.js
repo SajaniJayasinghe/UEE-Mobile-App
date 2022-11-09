@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 1,
     shadowRadius: 0,
-    marginTop: -80,
+    marginTop: -230,
     marginBottom: 10,
     marginLeft: 130,
   },
@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
     minWidth: 88,
     paddingLeft: 26,
     paddingRight: 16,
+    
   },
 
   loading: {

@@ -25,7 +25,7 @@ export default function Dashboard({ navigation }) {
         }}
       />
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        <TouchableOpacity onPress={() => navigation.navigate("Organization")}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate("Organization")}> */}
           <Card
             style={{
               padding: 50,
@@ -53,8 +53,8 @@ export default function Dashboard({ navigation }) {
               Organization
             </Text>
           </Card>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Events")}>
+        {/* </TouchableOpacity> */}
+        {/* <TouchableOpacity onPress={() => navigation.navigate("Events")}> */}
           <Card
             style={{
               padding: 50,
@@ -84,8 +84,8 @@ export default function Dashboard({ navigation }) {
               Events
             </Text>
           </Card>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Blogs")}>
+        {/* </TouchableOpacity> */}
+        <TouchableOpacity onPress={() => navigation.navigate("BlogsList")}>
           <Card
             style={{
               padding: 50,
@@ -116,7 +116,7 @@ export default function Dashboard({ navigation }) {
             </Text>
           </Card>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Donations")}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate("Donations")}> */}
           <Card
             style={{
               padding: 50,
@@ -145,7 +145,7 @@ export default function Dashboard({ navigation }) {
               Donations
             </Text>
           </Card>
-        </TouchableOpacity>
+        {/* </TouchableOpacity> */}
       </ScrollView>
       <Image
         style={styles.tinyLogo4}
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
     marginLeft: 120,
   },
   containerx: {
-    marginTop: -20,
+    marginTop: 20,
     backgroundColor: "#79BAEC",
     justifyContent: "center",
     alignItems: "center",

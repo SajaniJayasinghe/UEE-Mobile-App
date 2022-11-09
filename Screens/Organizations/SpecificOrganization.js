@@ -10,7 +10,7 @@ import {
   ScrollView,
 } from "react-native";
 
-const SpecificEventUser = ({ navigation }) => {
+const SpecificOrganization = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
@@ -22,58 +22,33 @@ const SpecificEventUser = ({ navigation }) => {
       <Text
         style={{
           color: "#000000",
-          textAlign: "left",
+          textAlign: "center",
           marginTop: 10,
-          fontSize: 15,
+          fontSize: 20,
           fontWeight: "bold",
         }}
       >
-        Mangroove restore
+        OCEANA
       </Text>
 
       <TouchableOpacity
         style={[styles.containerx, styles.materialButtonDark]}
-        onPress={() => navigation.navigate("donate")}
+        onPress={() => navigation.navigate("Members")}
       >
-        <Text style={styles.addnewblog}>Donate</Text>
+        <Text style={styles.addnewblog}>Members</Text>
       </TouchableOpacity>
 
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
         <TouchableOpacity onPress={() => navigation.navigate("UpdateList")}>
-          <Card style={{ padding: 100, margin: 25, height: 400, width: 350 }}>
-            <Text
-              style={{
-                color: "#000000",
-                textAlign: "left",
-                marginTop: 10,
-                fontSize: 15,
-                fontWeight: "bold",
-              }}
-            >
-              Venue - Hikkaduwa
-            </Text>
-            <Text
-              style={{
-                color: "#000000",
-                textAlign: "left",
-                marginTop: 10,
-                fontSize: 15,
-                fontWeight: "bold",
-              }}
-            >
-              Date - 12/12/2022
-            </Text>
-            <Text
-              style={{
-                color: "#000000",
-                textAlign: "left",
-                marginTop: 10,
-                fontSize: 15,
-                fontWeight: "bold",
-              }}
-            >
-              Time - 10.00 a.m
-            </Text>
+          <Card
+            style={{
+              padding: 30,
+              margin: 15,
+              height: 250,
+              width: 350,
+              marginLeft: 25,
+            }}
+          >
             <Text
               style={{
                 color: "#000000",
@@ -98,9 +73,11 @@ const styles = StyleSheet.create({
   },
   event1: {
     width: 350,
-    height: 150,
-    marginLeft: -99,
-    marginTop: -100,
+    height: 300,
+
+    marginLeft: 25,
+
+    marginTop: 10,
   },
   materialButtonDark: {
     height: 50,
@@ -146,4 +123,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SpecificEventUser;
+export default SpecificOrganization;
