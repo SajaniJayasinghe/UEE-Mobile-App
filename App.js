@@ -16,6 +16,11 @@ import UpdateUserProfile from "./Screens/CommonScreen/UpdateUserProfile";
 import EditDonations from "./Screens/Donation/EditDonations";
 import DonationsList from "./Screens/Donation/DonationsList";
 import ReceivedDonations from "./Screens/Donation/ReceivedDonations";
+import AllEvents from "./Screens/Events/AllEvents";
+import SpecificEventAdmin from "./Screens/Events/SpecificEventAdmin";
+import SpecificEventUser from "./Screens/Events/SpecificEventUser";
+import AddEvent from "./Screens/Events/AddEvent";
+import AdminDashboard from "./Screens/CommonScreen/AdminDashboard";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -42,6 +47,14 @@ export default function App() {
         <Stack.Screen name="DeleteBlogs" component={DeleteBlogs} />
         <Stack.Screen name="UserDashboard" component={UserDashboard} />
         <Stack.Screen name="UpdateUserProfile" component={UpdateUserProfile} />
+        <Stack.Screen name="AllEvents" component={AllEvents} />
+        <Stack.Screen
+          name="SpecificEventAdmin"
+          component={SpecificEventAdmin}
+        />
+        <Stack.Screen name="SpecificEventUser" component={SpecificEventUser} />
+        <Stack.Screen name="AddEvent" component={AddEvent} />
+        <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
       </Stack.Navigator>
     </NavigationContainer>
   );

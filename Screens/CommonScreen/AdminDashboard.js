@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default function UserDashboard({ navigation }) {
+export default function AdminDashboard({ navigation }) {
   return (
     <View style={styles.container}>
       <Image

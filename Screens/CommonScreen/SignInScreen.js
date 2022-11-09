@@ -24,12 +24,22 @@ export default function SignInScreen({ navigation }) {
     await axios
       .post(URL, { email: email, password: password })
       .then((res) => {
-        // console.log(res.data);
         if (res.data) {
           AsyncStorage.clear();
           console.log(res.data);
           storetoken(res.data.token);
-          navigation.navigate("UserDashboard");
+          switch (res.data.role) {
+            case "Admin":
+              console.log("Admin");
+              navigation.navigate("AdminDashboard");
+
+              break;
+            case "User":
+              navigation.navigate("UserDashboard");
+              break;
+            default:
+              console.log("Invalid User role");
+          }
         }
       })
       .catch((error) => {
@@ -86,6 +96,7 @@ export default function SignInScreen({ navigation }) {
         onPress={() => {
           loginUser();
         }}
+        // onPress={() => navigation.navigate("UserDashboard")}
       >
         <Text style={styles.loginText3}>Login</Text>
       </TouchableOpacity>
