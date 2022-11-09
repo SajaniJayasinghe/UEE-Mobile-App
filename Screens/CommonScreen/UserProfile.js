@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from "react-native";
 
 import axios from "axios";
@@ -37,6 +38,49 @@ export default function UserProfile({ route, navigation }) {
       .then((res) => {
         setProfile(res.data.User);
       });
+  };
+
+  const deleteProfile = async (id) => {
+    Alert.alert("Are you sure?", "This will permanently delete your profile!", [
+      {
+        text: "OK",
+        onPress: async () => {
+          const userToken = await AsyncStorage.getItem("token");
+          axios
+            .delete(
+              `https://life-below-water.herokuapp.com/api/user/deleteuser`,
+              {
+                headers: {
+                  Authorization: userToken,
+                },
+              }
+            )
+            .then((res) => {
+              navigation.push("LoadingPage");
+              getprofile();
+            })
+            .catch((e) => {
+              console.error(e);
+            });
+        },
+      },
+    ]);
+  };
+
+  const onLogOut = async () => {
+    Alert.alert("Are you sure you want to logout?", "", [
+      {
+        text: "Ok",
+        onPress: async () => {
+          await AsyncStorage.clear();
+          navigation.push("SignInScreen");
+        },
+      },
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+      },
+    ]);
   };
 
   console.log(profile);
@@ -120,14 +164,14 @@ export default function UserProfile({ route, navigation }) {
 
         <TouchableOpacity
           style={[styles.containerx, styles.ButtonDark]}
-          onPress={() => navigation.navigate(" ")}
+          onPress={() => deleteProfile(profile._id)}
         >
           <Text style={styles.loginText3}>Delete Profile</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={[styles.containerx, styles.ButtonDark]}
-          onPress={() => navigation.navigate(" ")}
+          onPress={onLogOut}
         >
           <Text style={styles.loginText3}>Log Out </Text>
         </TouchableOpacity>
