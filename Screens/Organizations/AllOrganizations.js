@@ -118,7 +118,9 @@ export default function AllOrganizations({ navigation }) {
                 <TouchableOpacity
                   style={[styles.containerx, styles.ButtonDark]}
                   onPress={() =>
-                    navigation.navigate("ForiegnPassengerDashboard")
+                    navigation.navigate("AddEvent", {
+                      organizationID: organization.organizationID,
+                    })
                   }
                 >
                   <Text
