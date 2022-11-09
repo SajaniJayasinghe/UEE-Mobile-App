@@ -37,27 +37,38 @@ const AllEvents = ({ navigation }) => {
         onChangeText={(text) => console.log(text)}
       />
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        <TouchableOpacity onPress={() => navigation.navigate("donate")}>
+        <TouchableOpacity onPress={() => navigation.navigate("UpdateList")}>
           <Card style={{ padding: 100, margin: 25, height: 150, width: 350 }}>
             <Text
               style={{
                 color: "#000000",
-                textAlign: "center",
-                marginTop: 0,
-                marginBottom: -30,
-                fontSize: 25,
+                textAlign: "left",
+                marginTop: 10,
+                fontSize: 15,
+                fontWeight: "bold",
+              }}
+            >
+              Saving Marine Life
+            </Text>
+
+            <Text
+              style={{
+                color: "#000000",
+                marginRight: -85,
+                marginLeft: -60,
+                marginTop: 10,
+                fontSize: 12,
                 fontWeight: "bold",
                 fontFamily: "Times New Roman",
               }}
             >
-              Donations
+              Organization - Oceana
             </Text>
-
             <Icon
               name="eye"
               size={30}
               color="#900"
-              style={{ marginLeft: 160 }}
+              style={{ marginLeft: 260 }}
             />
           </Card>
         </TouchableOpacity>
