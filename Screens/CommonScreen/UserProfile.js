@@ -73,7 +73,7 @@ export default function UserProfile({ route, navigation }) {
         text: "Ok",
         onPress: async () => {
           await AsyncStorage.clear();
-          navigation.push("SignInScreen");
+          navigation.push("LoadingPage");
         },
       },
       {

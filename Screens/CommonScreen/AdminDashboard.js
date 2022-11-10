@@ -45,7 +45,9 @@ export default function AdminDashboard({ navigation }) {
           </TouchableOpacity>
         </View>
         <View style={styles.rect4}>
-          <TouchableOpacity onPress={() => navigation.navigate("")}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("AllEventsAdmin")}
+          >
             <Image
               style={styles.tinyLogo6}
               source={{

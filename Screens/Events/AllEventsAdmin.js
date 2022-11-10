@@ -12,7 +12,7 @@ import {
   ScrollView,
 } from "react-native";
 
-export default function AllEvents({ navigation }) {
+export default function AllEventsAdmin({ navigation }) {
   const [event, setEvent] = useState([]);
 
   useEffect(() => {
@@ -39,18 +39,17 @@ export default function AllEvents({ navigation }) {
       >
         EVENTS LIST
       </Text>
-
       <SearchBar
         placeholder="Search here"
         fontColor="#000000"
         iconColor="#000000"
         shadowColor="#000000"
         cancelIconColor="#000000"
+        onPress={() => alert("onPress")}
         style={{
           borderWidth: 1,
           marginBottom: 10,
         }}
-        onPress={() => alert("onPress")}
         onChangeText={(text) => console.log(text)}
       />
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
@@ -69,14 +68,9 @@ export default function AllEvents({ navigation }) {
                 style={{
                   color: "#000000",
                   textAlign: "left",
-                  marginTop: 10,
                   fontSize: 15,
                   fontWeight: "bold",
-                }}
-              ></Text>
-              <Text
-                style={{
-                  marginTop: -20,
+                  marginTop: 10,
                   marginBottom: 10,
                 }}
               >
@@ -87,25 +81,16 @@ export default function AllEvents({ navigation }) {
                 style={{
                   color: "#000000",
                   textAlign: "left",
-                  marginTop: 10,
-                  fontSize: 12,
+                  marginTop: 0,
+                  marginBottom: 10,
+                  fontSize: 15,
                   fontWeight: "bold",
-                }}
-              ></Text>
-              <Text
-                style={{
-                  marginTop: -20,
                 }}
               >
                 Organization : {event.organizationName}
               </Text>
-
               <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("SpecificEventUser", {
-                    // organizationID: event.organizationID,
-                  })
-                }
+                onPress={() => navigation.navigate("SpecificEventAdmin")}
               >
                 <Icon
                   name="eye"

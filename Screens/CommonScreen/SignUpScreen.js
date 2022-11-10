@@ -94,41 +94,12 @@ export default function SignUpScreen({ navigation }) {
           marginLeft: 130,
           marginTop: -30,
           fontWeight: "bold",
-          marginBottom: 10,
+          marginBottom: 30,
         }}
       >
         SignUp Page
       </Text>
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        <Dropdown
-          style={styles.dropdown}
-          placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
-          inputSearchStyle={styles.inputSearchStyle}
-          iconStyle={styles.iconStyle}
-          data={data}
-          search
-          maxHeight={300}
-          labelField="label"
-          valueField="value"
-          placeholder="Select Your Role"
-          searchPlaceholder="Search..."
-          statusBarIsTranslucent={true}
-          value={value}
-          renderItem={renderItem}
-          onChange={(item) => {
-            setrole(item.value);
-          }}
-          renderLeftIcon={() => (
-            <AntDesign
-              style={styles.icon}
-              color="black"
-              name="Safety"
-              size={20}
-            />
-          )}
-        />
-
         <Text style={styles.loginText}>Enter Your Full Name</Text>
         <TextInput
           placeholder="Full Name"
@@ -170,6 +141,35 @@ export default function SignUpScreen({ navigation }) {
           onChange={(e) => setcpassword(e.nativeEvent.text)}
           value={cpassword}
         ></TextInput>
+
+        <Dropdown
+          style={styles.dropdown}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          iconStyle={styles.iconStyle}
+          data={data}
+          search
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder="Select Your Role"
+          searchPlaceholder="Search..."
+          statusBarIsTranslucent={true}
+          value={value}
+          renderItem={renderItem}
+          onChange={(item) => {
+            setrole(item.value);
+          }}
+          renderLeftIcon={() => (
+            <AntDesign
+              style={styles.icon}
+              color="black"
+              name="Safety"
+              size={20}
+            />
+          )}
+        />
 
         <TouchableOpacity style={[styles.containerx, styles.ButtonDark]}>
           <Text style={styles.loginText3} onPress={onSignup}>
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 0,
     marginTop: 10,
-    marginLeft: 120,
+    marginLeft: 140,
   },
   containerx: {
     marginTop: -20,
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     borderColor: "#FFBC26",
     borderWidth: 2,
-    marginTop: 30,
+    marginTop: 10,
     width: 332,
     marginLeft: 47,
   },
