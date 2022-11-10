@@ -15,7 +15,9 @@ import {
 export default function Organizations({ navigation }) {
   const [organization, setorganization] = useState([]);
 
-  const image = { uri: "https://reactjs.org/logo-og.png" };
+  const image = {
+    uri: "https://assets.puzzlefactory.pl/puzzle/193/194/original.jpg",
+  };
 
   useEffect(() => {
     axios
@@ -34,7 +36,7 @@ export default function Organizations({ navigation }) {
       <Text
         style={{
           fontWeight: "900",
-          // opacity: 0.6,
+
           textAlign: "center",
           fontSize: 26,
           marginTop: 10,
@@ -60,61 +62,33 @@ export default function Organizations({ navigation }) {
       >
         {organization.map((organization, index) => (
           <View key={organization + index}>
-            {/* <View
-              style={{
-                padding: 5,
-                margin: 21,
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <TouchableOpacity
-                style={[styles.containerx, styles.ButtonDark]}
-                onPress={() => navigation.navigate("ForiegnPassengerDashboard")}
-                // source={{
-                //   uri: "https://previews.123rf.com/images/scusi/scusi1309/scusi130900039/22719918-city-travel-by-bus.jpg",
-                // }}
-              >
-                <Text
-                  style={{
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <ImageBackground
-                    // style={styles.logo}
-                    source={{
-                      uri: "https://previews.123rf.com/images/scusi/scusi1309/scusi130900039/22719918-city-travel-by-bus.jpg",
-                    }}
-                  />
-                  {organization.organizationName}
-                </Text> */}
             <TouchableOpacity
-              style={[styles.containerx, styles.ButtonDark]}
-              onPress={() => navigation.navigate("SpecificOrganization")}
+              style={styles.containerx}
+              onPress={() =>
+                navigation.navigate("SpecificOrganization", {
+                  organizationName: organization.organizationName,
+                  description: organization.description,
+                  organizationMembers: organization.organizationMembers,
+                })
+              }
               // source={{
               //   uri: "https://previews.123rf.com/images/scusi/scusi1309/scusi130900039/22719918-city-travel-by-bus.jpg",
               // }}
             >
+              <ImageBackground
+                source={image}
+                resizeMode="cover"
+                style={styles.image}
+              ></ImageBackground>
               <View
                 style={{
                   padding: 5,
-                  margin: 21,
                   flexDirection: "row",
                   justifyContent: "center",
                   alignItems: "center",
                 }}
               >
-                <ImageBackground
-                  source={image}
-                  resizeMode="cover"
-                  style={styles.text}
-                >
-                  <Text style={styles.text}>
-                    {organization.organizationName}
-                  </Text>
-                </ImageBackground>
+                <Text style={styles.text}>{organization.organizationName}</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -157,30 +131,30 @@ const styles = StyleSheet.create({
     marginLeft: -10,
     flexDirection: "row",
   },
-  ButtonDark: {
-    height: 70,
-    width: 350,
-    shadowOffset: {
-      width: 3,
-      height: 3,
-    },
-    elevation: 5,
-    shadowOpacity: 1,
-    borderRadius: 100,
-    margin: 5,
-  },
+
   containerx: {
-    backgroundColor: "#ADDFFF",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "row",
+    marginBottom: -20,
+    elevation: 0,
+  },
+  text: {
+    fontSize: 20,
+    fontColor: "black",
+    opacity: 1,
+    top: -60,
+  },
+  image: {
+    height: 70,
+    width: 350,
+    borderRadius: 50,
+    overflow: "hidden",
+    opacity: 0.25,
+    marginTop: 25,
+    borderWidth: 1,
     shadowOffset: {
       width: 0,
       height: 1,
     },
-    elevation: 2,
-    minWidth: 78,
-    paddingLeft: 3,
-    paddingRight: 3,
   },
 });

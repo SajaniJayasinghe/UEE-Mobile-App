@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "react-native-shadow-cards";
 
 import {
@@ -9,8 +9,20 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import { useRoute } from "@react-navigation/native";
 
 const SpecificOrganization = ({ navigation }) => {
+  const [organization, setorganization] = useState([]);
+  const route = useRoute();
+
+  useEffect(() => {
+    const data = {
+      organizationName: route.params.organizationName,
+      description: route.params.description,
+    };
+    setorganization(data);
+  }, []);
+
   return (
     <View style={styles.container}>
       <Image
@@ -28,12 +40,17 @@ const SpecificOrganization = ({ navigation }) => {
           fontWeight: "bold",
         }}
       >
-        OCEANA
+        {organization.organizationName}
       </Text>
 
       <TouchableOpacity
         style={[styles.containerx, styles.materialButtonDark]}
-        onPress={() => navigation.navigate("Members")}
+        onPress={() =>
+          navigation.navigate("Members", {
+            organizationName: organization.organizationName,
+            organizationMembers: organization.organizationMembers,
+          })
+        }
       >
         <Text style={styles.addnewblog}>Members</Text>
       </TouchableOpacity>
@@ -58,7 +75,7 @@ const SpecificOrganization = ({ navigation }) => {
                 fontWeight: "bold",
               }}
             >
-              Description - helloooooo
+              {organization.description}
             </Text>
           </Card>
         </TouchableOpacity>

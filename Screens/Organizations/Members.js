@@ -9,22 +9,23 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+import { useRoute } from "@react-navigation/native";
 
-export default function Members({ organizationID }, { navigation }) {
+export default function Members({ navigation }) {
   const [organization, setorganization] = useState([]);
+  const [organizationMembers, setorganizationMembers] = useState([]);
+  const route = useRoute();
 
   useEffect(() => {
-    axios
-      .get(
-        `https://life-below-water.herokuapp.com/api/organization/${organizationID}`
-      )
-      .then((res) => {
-        if (res.data.success) {
-          setorganization(res.data.existingOrganizations);
-        }
-      });
+    const data = {
+      organizationName: route.params.organizationName,
+    };
+    const data1 = {
+      organizationMembers: route.params.organizationMembers,
+    };
+    setorganization(data);
+    setorganizationMembers(data1);
   }, []);
-
   return (
     <View style={styles.container}>
       <Text
@@ -49,28 +50,22 @@ export default function Members({ organizationID }, { navigation }) {
       />
 
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        {organization.map((organization, index) => (
+        {organizationMembers.map((organization, index) => (
           <View key={organization + index}>
-            <TouchableOpacity
-              style={[styles.containerx, styles.ButtonDark]}
-              onPress={() => navigation.navigate("ForiegnPassengerDashboard")}
+            <View
+              style={{
+                padding: 5,
+                margin: 21,
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              <View
-                style={{
-                  padding: 5,
-                  margin: 21,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={styles.text}>
-                  {organization.organizationMembers[0].name}
-                </Text>
-              </View>
-            </TouchableOpacity>
+              <Text style={styles.text}>
+                {organization.organizationMembers}
+              </Text>
+            </View>
           </View>
-          // </View>
         ))}
       </ScrollView>
     </View>
