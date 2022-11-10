@@ -104,7 +104,15 @@ export default function AllEvents({ navigation }) {
               </Text>
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate("SpecificEventUser", { id: event._id })
+                  navigation.navigate("SpecificEventUser", {
+                    id: event._id,
+                    organizationID: event.organizationID,
+                    eventTitle: event.eventTitle,
+                    venue: event.venue,
+                    eventTime: event.eventTime,
+                    eventDate: event.eventDate,
+                    eventdescription: event.eventdescription,
+                  })
                 }
               >
                 <Icon

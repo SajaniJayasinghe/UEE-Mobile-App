@@ -21,6 +21,8 @@ export default function Donations({ route, navigation }) {
   const [paymenttype, setpaymenttype] = useState("");
   const [value, setValue] = useState(null);
 
+  const { oid, eid } = route.params;
+
   const data = [
     { label: "Cash", value: "Cash" },
     { label: "Online", value: "Online" },
@@ -43,7 +45,9 @@ export default function Donations({ route, navigation }) {
   };
 
   const addDonation = () => {
-    const URL = `https://life-below-water.herokuapp.com/api/donation/adddonation/${organizationID}/${eventID}`;
+    console.log("oid", oid);
+    console.log("eid", eid);
+    const URL = `https://life-below-water.herokuapp.com/api/donation/adddonation/${oid}/${eid}`;
 
     const payload = {
       donatorName: donatorName,

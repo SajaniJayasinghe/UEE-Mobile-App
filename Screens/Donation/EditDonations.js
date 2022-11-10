@@ -12,12 +12,17 @@ import axios from "axios";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { Dropdown } from "react-native-element-dropdown";
 
-export default function EditDonations({ navigation }) {
+export default function EditDonations({ route, navigation }) {
+  const [donatorName, setdonatorName] = useState("");
+  const [depositeDate, setdepositeDate] = useState("");
+  const [receipt, setreceipt] = useState("");
+  const [amount, setamount] = useState("");
+  const [paymenttype, setpaymenttype] = useState("");
   const [value, setValue] = useState(null);
 
   const data = [
-    { label: "Cash Payment", value: "CashPayment" },
-    { label: "Online Transaction", value: "OnlineTransfer" },
+    { label: "Cash", value: "Cash" },
+    { label: "Online", value: "Online" },
   ];
 
   const renderItem = (item) => {

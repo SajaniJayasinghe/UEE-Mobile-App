@@ -1,6 +1,7 @@
-import React from "react";
-import { Card } from "react-native-shadow-cards";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Card } from "react-native-shadow-cards";
+
 import {
   View,
   Image,
@@ -9,22 +10,31 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import { useRoute } from "@react-navigation/native";
 
-// const SpecificEventUser = ({ route, navigation }) => {
-export default function SpecificEventUser({ route, navigation }) {
-  const [events, setevents] = useState([]);
+export default function SpecificEventUser({ navigation }) {
+  const [specificevent, setSpecificEvent] = useState([]);
+  const route = useRoute();
   const { id } = route.params;
 
   useEffect(() => {
-    console.log(id);
-    axios
-      .get(`https://life-below-water.herokuapp.com/api/event/getoneevent/${id}`)
-      .then((res) => {
-        if (res.data.success) {
-          setevents(res.data.events);
-        }
-      });
-    // setevents(data);
+    // axios
+    //   .get(`https://life-below-water.herokuapp.com/api/event/getoneevent/${id}`)
+    //   .then((res) => {
+    //     if (res.data.success) {
+    //       setSpecificEvent(res.data.events);
+    //       console.log(specificevent);
+    //     }
+    //   });
+    const data = {
+      eventTitle: route.params.eventTitle,
+      organizationID: route.params.organizationID,
+      venue: route.params.venue,
+      eventTime: route.params.eventTime,
+      eventDate: route.params.eventDate,
+      eventdescription: route.params.eventdescription,
+    };
+    setSpecificEvent(data);
   }, []);
 
   return (
@@ -35,6 +45,18 @@ export default function SpecificEventUser({ route, navigation }) {
           uri: "https://media.istockphoto.com/photos/sea-life-on-beautiful-coral-reef-with-blacktail-butterflyfish-on-red-picture-id1364050573?b=1&k=20&m=1364050573&s=170667a&w=0&h=RU5Bi5gDzop_fvqiQXAk7elW3l8mS0t52VjLwl29bc0=",
         }}
       />
+
+      <TouchableOpacity
+        style={[styles.containerx, styles.materialButtonDark]}
+        onPress={() =>
+          navigation.navigate("AddDonations", {
+            eid: specificevent._id,
+            oid: specificevent.organizationID,
+          })
+        }
+      >
+        <Text style={styles.addnewblog}>Donate</Text>
+      </TouchableOpacity>
       <Text
         style={{
           color: "#000000",
@@ -44,71 +66,55 @@ export default function SpecificEventUser({ route, navigation }) {
           fontWeight: "bold",
         }}
       >
-        Mangroove restore
+        {specificevent.eventTitle}
       </Text>
-
-      <TouchableOpacity
-        style={[styles.containerx, styles.materialButtonDark]}
-        onPress={() => navigation.navigate("donate")}
-      >
-        <Text style={styles.addnewblog}>Donate</Text>
-      </TouchableOpacity>
-
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        {events.map((events, index) => (
-          <View key={events + index}>
-            <TouchableOpacity onPress={() => navigation.navigate("UpdateList")}>
-              <Card
-                style={{ padding: 100, margin: 25, height: 400, width: 350 }}
-              >
-                <Text
-                  style={{
-                    color: "#000000",
-                    textAlign: "left",
-                    marginTop: 10,
-                    fontSize: 15,
-                    fontWeight: "bold",
-                  }}
-                >
-                  Venue - Hikkaduwa
-                </Text>
-                <Text
-                  style={{
-                    color: "#000000",
-                    textAlign: "left",
-                    marginTop: 10,
-                    fontSize: 15,
-                    fontWeight: "bold",
-                  }}
-                >
-                  Date - 12/12/2022
-                </Text>
-                <Text
-                  style={{
-                    color: "#000000",
-                    textAlign: "left",
-                    marginTop: 10,
-                    fontSize: 15,
-                    fontWeight: "bold",
-                  }}
-                >
-                  Time - 10.00 a.m
-                </Text>
-                <Text
-                  style={{
-                    color: "#000000",
-                    textAlign: "left",
-                    marginTop: 10,
-                    fontSize: 15,
-                    fontWeight: "bold",
-                  }}
-                >
-                  Description - helloooooo
-                </Text>
-              </Card>
-            </TouchableOpacity>
-          </View>
-        ))}
+        <Card style={{ padding: 100, margin: 25, height: 400, width: 350 }}>
+          <Text
+            style={{
+              color: "#000000",
+              textAlign: "left",
+              marginTop: 10,
+              fontSize: 15,
+              fontWeight: "bold",
+            }}
+          >
+            {specificevent.eventVenue}
+          </Text>
+          <Text
+            style={{
+              color: "#000000",
+              textAlign: "left",
+              marginTop: 10,
+              fontSize: 15,
+              fontWeight: "bold",
+            }}
+          >
+            {specificevent.eventDate}
+          </Text>
+          <Text
+            style={{
+              color: "#000000",
+              textAlign: "left",
+              marginTop: 10,
+              fontSize: 15,
+              fontWeight: "bold",
+            }}
+          >
+            {specificevent.eventTime}
+          </Text>
+          <Text
+            style={{
+              color: "#000000",
+              textAlign: "left",
+              marginTop: 10,
+              fontSize: 15,
+              fontWeight: "bold",
+            }}
+          >
+            {specificevent.description}
+          </Text>
+        </Card>
       </ScrollView>
     </View>
   );
