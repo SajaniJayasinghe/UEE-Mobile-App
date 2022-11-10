@@ -41,6 +41,12 @@ export default function AddOrganization({ route, navigation }) {
   };
   return (
     <View style={styles.container}>
+      <Image
+        style={styles.tinyLogo}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
       <Text
         style={{
           fontWeight: "800",
@@ -48,6 +54,7 @@ export default function AddOrganization({ route, navigation }) {
           fontSize: 26,
           marginLeft: -10,
           marginTop: 30,
+          marginBottom: 20,
         }}
       >
         Create Organization
@@ -61,7 +68,7 @@ export default function AddOrganization({ route, navigation }) {
             textAlign: "left",
             fontSize: 20,
             marginLeft: 20,
-            marginTop: 20,
+            marginTop: 30,
           }}
         >
           Organization Name
@@ -118,6 +125,12 @@ export default function AddOrganization({ route, navigation }) {
       >
         <Text style={styles.letsGetStarted}> CREATE</Text>
       </TouchableOpacity>
+      <Image
+        style={styles.tinyLogo1}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
     </View>
   );
 }
@@ -127,13 +140,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   input: {
-    height: 50,
+    height: 60,
     margin: 12,
     marginTop: 20,
     borderWidth: 1,
     padding: 10,
-    marginLeft: 60,
-    width: 290,
+    marginLeft: 20,
+    width: 380,
+    borderRadius: 25,
   },
   input2: {
     height: 125,
@@ -141,9 +155,11 @@ const styles = StyleSheet.create({
     marginTop: 15,
     borderWidth: 1,
     padding: 10,
-    marginLeft: 60,
+    marginLeft: 20,
     width: 290,
     marginBottom: -70,
+    width: 380,
+    borderRadius: 25,
   },
   loginlogo: {
     width: 440,
@@ -176,11 +192,12 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 1,
     shadowRadius: 0,
-    marginLeft: 200,
-    marginTop: 150,
+    marginLeft: 130,
+    marginTop: 100,
+    marginBottom: 50,
   },
   containerx: {
-    backgroundColor: "#ADDFFF",
+    backgroundColor: "#79BAEC",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
@@ -212,5 +229,17 @@ const styles = StyleSheet.create({
   },
   letsGetStarted: {
     fontSize: 20,
+  },
+  tinyLogo: {
+    width: 450,
+    height: 40,
+    marginLeft: -15,
+    marginTop: 0,
+  },
+  tinyLogo1: {
+    width: 450,
+    height: 50,
+    marginLeft: -15,
+    marginTop: 0,
   },
 });

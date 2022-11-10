@@ -52,10 +52,14 @@ export default function AddEvent({ route, navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        style={styles.event1}
+        style={styles.tinyLogo}
         source={{
-          uri: "https://media.istockphoto.com/photos/sea-life-on-beautiful-coral-reef-with-blacktail-butterflyfish-on-red-picture-id1364050573?b=1&k=20&m=1364050573&s=170667a&w=0&h=RU5Bi5gDzop_fvqiQXAk7elW3l8mS0t52VjLwl29bc0=",
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
         }}
+      />
+      <Image
+        style={styles.logo}
+        source={require("../../assets/Advantage-1.png")}
       />
       <Text
         style={{
@@ -63,58 +67,59 @@ export default function AddEvent({ route, navigation }) {
           textAlign: "center",
           fontSize: 26,
           marginLeft: -10,
-          marginTop: 30,
+          marginTop: 7,
+          marginBottom: 15,
         }}
       >
         Create Event
       </Text>
-      <ScrollView style={{ width: "80%", margin: 2 }}>
-        <View>
-          <Text style={styles.loginText}>Event Title</Text>
-          <TextInput
-            placeholder="Enter Event Title"
-            style={styles.textInput2}
-            value={eventTitle}
-            onChange={(e) => setEventTitle(e.nativeEvent.text)}
-          ></TextInput>
+      {/* <ScrollView> */}
+      <View>
+        <Text style={{ marginLeft: 40, fontSize: 18 }}>Event Title</Text>
+        <TextInput
+          placeholder="Enter Event Title"
+          style={styles.textInput2}
+          value={eventTitle}
+          onChange={(e) => setEventTitle(e.nativeEvent.text)}
+        ></TextInput>
 
-          <Text style={styles.loginText}>Event Venue</Text>
-          <TextInput
-            placeholder="Enter Event Title"
-            style={styles.textInput2}
-            value={venue}
-            onChange={(e) => setVenue(e.nativeEvent.text)}
-          ></TextInput>
-          <Text style={styles.loginText}>Event Time</Text>
-          <TextInput
-            placeholder="Enter Event Title"
-            style={styles.textInput2}
-            value={eventTime}
-            onChange={(e) => setEventTime(e.nativeEvent.text)}
-          ></TextInput>
-          <Text style={styles.loginText}>Event Date</Text>
-          <TextInput
-            placeholder="Enter Event Title"
-            style={styles.textInput2}
-            value={eventDate}
-            onChange={(e) => setEventDate(e.nativeEvent.text)}
-          ></TextInput>
-          <Text style={styles.loginText}>Description</Text>
-          <TextInput
-            placeholder="Enter Event Title"
-            style={styles.textInput2}
-            value={description}
-            onChange={(e) => setDescription(e.nativeEvent.text)}
-          ></TextInput>
-          <Text style={styles.loginText}>Image</Text>
-          <TextInput
-            placeholder="Enter Event Title"
-            style={styles.textInput2}
-            value={eventImage}
-            onChange={(e) => setEventImage(e.nativeEvent.text)}
-          ></TextInput>
-        </View>
-      </ScrollView>
+        <Text style={{ marginLeft: 40, fontSize: 18 }}>Event Venue</Text>
+        <TextInput
+          placeholder="Enter Event Title"
+          style={styles.textInput2}
+          value={venue}
+          onChange={(e) => setVenue(e.nativeEvent.text)}
+        ></TextInput>
+        <Text style={{ marginLeft: 40, fontSize: 18 }}>Event Time</Text>
+        <TextInput
+          placeholder="Enter Event Title"
+          style={styles.textInput2}
+          value={eventTime}
+          onChange={(e) => setEventTime(e.nativeEvent.text)}
+        ></TextInput>
+        <Text style={{ marginLeft: 40, fontSize: 18 }}>Event Date</Text>
+        <TextInput
+          placeholder="Enter Event Title"
+          style={styles.textInput2}
+          value={eventDate}
+          onChange={(e) => setEventDate(e.nativeEvent.text)}
+        ></TextInput>
+        <Text style={{ marginLeft: 40, fontSize: 18 }}>Description</Text>
+        <TextInput
+          placeholder="Enter Event Title"
+          style={styles.textInput2}
+          value={description}
+          onChange={(e) => setDescription(e.nativeEvent.text)}
+        ></TextInput>
+        <Text style={{ marginLeft: 40, fontSize: 18 }}>Image</Text>
+        <TextInput
+          placeholder="Enter Event Title"
+          style={styles.textInput2}
+          value={eventImage}
+          onChange={(e) => setEventImage(e.nativeEvent.text)}
+        ></TextInput>
+      </View>
+      {/* </ScrollView> */}
       <TouchableOpacity
         style={[styles.containerx, styles.ButtonDark]}
         onPress={() => {
@@ -123,6 +128,12 @@ export default function AddEvent({ route, navigation }) {
       >
         <Text style={styles.letsGetStarted}> CREATE</Text>
       </TouchableOpacity>
+      <Image
+        style={styles.tinyLogo1}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
     </View>
   );
 }
@@ -133,21 +144,21 @@ const styles = StyleSheet.create({
   },
   textInput2: {
     height: 40,
-    width: 334,
+    width: 340,
     backgroundColor: "#fff",
     textAlign: "center",
     fontSize: 18,
     borderWidth: 1,
-    marginTop: 20,
-    marginLeft: 45,
+    marginTop: 0,
+    marginLeft: 35,
     marginBottom: 10,
+    borderRadius: 25,
   },
   loginText: {
     color: "black",
     fontSize: 18,
     lineHeight: 18,
     marginBottom: -10,
-    marginLeft: 44,
   },
   loginlogo: {
     width: 440,
@@ -160,7 +171,7 @@ const styles = StyleSheet.create({
   },
   logo1: {
     width: 300,
-    height: 30,
+    height: 60,
     justifyContent: "center",
     alignItems: "center",
     marginLeft: 60,
@@ -180,8 +191,9 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 1,
     shadowRadius: 0,
-    marginLeft: 200,
-    marginTop: 150,
+    marginLeft: 130,
+    marginTop: 10,
+    marginBottom: 40,
   },
   containerx: {
     backgroundColor: "#ADDFFF",
@@ -216,5 +228,27 @@ const styles = StyleSheet.create({
   },
   letsGetStarted: {
     fontSize: 20,
+  },
+  tinyLogo: {
+    width: 450,
+    height: 40,
+    marginLeft: -15,
+    marginTop: 0,
+    marginBottom: 15,
+  },
+  tinyLogo1: {
+    width: 450,
+    height: 60,
+    marginLeft: -15,
+    marginTop: -25,
+  },
+  logo: {
+    width: 440,
+    height: 200,
+    marginTop: -20,
+    marginLeft: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
   },
 });

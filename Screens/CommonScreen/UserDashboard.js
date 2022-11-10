@@ -14,9 +14,6 @@ export default function UserDashboard({ navigation }) {
 
       <Image
         style={styles.tinyLogo1}
-        // source={{
-        //   uri: "https://images4.alphacoders.com/968/968510.jpg",
-        // }}
         source={require("../../assets/userdashboard.jpeg")}
       />
       <TouchableOpacity onPress={() => navigation.navigate("UserProfile")}>
@@ -25,7 +22,9 @@ export default function UserDashboard({ navigation }) {
 
       <View style={styles.rect3Row}>
         <View style={styles.rect3}>
-          <TouchableOpacity onPress={() => navigation.navigate("Organization")}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("AllOrganizations")}
+          >
             <Image
               style={styles.tinyLogo5}
               source={{

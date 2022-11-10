@@ -7,9 +7,6 @@ import { Card } from "react-native-shadow-cards";
 
 export default function ReceivedDonations({ navigation }) {
   const [donations, setdonations] = useState([]);
-  // const abc = (x) => {
-  //   console.log(x);
-  // };
   useEffect(() => {
     axios
       .get("https://life-below-water.herokuapp.com/api/donation/getdonation")

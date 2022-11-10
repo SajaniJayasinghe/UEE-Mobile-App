@@ -22,6 +22,12 @@ import SpecificEventUser from "./Screens/Events/SpecificEventUser";
 import AddEvent from "./Screens/Events/AddEvent";
 import AdminDashboard from "./Screens/CommonScreen/AdminDashboard";
 import AllEventsAdmin from "./Screens/Events/AllEventsAdmin";
+import AddOrganization from "./Screens/Organizations/AddOrganization";
+import AllOrganizations from "./Screens/Organizations/AllOrganizations";
+import EditOrganizaton from "./Screens/Organizations/EditOrganizaton";
+import Organizations from "./Screens/Organizations/Organizations";
+import SpecificOrganization from "./Screens/Organizations/SpecificOrganization";
+import Members from "./Screens/Organizations/Members";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -57,6 +63,15 @@ export default function App() {
         <Stack.Screen name="AddEvent" component={AddEvent} />
         <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
         <Stack.Screen name="AllEventsAdmin" component={AllEventsAdmin} />
+        <Stack.Screen name="AddOrganization" component={AddOrganization} />
+        <Stack.Screen name="AllOrganizations" component={AllOrganizations} />
+        <Stack.Screen name="EditOrganizaton" component={EditOrganizaton} />
+        <Stack.Screen name="Organizations" component={Organizations} />
+        <Stack.Screen
+          name="SpecificOrganization"
+          component={SpecificOrganization}
+        />
+        <Stack.Screen name="Members" component={Members} />
       </Stack.Navigator>
     </NavigationContainer>
   );
