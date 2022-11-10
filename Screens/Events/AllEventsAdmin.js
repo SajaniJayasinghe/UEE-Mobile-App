@@ -3,17 +3,20 @@ import { Card } from "react-native-shadow-cards";
 import SearchBar from "react-native-dynamic-search-bar";
 import Icon from "react-native-vector-icons/AntDesign";
 import axios from "axios";
-
 import {
   View,
   StyleSheet,
   Text,
   TouchableOpacity,
   ScrollView,
+  Image,
 } from "react-native";
 
 export default function AllEventsAdmin({ navigation }) {
   const [event, setEvent] = useState([]);
+  // const eventA = (x) => {
+  //   console.log(x);
+  // };
 
   useEffect(() => {
     axios
@@ -27,6 +30,12 @@ export default function AllEventsAdmin({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Image
+        style={styles.tinyLogo}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
       <Text
         style={{
           color: "#151B54",
@@ -62,6 +71,7 @@ export default function AllEventsAdmin({ navigation }) {
                 height: 100,
                 width: 400,
                 marginLeft: 15,
+                borderRadius: 30,
               }}
             >
               <Text
@@ -90,7 +100,9 @@ export default function AllEventsAdmin({ navigation }) {
                 Organization : {event.organizationName}
               </Text>
               <TouchableOpacity
-                onPress={() => navigation.navigate("SpecificEventAdmin")}
+                onPress={() =>
+                  navigation.navigate("SpecificEventAdmin", { id: event._id })
+                }
               >
                 <Icon
                   name="eye"
@@ -103,6 +115,12 @@ export default function AllEventsAdmin({ navigation }) {
           </View>
         ))}
       </ScrollView>
+      <Image
+        style={styles.tinyLogo4}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
     </View>
   );
 }
@@ -110,5 +128,17 @@ export default function AllEventsAdmin({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  tinyLogo: {
+    width: 450,
+    height: 40,
+    marginLeft: -15,
+    marginTop: 0,
+  },
+  tinyLogo4: {
+    width: 450,
+    height: 50,
+    marginLeft: -15,
+    marginTop: 20,
   },
 });

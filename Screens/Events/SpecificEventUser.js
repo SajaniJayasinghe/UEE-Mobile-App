@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "react-native-shadow-cards";
-
+import axios from "axios";
 import {
   View,
   Image,
@@ -10,7 +10,23 @@ import {
   ScrollView,
 } from "react-native";
 
-const SpecificEventUser = ({ navigation }) => {
+// const SpecificEventUser = ({ route, navigation }) => {
+export default function SpecificEventUser({ route, navigation }) {
+  const [events, setevents] = useState([]);
+  const { id } = route.params;
+
+  useEffect(() => {
+    console.log(id);
+    axios
+      .get(`https://life-below-water.herokuapp.com/api/event/getoneevent/${id}`)
+      .then((res) => {
+        if (res.data.success) {
+          setevents(res.data.events);
+        }
+      });
+    // setevents(data);
+  }, []);
+
   return (
     <View style={styles.container}>
       <Image
@@ -39,58 +55,64 @@ const SpecificEventUser = ({ navigation }) => {
       </TouchableOpacity>
 
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        <TouchableOpacity onPress={() => navigation.navigate("UpdateList")}>
-          <Card style={{ padding: 100, margin: 25, height: 400, width: 350 }}>
-            <Text
-              style={{
-                color: "#000000",
-                textAlign: "left",
-                marginTop: 10,
-                fontSize: 15,
-                fontWeight: "bold",
-              }}
-            >
-              Venue - Hikkaduwa
-            </Text>
-            <Text
-              style={{
-                color: "#000000",
-                textAlign: "left",
-                marginTop: 10,
-                fontSize: 15,
-                fontWeight: "bold",
-              }}
-            >
-              Date - 12/12/2022
-            </Text>
-            <Text
-              style={{
-                color: "#000000",
-                textAlign: "left",
-                marginTop: 10,
-                fontSize: 15,
-                fontWeight: "bold",
-              }}
-            >
-              Time - 10.00 a.m
-            </Text>
-            <Text
-              style={{
-                color: "#000000",
-                textAlign: "left",
-                marginTop: 10,
-                fontSize: 15,
-                fontWeight: "bold",
-              }}
-            >
-              Description - helloooooo
-            </Text>
-          </Card>
-        </TouchableOpacity>
+        {events.map((events, index) => (
+          <View key={events + index}>
+            <TouchableOpacity onPress={() => navigation.navigate("UpdateList")}>
+              <Card
+                style={{ padding: 100, margin: 25, height: 400, width: 350 }}
+              >
+                <Text
+                  style={{
+                    color: "#000000",
+                    textAlign: "left",
+                    marginTop: 10,
+                    fontSize: 15,
+                    fontWeight: "bold",
+                  }}
+                >
+                  Venue - Hikkaduwa
+                </Text>
+                <Text
+                  style={{
+                    color: "#000000",
+                    textAlign: "left",
+                    marginTop: 10,
+                    fontSize: 15,
+                    fontWeight: "bold",
+                  }}
+                >
+                  Date - 12/12/2022
+                </Text>
+                <Text
+                  style={{
+                    color: "#000000",
+                    textAlign: "left",
+                    marginTop: 10,
+                    fontSize: 15,
+                    fontWeight: "bold",
+                  }}
+                >
+                  Time - 10.00 a.m
+                </Text>
+                <Text
+                  style={{
+                    color: "#000000",
+                    textAlign: "left",
+                    marginTop: 10,
+                    fontSize: 15,
+                    fontWeight: "bold",
+                  }}
+                >
+                  Description - helloooooo
+                </Text>
+              </Card>
+            </TouchableOpacity>
+          </View>
+        ))}
       </ScrollView>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -145,5 +167,3 @@ const styles = StyleSheet.create({
     paddingRight: 16,
   },
 });
-
-export default SpecificEventUser;

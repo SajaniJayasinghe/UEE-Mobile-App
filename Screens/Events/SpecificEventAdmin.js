@@ -6,23 +6,23 @@ import axios from "axios";
 
 import { View, Image, StyleSheet, Text, ScrollView } from "react-native";
 
-export default function SpecificEventAdmin({ navigation }) {
+export default function SpecificEventAdmin({ route, navigation }) {
   const [events, setevents] = useState([]);
+  const { id } = route.params;
 
   useEffect(() => {
+    console.log(id);
     axios
-      .get(
-        `https://life-below-water.herokuapp.com/api/event/getoneevent/${eventID}`
-      )
+      .get(`https://life-below-water.herokuapp.com/api/event/getoneevent/${id}`)
       .then((res) => {
         if (res.data.success) {
-          setSpecificEvent(res.data.events);
+          setevents(res.data.events);
         }
       });
-    setevents(data);
+    // setevents(data);
   }, []);
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <View style={styles.container}>

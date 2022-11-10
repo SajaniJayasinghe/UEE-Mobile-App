@@ -14,6 +14,9 @@ import {
 
 export default function AllEvents({ navigation }) {
   const [event, setEvent] = useState([]);
+  // const eventA = (x) => {
+  //   console.log(x);
+  // };
 
   useEffect(() => {
     axios
@@ -99,12 +102,9 @@ export default function AllEvents({ navigation }) {
               >
                 Organization : {event.organizationName}
               </Text>
-
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate("SpecificEventUser", {
-                    // organizationID: event.organizationID,
-                  })
+                  navigation.navigate("SpecificEventUser", { id: event._id })
                 }
               >
                 <Icon

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
+import { StyleSheet, View, Text, Image, ScrollView, Alert } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SearchBar from "react-native-dynamic-search-bar";
 import axios from "axios";
@@ -7,7 +7,9 @@ import { Card } from "react-native-shadow-cards";
 
 export default function ReceivedDonations({ navigation }) {
   const [donations, setdonations] = useState([]);
-
+  // const abc = (x) => {
+  //   console.log(x);
+  // };
   useEffect(() => {
     axios
       .get("https://life-below-water.herokuapp.com/api/donation/getdonation")
@@ -23,12 +25,13 @@ export default function ReceivedDonations({ navigation }) {
       {
         text: "OK",
         onPress: async () => {
+          console.log(id);
           axios
             .delete(
-              `https://life-below-water.herokuapp.com/api/user/deletedonation/${donationID}`
+              `https://life-below-water.herokuapp.com/api/donation/deletedonation/${id}`
             )
             .then((res) => {
-              navigation.push("LoadingPage");
+              navigation.push("ReceivedDonations");
             })
             .catch((e) => {
               console.error(e);
@@ -72,7 +75,14 @@ export default function ReceivedDonations({ navigation }) {
         {donations.map((donations, index) => (
           <View style={styles.donate} key={donations + index}>
             <Card
-              style={{ padding: 7, margin: 10, marginLeft: 20, height: 120 }}
+              style={{
+                padding: 7,
+                margin: 10,
+                marginLeft: 20,
+                height: 100,
+                borderRadius: 25,
+                backgroundColor: "#EBF4FA",
+              }}
             >
               <Text style={styles.eventName}>
                 Event Name : {donations.eventTitle}
@@ -143,12 +153,12 @@ const styles = StyleSheet.create({
     width: 133,
   },
   icon: {
-    color: "rgba(128,128,128,1)",
+    color: "#8B0000",
     fontSize: 28,
     height: 40,
     width: 40,
     marginLeft: 330,
-    marginTop: 5,
+    marginTop: -15,
   },
   eventNameColumnRow: {
     height: 60,
