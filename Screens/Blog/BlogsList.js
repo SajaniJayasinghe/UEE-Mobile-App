@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Card } from "react-native-shadow-cards";
 import SearchBar from "react-native-dynamic-search-bar";
-
-
 import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView} from "react-native";
 
-const BlogsList = ({ navigation }) => {
+export default function BlogsList({ navigation }) {
+  const [blog, setblog] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://life-below-water.herokuapp.com/api/blog/getblog")
+      .then((res) => {
+        if (res.data.success) {
+          setblog(res.data.existingBlogs);
+        }
+      });
+  }, []);
+
     return (
         <View style={styles.container}>
+           <Image
+        style={styles.tiny}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
              <Text
         style={{
           color: "#151B54",
@@ -22,7 +39,7 @@ const BlogsList = ({ navigation }) => {
       </Text>
       <TouchableOpacity
         style={[styles.containerx, styles.materialButtonDark]}
-        onPress={() => navigation.navigate("UpdateList")}
+        onPress={() => navigation.navigate("AddBlog")}
       >
         <Text style={styles.addnewblog}>Add New Blog</Text>
       </TouchableOpacity>
@@ -30,18 +47,23 @@ const BlogsList = ({ navigation }) => {
         <SearchBar
         placeholder="Search here"
         fontColor="#000000"
-        backgroundColor="#DBE9FA"
         iconColor="#000000"
         shadowColor="#000000"
         cancelIconColor="#000000"
+        style={{
+          borderWidth:1,
+        }}
         onPress={() => alert("onPress")}
         onChangeText={(text) => console.log(text)}
        />
-      <ScrollView style={{ display: "flex", flexDirection: "column" }}>
+       <ScrollView>
+        <View style={{ display: "flex", flexDirection: "column", padding: 25 }}>
+          {blog.map((blog, index) => (
+            <View key={blog + index}>
       <TouchableOpacity
        onPress={() => navigation.navigate("UpdateList")}>
       <Card
-       style={{ padding: 100, margin: 25, height:300, width:350}}
+       style={{ padding: 100, margin:-4, height:300, width:350, marginBottom:30}}
       
       >
       <Image
@@ -50,72 +72,34 @@ const BlogsList = ({ navigation }) => {
           uri: "https://media.istockphoto.com/photos/sea-life-on-beautiful-coral-reef-with-blacktail-butterflyfish-on-red-picture-id1364050573?b=1&k=20&m=1364050573&s=170667a&w=0&h=RU5Bi5gDzop_fvqiQXAk7elW3l8mS0t52VjLwl29bc0=",
         }}
       />
-       <Text
-        style={{
-          color: "#000000",
-          textAlign: "center",
-          marginTop: 10,
-          fontSize: 15,
-          fontWeight: "bold",
-       
-        }}
-      >
-        Saving Marine Life
-      </Text>
+         <Text
+                  style={{
+                    marginVertical: 5,
+                    fontSize: 20,
 
-      <Text
-        style={{
-          color: "#000000",
-          marginRight:-85,
-          marginLeft:-60,
-          marginTop: 10,
-          fontSize: 12,
-          fontWeight: "bold",
-          fontFamily: "Times New Roman",
-        }}
-      >
-        Marine life, sea life, or ocean life is the plants, 
-        animals and other organisms that live in the salt water of seas or oceans, 
-        or the brackish water of coastal
-        </Text>
+                    flexDirection: "row",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  {blog.blogName}
+                </Text>
+                <Text
+                  style={{
+                    marginVertical: 5,
+                    fontSize: 20,
+
+                    flexDirection: "row",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  {blog.description}
+                </Text>
       </Card>
       </TouchableOpacity>
-      <Card style={{ padding: 100, margin: 25, height:300, width:350}}>
-      <Image
-        style={styles.blog1}
-        source={{
-          uri: "https://oceana.org/wp-content/uploads/sites/18/cephalopods.jpg",
-        }}
-      />
-       <Text
-        style={{
-          color: "#000000",
-          textAlign: "center",
-          marginTop: 10,
-          fontSize: 15,
-          fontWeight: "bold",
-          fontFamily: "Times New Roman",
-        }}
-      >
-        Protect The Ocean
-      </Text>
-
-      <Text
-        style={{
-          color: "#000000",
-          marginRight:-85,
-          marginLeft:-60,
-          marginTop: 10,
-          fontSize: 12,
-          fontWeight: "bold",
-          fontFamily: "Times New Roman",
-        }}
-      >
-       Under the Name Coral, We Find Different Species, Some of Which Live in the Mediterranean. 
-       What Is Coral? Coral: Plant or Animal? 
-       Coral at the Oceanographic Institute.
-        </Text>
-      </Card>
+     
+            </View>
+          ))}
+        </View>
       </ScrollView>
       </View>
       
@@ -125,6 +109,18 @@ const BlogsList = ({ navigation }) => {
     const styles = StyleSheet.create({
         container: {
           flex: 1,
+        },
+        tiny: {
+          width: 470,
+          height: 100,
+          marginLeft: -15,
+          marginTop: -50,
+        },
+        tiny1: {
+          width: 470,
+          height: 40,
+          marginLeft: -15,
+          marginTop: -50,
         },
         blog1: {
             width: 350,
@@ -189,4 +185,3 @@ const BlogsList = ({ navigation }) => {
   },
     });
     
-    export default BlogsList ;
