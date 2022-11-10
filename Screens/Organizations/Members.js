@@ -12,19 +12,23 @@ import {
 import { useRoute } from "@react-navigation/native";
 
 export default function Members({ navigation }) {
-  const [organization, setorganization] = useState([]);
   const [organizationMembers, setorganizationMembers] = useState([]);
   const route = useRoute();
 
+  const oid = route.params.id;
+  const organizationName = route.params.organizationName;
+  console.log("organizationMembers", organizationName);
+
   useEffect(() => {
-    const data = {
-      organizationName: route.params.organizationName,
-    };
-    const data1 = {
-      organizationMembers: route.params.organizationMembers,
-    };
-    setorganization(data);
-    setorganizationMembers(data1);
+    axios
+      .get(
+        `https://life-below-water.herokuapp.com/api/organization/members/${oid}`
+      )
+      .then((res) => {
+        if (res.data.success) {
+          setorganizationMembers(res.data.Members);
+        }
+      });
   }, []);
   return (
     <View style={styles.container}>
@@ -35,9 +39,10 @@ export default function Members({ navigation }) {
           textAlign: "center",
           fontSize: 26,
           marginTop: 10,
+          marginBottom: 10,
         }}
       >
-        {organization.organizationName} Members
+        {organizationName}
       </Text>
       <SearchBar
         placeholder="Search here"
@@ -48,26 +53,49 @@ export default function Members({ navigation }) {
         onPress={() => alert("onPress")}
         onChangeText={(text) => console.log(text)}
       />
-
-      <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        {organizationMembers.map((organization, index) => (
-          <View key={organization + index}>
-            <View
-              style={{
-                padding: 5,
-                margin: 21,
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text style={styles.text}>
-                {organization.organizationMembers}
-              </Text>
+      <TouchableOpacity
+        style={[styles.containerx1, styles.materialButtonDark1]}
+        onPress={() => navigation.navigate("Members")}
+      >
+        <Text style={styles.addnewblog}>Members</Text>
+      </TouchableOpacity>
+      <Text
+        style={{
+          fontWeight: "900",
+          // opacity: 0.6,
+          marginLeft: 20,
+          textAlign: "left",
+          fontSize: 26,
+          marginTop: 10,
+        }}
+      >
+        Members
+      </Text>
+      {organizationMembers ? (
+        <ScrollView style={{ display: "flex", flexDirection: "column" }}>
+          {organizationMembers.map((organization, index) => (
+            <View key={organization + index}>
+              <View
+                style={{
+                  padding: 5,
+                  marginLeft: 30,
+                  margin: 21,
+                  flexDirection: "row",
+                  fontSze: 20,
+                  // justifyContent: "center",
+                  // alignItems: "center",
+                }}
+              >
+                <Text style={styles.text}>
+                  {index + 1}. {organization.name}
+                </Text>
+              </View>
             </View>
-          </View>
-        ))}
-      </ScrollView>
+          ))}
+        </ScrollView>
+      ) : (
+        <Text>No Members</Text>
+      )}
     </View>
   );
 }
@@ -126,5 +154,42 @@ const styles = StyleSheet.create({
     minWidth: 78,
     paddingLeft: 3,
     paddingRight: 3,
+  },
+  text: {
+    fontSize: 20,
+  },
+  containerx1: {
+    backgroundColor: "#C2DFFF",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    borderRadius: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.35,
+    shadowRadius: 5,
+    elevation: 2,
+    minWidth: 88,
+    paddingLeft: 26,
+    paddingRight: 16,
+  },
+  materialButtonDark1: {
+    height: 50,
+    width: 160,
+    borderRadius: 130,
+    shadowColor: "rgba(0,0,0,1)",
+    shadowOffset: {
+      width: 3,
+      height: 3,
+    },
+    elevation: 5,
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    marginTop: 25,
+    marginLeft: 220,
+    marginBottom: 15,
   },
 });

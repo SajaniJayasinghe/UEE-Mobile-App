@@ -7,7 +7,6 @@ import {
   Text,
   View,
   StyleSheet,
-  Image,
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
@@ -66,9 +65,9 @@ export default function Organizations({ navigation }) {
               style={styles.containerx}
               onPress={() =>
                 navigation.navigate("SpecificOrganization", {
+                  organizationID: organization._id,
                   organizationName: organization.organizationName,
                   description: organization.description,
-                  organizationMembers: organization.organizationMembers,
                 })
               }
               // source={{

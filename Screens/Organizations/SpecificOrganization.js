@@ -19,6 +19,7 @@ const SpecificOrganization = ({ navigation }) => {
     const data = {
       organizationName: route.params.organizationName,
       description: route.params.description,
+      organizationID: route.params.organizationID,
     };
     setorganization(data);
   }, []);
@@ -47,8 +48,8 @@ const SpecificOrganization = ({ navigation }) => {
         style={[styles.containerx, styles.materialButtonDark]}
         onPress={() =>
           navigation.navigate("Members", {
+            id: organization.organizationID,
             organizationName: organization.organizationName,
-            organizationMembers: organization.organizationMembers,
           })
         }
       >
@@ -56,29 +57,27 @@ const SpecificOrganization = ({ navigation }) => {
       </TouchableOpacity>
 
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        <TouchableOpacity onPress={() => navigation.navigate("UpdateList")}>
-          <Card
+        <Card
+          style={{
+            padding: 30,
+            margin: 15,
+            height: 250,
+            width: 350,
+            marginLeft: 25,
+          }}
+        >
+          <Text
             style={{
-              padding: 30,
-              margin: 15,
-              height: 250,
-              width: 350,
-              marginLeft: 25,
+              color: "#000000",
+              textAlign: "left",
+              marginTop: 10,
+              fontSize: 15,
+              fontWeight: "bold",
             }}
           >
-            <Text
-              style={{
-                color: "#000000",
-                textAlign: "left",
-                marginTop: 10,
-                fontSize: 15,
-                fontWeight: "bold",
-              }}
-            >
-              {organization.description}
-            </Text>
-          </Card>
-        </TouchableOpacity>
+            {organization.description}
+          </Text>
+        </Card>
       </ScrollView>
     </View>
   );
