@@ -10,14 +10,62 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Members({ navigation }) {
   const [organizationMembers, setorganizationMembers] = useState([]);
+  const [name, setname] = useState("");
   const route = useRoute();
-
   const oid = route.params.id;
   const organizationName = route.params.organizationName;
-  console.log("organizationMembers", organizationName);
+  // console.log("organizationMembers", organizationName);
+
+  // const getToken = async () => {
+  //   var token = await AsyncStorage.getItem("token");
+  //   console.log(token);
+  // };
+  // useEffect(() => {
+  //   getToken();
+  // }, []);
+
+  const addMember = async () => {
+    //   const Token = await AsyncStorage.getItem("token");
+    //   const URL = `https://life-below-water.herokuapp.com/api/organization/addmember/${oid}`;
+    //   const payload = {
+    //     name: name,
+    //   };
+    //   axios
+    //     .post(URL, payload, {
+    //       headers: {
+    //         Authorization: Token,
+    //       },
+    //     })
+    //     .then((res) => {
+    //       if (res.data.status) {
+    //         setname(res.data.User.name);
+    //       }
+    //       Alert.alert(
+    //         "Congratulations!!!",
+    //         "You're a member of this organization",
+    //         [
+    //           {
+    //             text: "OK",
+    //             onPress: () => navigation.navigate("Member", {}),
+    //           },
+    //         ],
+    //         { cancelable: false }
+    //       );
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //       Alert.alert(
+    //         "Error",
+    //         "Adding you to this group is unsuccessful",
+    //         [{ text: "Check Again" }],
+    //         { cancelable: false }
+    //       );
+    //     });
+  };
 
   useEffect(() => {
     axios
@@ -55,9 +103,9 @@ export default function Members({ navigation }) {
       />
       <TouchableOpacity
         style={[styles.containerx1, styles.materialButtonDark1]}
-        onPress={() => navigation.navigate("Members")}
+        onPress={() => addMember()}
       >
-        <Text style={styles.addnewblog}>Members</Text>
+        <Text style={styles.addnewblog}>ADD ME</Text>
       </TouchableOpacity>
       <Text
         style={{

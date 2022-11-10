@@ -27,7 +27,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Organizations">
+      <Stack.Navigator initialRouteName="AllOrganizations">
         <Stack.Screen name="BlogsList" component={BlogsList} />
         <Stack.Screen name="UpdateList" component={UpdateDeleteList} />
         <Stack.Screen name="UpdateBlogs" component={UpdateBlogs} />

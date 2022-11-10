@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { Card } from "react-native-shadow-cards";
 
@@ -26,6 +27,32 @@ export default function AllOrganizations({ navigation }) {
         }
       });
   }, []);
+
+  const deleteorganization = async (id) => {
+    Alert.alert(
+      "Are you sure?",
+      "This will permanently delete the organization!",
+      [
+        {
+          text: "OK",
+          onPress: async () => {
+            console.log(id);
+            axios
+              .delete(
+                `https://life-below-water.herokuapp.com/api/organization/delete/${id}`
+              )
+              .then((res) => {
+                navigation.push("AllOrganizations");
+              })
+              .catch((e) => {
+                console.error(e);
+              });
+          },
+        },
+      ],
+      { cancelable: true }
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -96,9 +123,7 @@ export default function AllOrganizations({ navigation }) {
                 }}
               > */}
                 <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate("ForiegnPassengerDashboard")
-                  }
+                  onPress={() => deleteorganization(organization._id)}
                 >
                   <Icona
                     name="delete"
