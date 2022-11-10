@@ -21,8 +21,8 @@ export default function Donations({ route, navigation }) {
   const [paymenttype, setpaymenttype] = useState("");
   const [value, setValue] = useState(null);
 
-  const { oid, eid } = route.params;
-
+  // const oid = route.params.oid;
+  const eid = route.params.eid;
   const data = [
     { label: "Cash", value: "Cash" },
     { label: "Online", value: "Online" },
@@ -45,22 +45,21 @@ export default function Donations({ route, navigation }) {
   };
 
   const addDonation = () => {
-    console.log("oid", oid);
-    console.log("eid", eid);
-    const URL = `https://life-below-water.herokuapp.com/api/donation/adddonation/${oid}/${eid}`;
+    const URL = `https://life-below-water.herokuapp.com/api/donation/adddonation/${eid}`;
 
     const payload = {
       donatorName: donatorName,
       depositeDate: depositeDate,
       receipt: receipt,
       amount: amount,
+      paymenttype: paymenttype,
     };
 
     axios
       .post(URL, payload)
       .then((res) => {
         Alert.alert("Donation Added Successfull");
-        navigation.navigate("Dashboard");
+        navigation.navigate("UserDashboard");
       })
       .catch((error) => {
         console.log(error);
@@ -100,35 +99,6 @@ export default function Donations({ route, navigation }) {
         Add Donations
       </Text>
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        <Dropdown
-          style={styles.dropdown}
-          placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
-          inputSearchStyle={styles.inputSearchStyle}
-          iconStyle={styles.iconStyle}
-          data={data}
-          search
-          maxHeight={250}
-          labelField="label"
-          valueField="value"
-          placeholder="Select Payment Type"
-          searchPlaceholder="Search..."
-          statusBarIsTranslucent={true}
-          value={value}
-          renderItem={renderItem}
-          onChange={(item) => {
-            setpaymenttype(item.value);
-          }}
-          renderLeftIcon={() => (
-            <AntDesign
-              style={styles.icon}
-              color="black"
-              name="Safety"
-              size={25}
-            />
-          )}
-        />
-
         <Text style={styles.loginText}>Name Of Donator</Text>
         <TextInput
           placeholder="Name Of Donator"
@@ -160,6 +130,36 @@ export default function Donations({ route, navigation }) {
           value={amount}
           style={styles.textInput2}
         ></TextInput>
+
+        <Dropdown
+          style={styles.dropdown}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          inputSearchStyle={styles.inputSearchStyle}
+          iconStyle={styles.iconStyle}
+          data={data}
+          search
+          maxHeight={250}
+          labelField="label"
+          valueField="value"
+          placeholder="Select Payment Type"
+          searchPlaceholder="Search..."
+          statusBarIsTranslucent={true}
+          value={paymenttype}
+          renderItem={renderItem}
+          onChange={(item) => {
+            setpaymenttype(item.value);
+          }}
+          renderLeftIcon={() => (
+            <AntDesign
+              style={styles.icon}
+              color="black"
+              name="Safety"
+              size={25}
+            />
+          )}
+        />
+
         <TouchableOpacity
           style={[styles.containerx, styles.ButtonDark]}
           onPress={() => {

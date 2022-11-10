@@ -10,13 +10,11 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  Image,
 } from "react-native";
 
 export default function AllEvents({ navigation }) {
   const [event, setEvent] = useState([]);
-  // const eventA = (x) => {
-  //   console.log(x);
-  // };
 
   useEffect(() => {
     axios
@@ -30,6 +28,19 @@ export default function AllEvents({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Image
+        style={styles.tinyLogo}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
+      <Image
+        style={styles.tinyLogo1}
+        source={{
+          uri: "https://cdni.iconscout.com/illustration/premium/thumb/business-woman-planning-events-deadlines-and-agenda-3611245-3126414.png",
+        }}
+      />
+
       <Text
         style={{
           color: "#151B54",
@@ -66,6 +77,7 @@ export default function AllEvents({ navigation }) {
                 height: 100,
                 width: 400,
                 marginLeft: 15,
+                borderRadius: 25,
               }}
             >
               <Text
@@ -106,7 +118,6 @@ export default function AllEvents({ navigation }) {
                 onPress={() =>
                   navigation.navigate("SpecificEventUser", {
                     id: event._id,
-                    organizationID: event.organizationID,
                     eventTitle: event.eventTitle,
                     venue: event.venue,
                     eventTime: event.eventTime,
@@ -126,6 +137,12 @@ export default function AllEvents({ navigation }) {
           </View>
         ))}
       </ScrollView>
+      <Image
+        style={styles.tinyLogo}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
     </View>
   );
 }
@@ -133,5 +150,18 @@ export default function AllEvents({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  tinyLogo: {
+    width: 450,
+    height: 50,
+    marginLeft: -15,
+    marginTop: 0,
+  },
+  tinyLogo1: {
+    width: 430,
+    height: 200,
+    marginLeft: 10,
+    marginBottom: -35,
+    marginTop: 0,
   },
 });

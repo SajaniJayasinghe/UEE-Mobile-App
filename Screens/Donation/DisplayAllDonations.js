@@ -62,7 +62,14 @@ export default function DisplayAllDonations({ navigation }) {
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
         {donations.map((donations, index) => (
           <View style={styles.bus2} key={donations + index}>
-            <Card style={{ padding: 10, margin: 21, marginTop: 0 }}>
+            <Card
+              style={{
+                padding: 10,
+                margin: 21,
+                marginTop: 0,
+                borderRadius: 25,
+              }}
+            >
               <LinearGradient
                 colors={["#79BAEC", "#C2DFFF"]}
                 style={styles.log2}
@@ -125,6 +132,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: -10,
     marginLeft: -10,
+    borderRadius: 25,
     flexDirection: "row",
   },
   tinyLogo: {
