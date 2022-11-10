@@ -21,6 +21,7 @@ import SpecificEventAdmin from "./Screens/Events/SpecificEventAdmin";
 import SpecificEventUser from "./Screens/Events/SpecificEventUser";
 import AddEvent from "./Screens/Events/AddEvent";
 import AdminDashboard from "./Screens/CommonScreen/AdminDashboard";
+import AllEventsAdmin from "./Screens/Events/AllEventsAdmin";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -55,6 +56,7 @@ export default function App() {
         <Stack.Screen name="SpecificEventUser" component={SpecificEventUser} />
         <Stack.Screen name="AddEvent" component={AddEvent} />
         <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
+        <Stack.Screen name="AllEventsAdmin" component={AllEventsAdmin} />
       </Stack.Navigator>
     </NavigationContainer>
   );

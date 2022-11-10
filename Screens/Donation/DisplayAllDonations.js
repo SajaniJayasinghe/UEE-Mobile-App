@@ -51,7 +51,8 @@ export default function DisplayAllDonations({ navigation }) {
           fontWeight: "900",
           textAlign: "center",
           fontSize: 26,
-          marginTop: 215,
+          marginTop: 225,
+          marginBottom: 20,
           fontColor: "black",
         }}
       >
@@ -61,7 +62,7 @@ export default function DisplayAllDonations({ navigation }) {
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
         {donations.map((donations, index) => (
           <View style={styles.bus2} key={donations + index}>
-            <Card style={{ padding: 10, margin: 21 }}>
+            <Card style={{ padding: 10, margin: 21, marginTop: 0 }}>
               <LinearGradient
                 colors={["#79BAEC", "#C2DFFF"]}
                 style={styles.log2}

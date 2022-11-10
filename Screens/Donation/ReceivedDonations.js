@@ -1,9 +1,43 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import SearchBar from "react-native-dynamic-search-bar";
+import axios from "axios";
+import { Card } from "react-native-shadow-cards";
 
 export default function ReceivedDonations({ navigation }) {
+  const [donations, setdonations] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://life-below-water.herokuapp.com/api/donation/getdonation")
+      .then((res) => {
+        if (res.data.success) {
+          setdonations(res.data.existingDonations);
+        }
+      });
+  }, []);
+
+  const deletedonation = async (id) => {
+    Alert.alert("Are you sure?", "This will permanently delete donation!", [
+      {
+        text: "OK",
+        onPress: async () => {
+          axios
+            .delete(
+              `https://life-below-water.herokuapp.com/api/user/deletedonation/${donationID}`
+            )
+            .then((res) => {
+              navigation.push("LoadingPage");
+            })
+            .catch((e) => {
+              console.error(e);
+            });
+        },
+      },
+    ]);
+  };
+
   return (
     <View style={styles.container}>
       <Image
@@ -35,15 +69,25 @@ export default function ReceivedDonations({ navigation }) {
         onChangeText={(text) => console.log(text)}
       />
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        <View style={styles.rect1}>
-          <View style={styles.eventNameColumnRow}>
-            <View style={styles.eventNameColumn}>
-              <Text style={styles.eventName}>Event Name</Text>
-              <Text style={styles.donation}>Donation</Text>
-            </View>
-            <Icon name="delete-forever" style={styles.icon}></Icon>
+        {donations.map((donations, index) => (
+          <View style={styles.donate} key={donations + index}>
+            <Card
+              style={{ padding: 7, margin: 10, marginLeft: 20, height: 120 }}
+            >
+              <Text style={styles.eventName}>
+                Event Name : {donations.eventTitle}
+              </Text>
+              <Text style={styles.donation}>
+                Donator name : {donations.donatorName}
+              </Text>
+              <Icon
+                name="delete-forever"
+                onPress={() => deletedonation(donations._id)}
+                style={styles.icon}
+              ></Icon>
+            </Card>
           </View>
-        </View>
+        ))}
       </ScrollView>
       <Image
         style={styles.tinyLogo4}
@@ -80,16 +124,20 @@ const styles = StyleSheet.create({
   eventName: {
     color: "#121212",
     height: 24,
-    width: 113,
+    width: 500,
     marginLeft: 20,
     marginTop: 10,
+    fontSize: 15,
+    marginRight: 35,
   },
   donation: {
     color: "#121212",
     height: 28,
-    width: 133,
+    width: 500,
     marginTop: 3,
     marginLeft: 20,
+    fontSize: 15,
+    marginRight: 35,
   },
   eventNameColumn: {
     width: 133,
@@ -99,8 +147,8 @@ const styles = StyleSheet.create({
     fontSize: 28,
     height: 40,
     width: 40,
-    marginLeft: 155,
-    marginTop: 15,
+    marginLeft: 330,
+    marginTop: 5,
   },
   eventNameColumnRow: {
     height: 60,

@@ -48,7 +48,7 @@ export default function UserDashboard({ navigation }) {
           </TouchableOpacity>
         </View>
         <View style={styles.rect4}>
-          <TouchableOpacity onPress={() => navigation.navigate("Events")}>
+          <TouchableOpacity onPress={() => navigation.navigate("AllEvents")}>
             <Image
               style={styles.tinyLogo6}
               source={{
@@ -97,7 +97,7 @@ export default function UserDashboard({ navigation }) {
         </View>
         <View style={styles.rect6}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("ReceivedDonations")}
+            onPress={() => navigation.navigate("DisplayAllDonation")}
           >
             <Image
               style={styles.tinyLogo7}
