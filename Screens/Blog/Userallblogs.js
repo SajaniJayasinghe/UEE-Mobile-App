@@ -63,7 +63,7 @@ export default function Userallblogs({ navigation }) {
         blogImage:blog.blogImage
        })}>
       <Card
-       style={{ padding: 100, margin:-4, height:300, width:350, marginBottom:30}}
+       style={{ padding: 100, margin:-4, height:330, width:350, marginBottom:30}}
       
       >
       {/* <Image

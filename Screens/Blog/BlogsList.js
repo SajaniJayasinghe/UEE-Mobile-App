@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card } from "react-native-shadow-cards";
 import SearchBar from "react-native-dynamic-search-bar";
-import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView} from "react-native";
+import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView,TextInput,Button} from "react-native";
+import { printToFileAsync } from 'expo-print';
+import { shareAsync } from 'expo-sharing';
 
 export default function BlogsList({ navigation }) {
   const [blog, setblog] = useState([]);
-
- 
+  const [filterblogs, setfilterblogs] = useState([]);
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     axios
@@ -18,6 +20,95 @@ export default function BlogsList({ navigation }) {
         }
       });
   }, []);
+
+
+  const searchFunc = (text) => {
+    return blog.filter((blog) => blog.blogName === text)
+  }
+
+  useEffect(() => {
+    setfilterblogs(searchFunc(search))
+  }, [search])
+
+
+  let generatePdf = async (blogName,description) => {
+
+    const html = `
+
+    <html>
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      margin: auto;
+      text-align: center;
+      font-family: arial;
+    }
+    
+    .title {
+      color: grey;
+      font-size: 18px;
+    }
+    
+    button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 8px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+    }
+    
+    a {
+      text-decoration: none;
+      font-size: 22px;
+      color: black;
+    }
+    
+    button:hover, a:hover {
+      opacity: 0.7;
+    }
+    </style>
+    </head>
+    <body>
+    
+    <h2 style="text-align:center">Blogs Details  </h2>
+    
+    <div class="card">
+      <img src="https://bokun.s3.amazonaws.com/b1e06f81-8717-4e42-90da-ae4fa6d76c24.png" alt="John" style="width:100%">
+      <h1>Job ID: ${blogName} </h1>
+      <p class="title"> </p>
+      <p>Job Period : ${description}</p>
+      <div style="margin: 24px 0;">
+        <a href="#"><i class="fa fa-dribbble"></i></a> 
+        <a href="#"><i class="fa fa-twitter"></i></a>  
+        <a href="#"><i class="fa fa-linkedin"></i></a>  
+        <a href="#"><i class="fa fa-facebook"></i></a> 
+      </div>
+  
+      <p> Thanks For view Our Blogs </p>
+
+    </div>
+    
+    </body>
+    </html>
+    
+`;
+
+    const file = await printToFileAsync({
+      html: html,
+      base64: false
+    });
+
+    await shareAsync(file.uri);
+  };
+
 
     return (
         <View style={styles.container}>
@@ -45,22 +136,12 @@ export default function BlogsList({ navigation }) {
       >
         <Text style={styles.addnewblog}>Add New Blog</Text>
       </TouchableOpacity>
-        
-        <SearchBar
-        placeholder="Search here"
-        fontColor="#000000"
-        iconColor="#000000"
-        shadowColor="#000000"
-        cancelIconColor="#000000"
-        style={{
-          borderWidth:1,
-        }}
-        onPress={() => alert("onPress")}
-        onChangeText={(text) => console.log(text)}
-       />
+      <TextInput style={styles.inputserach}    placeholder='Search for Blogs' value={search} onChangeText={(text)=>setSearch(text)} />
+
        <ScrollView>
         <View style={{ display: "flex", flexDirection: "column", padding: 25 }}>
-          {blog.map((blog, index) => (
+        {(search === ''? blog: filterblogs).map((blog, index) => (
+          
             <View key={blog + index}>
       <TouchableOpacity
        onPress={() => navigation.navigate("UpdateList",{
@@ -70,15 +151,9 @@ export default function BlogsList({ navigation }) {
         blogImage:blog.blogImage
        })}>
       <Card
-       style={{ padding: 100, margin:-4, height:300, width:350, marginBottom:30}}
+       style={{ padding: 100, margin:-4, height:400, width:350, marginBottom:50}}
       
       >
-      {/* <Image
-        style={styles.blog1}
-        source={{
-          uri: "https://media.istockphoto.com/photos/sea-life-on-beautiful-coral-reef-with-blacktail-butterflyfish-on-red-picture-id1364050573?b=1&k=20&m=1364050573&s=170667a&w=0&h=RU5Bi5gDzop_fvqiQXAk7elW3l8mS0t52VjLwl29bc0=",
-        }}
-      /> */}
       <Image
              style={styles.blog1}
               source={{uri:blog.blogImage}}
@@ -97,14 +172,16 @@ export default function BlogsList({ navigation }) {
                 <Text
                   style={{
                     marginVertical: 5,
-                    fontSize: 20,
+                    fontSize: 15,
                     flexDirection: "row",
                     textAlign: "justify",
-                    margin: -80
+                    margin: -80,
                   }}
                 >
                   {blog.description}
                 </Text>
+                <Button  title="Generate PDF" onPress={() => generatePdf(blog.blogName ,blog.description)} />
+
       </Card>
       </TouchableOpacity>
      
@@ -156,6 +233,22 @@ export default function BlogsList({ navigation }) {
             marginLeft: 220,
             marginBottom:15,
          },
+         inputserach:{
+          backgroundColor:'white',
+          shadowColor:'black',
+          shadowOffset:{width:5,height:5},
+          shadowOpacity:0.1,
+          elevation:3,
+          borderRadius:40,
+          padding:10,
+          marginTop:10,
+          width:370,
+          justifyContent:'center',
+          alignItems:'center',
+          marginLeft:12,
+          height:40
+      
+        },
 
             addnewblog: {
             color: "black",

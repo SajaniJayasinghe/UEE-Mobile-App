@@ -69,7 +69,7 @@ const SpecificBlog = ({ navigation }) => {
       </Text>
       <TouchableOpacity
          onPress={() => navigation.navigate("UpdateBlog",{
-          bid:blog._id,
+          bid:blog.id,
           blogName:blog.blogName,
           description:blog.description,
           blogImage:blog.blogImage

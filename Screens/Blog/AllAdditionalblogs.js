@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card } from "react-native-shadow-cards";
 import SearchBar from "react-native-dynamic-search-bar";
-import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView} from "react-native";
+import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView,TextInput} from "react-native";
 
 export default function AllAdditionalblogs({ navigation }) {
   const [userblog, setuserblog] = useState([]);
-
+  const [search, setSearch] = useState('')
+  const [filteruserblog, setfilteruserblog] = useState([]);
  
 
   useEffect(() => {
@@ -18,6 +19,16 @@ export default function AllAdditionalblogs({ navigation }) {
         }
       });
   }, []);
+
+
+  const searchFunc = (text) => {
+    return userblog.filter((userblog) => userblog.blogNamea === text)
+  }
+
+  useEffect(() => {
+    setfilteruserblog(searchFunc(search))
+  }, [search])
+
 
     return (
         <View style={styles.container}>
@@ -45,42 +56,17 @@ export default function AllAdditionalblogs({ navigation }) {
       >
         <Text style={styles.addnewblog}>Add New Blog</Text>
       </TouchableOpacity>
-        
-        <SearchBar
-        placeholder="Search here"
-        fontColor="#000000"
-        iconColor="#000000"
-        shadowColor="#000000"
-        cancelIconColor="#000000"
-        style={{
-          borderWidth:1,
-        }}
-        onPress={() => alert("onPress")}
-        onChangeText={(text) => console.log(text)}
-       />
+      <TextInput style={styles.inputserach}    placeholder='Search for Blogs' value={search} onChangeText={(text)=>setSearch(text)} />
        <ScrollView>
         <View style={{ display: "flex", flexDirection: "column", padding: 25 }}>
-          {userblog.map((userblog, index) => (
+        {(search === ''? userblog: filteruserblog).map((userblog, index) => (
             <View key={userblog + index}>
-      <TouchableOpacity
-    //    onPress={() => navigation.navigate("UpdateList",{
-    //     bid:blog._id,
-    //     blogName:blog.blogName,
-    //     description:blog.description,
-    //     blogImage:blog.blogImage
-    //    })} 
-   
-    >
+      <TouchableOpacity>
+      
       <Card
        style={{ padding: 100, margin:-4, height:300, width:350, marginBottom:30}}
       
       >
-      {/* <Image
-        style={styles.blog1}
-        source={{
-          uri: "https://media.istockphoto.com/photos/sea-life-on-beautiful-coral-reef-with-blacktail-butterflyfish-on-red-picture-id1364050573?b=1&k=20&m=1364050573&s=170667a&w=0&h=RU5Bi5gDzop_fvqiQXAk7elW3l8mS0t52VjLwl29bc0=",
-        }}
-      /> */}
       <Image
              style={styles.blog1}
               source={{uri:userblog.blogImagea}}
@@ -141,6 +127,22 @@ export default function AllAdditionalblogs({ navigation }) {
             height: 150,
             marginLeft: -99,
             marginTop: -100,
+          },
+          inputserach:{
+            backgroundColor:'white',
+            shadowColor:'black',
+            shadowOffset:{width:5,height:5},
+            shadowOpacity:0.1,
+            elevation:3,
+            borderRadius:40,
+            padding:10,
+            marginTop:10,
+            width:370,
+            justifyContent:'center',
+            alignItems:'center',
+            marginLeft:12,
+            height:40
+        
           },
 
         materialButtonDark: {

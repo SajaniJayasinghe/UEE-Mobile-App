@@ -12,60 +12,41 @@ import {
   Item,
 } from "react-native";
 import axios from "axios";
-import AntDesign from "react-native-vector-icons/AntDesign";
-import { Dropdown } from "react-native-element-dropdown";
+
 
 export default function UpdateBlog({  navigation }) {
   const [blog, setblog] = useState([]);
   const route = useRoute();
-
-  const bID = route.params.bid
-
+  
+  const [blogID, setblogID] = useState("");
+  
   const [blogName, setblogName] = useState("");
   const [description, setdescription] = useState("");
   const [blogImage, setblogImage] = useState("");
-  
-//   useEffect(() => {
-//     axios
-//     .get(`https://life-below-water.herokuapp.com/api/blog/getblog/${bID}`
-//     )
-//     .then((res)=>{
-//       // setbID(res.data.blog.bID)
-//       setblogName(res.data.blog.blogName);
-//       setdescription(res.data.description);
-//       setblogImage(res.data.blogImage)
-//     })
-//     .catch((e)=>{
-//     console.log(e);
-//   })
-  
-// },[]);
- 
+   
 useEffect(() => {
   
-  const data = {
-    id:route.params.bid,
-    blogName: route.params.blogName,
-    description: route.params.description,
-    blogImage:route.params.blogImage
-  };
-  setblog(data);
-}, []);
-
-
-   
+    setblogID(route.params.bid);
+    setblogName (route.params.blogName);
+    setdescription(route.params.description);
+    setblogImage(route.params.blogImage);
   
-
+  
+}, []);
+console.log(blogID);
   const updateBlog = async () => {
-    const URL = `https://life-below-water.herokuapp.com/api/blog/update/${bID}`;
+  
+    const URL = `https://life-below-water.herokuapp.com/api/blog/update/${blogID}`;
+   
     const payload = {
       blogName: blogName,
       description: description,
       blogImage: blogImage,
     };
-    axios.put(URL,payload).then((res)=>{
+    console.log(payload);
+    await axios.put(URL,payload).then((res)=>{
       Alert.alert("Blog update successfull")
-      navigation.navigate("UpdateList");
+      navigation.navigate("BlogsList");
     })
     .catch((error) => {
       console.error(error);
@@ -89,15 +70,13 @@ useEffect(() => {
      
       <Text style={styles.loginText1}>UPDATE BLOG</Text>
       <Image
-        style={styles.blog1}
-        source={{
-          uri: "https://media.istockphoto.com/photos/sea-life-on-beautiful-coral-reef-with-blacktail-butterflyfish-on-red-picture-id1364050573?b=1&k=20&m=1364050573&s=170667a&w=0&h=RU5Bi5gDzop_fvqiQXAk7elW3l8mS0t52VjLwl29bc0=",
-        }}
-      />  
+             style={styles.blog1}
+              source={{uri:blogImage}}
+            />
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
         <Text style={styles.loginText}>Name Of Blog</Text>
         <TextInput
-        value={blog.blogName}
+        value={blogName}
           placeholder="Name Of Blog"
           onChange={(e)=>setblogName(e.nativeEvent.text)}
           style={styles.textInput2}
@@ -105,7 +84,7 @@ useEffect(() => {
 
         <Text style={styles.loginText}>Description</Text>
         <TextInput
-         value={blog.description}
+         value={description}
           placeholder="Description"
           onChange={(e)=>setdescription(e.nativeEvent.text)}
           style={styles.textInput2}
@@ -113,7 +92,7 @@ useEffect(() => {
 
         <Text style={styles.loginText}>Image</Text>
         <TextInput
-         value={blog.blogImage}
+         value={blogImage}
           placeholder="Enter Image"
           onChange={(e)=>setblogImage(e.nativeEvent.text)}
           style={styles.textInput2}
