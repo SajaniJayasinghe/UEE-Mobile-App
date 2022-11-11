@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView, TextInput,Card, Alert } from "react-native";
+import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView, TextInput,Card, Alert,Hyperlink } from "react-native";
+
 
 export default function AddBlog({ route, navigation }) {
   const [blogNamea, setblogNamea] = useState("");
@@ -68,7 +69,7 @@ export default function AddBlog({ route, navigation }) {
           onChange={(e) => setblogNamea(e.nativeEvent.text)}
           value={blogNamea}
         />
-
+ 
         <Text
           style={{
             fontWeight: "800",
@@ -78,6 +79,7 @@ export default function AddBlog({ route, navigation }) {
             marginLeft: 20,
             marginTop: 20,
           }}
+        
         >
          Blog URL
         </Text>

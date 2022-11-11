@@ -68,7 +68,7 @@ const UserSpecificblog = ({ navigation }) => {
         </ScrollView> 
       <TouchableOpacity
         style={[styles.containerxb, styles.materialButtonDarkb]}
-        onPress={() => navigation.navigate("Userallblogs")}
+        onPress={() => navigation.navigate("UserAdditionalblogs")}
       >
         <Text style={styles.addnewblog}>See More</Text>
       </TouchableOpacity>

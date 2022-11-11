@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card } from "react-native-shadow-cards";
 import SearchBar from "react-native-dynamic-search-bar";
-import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView} from "react-native";
+import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView,TextInput} from "react-native";
 
 export default function Userallblogs({ navigation }) {
   const [blog, setblog] = useState([]);
+  const [filterblogs, setfilterblogs] = useState([]);
+  const [search, setSearch] = useState('')
 
  
 
@@ -18,6 +20,14 @@ export default function Userallblogs({ navigation }) {
         }
       });
   }, []);
+
+  const searchFunc = (text) => {
+    return blog.filter((blog) => blog.blogName === text)
+  }
+
+  useEffect(() => {
+    setfilterblogs(searchFunc(search))
+  }, [search])
 
     return (
         <View style={styles.container}>
@@ -39,22 +49,13 @@ export default function Userallblogs({ navigation }) {
       >
         BLOGS LIST
       </Text>
-        <SearchBar
-        placeholder="Search here"
-        fontColor="#000000"
-        iconColor="#000000"
-        shadowColor="#000000"
-        cancelIconColor="#000000"
-        style={{
-          borderWidth:1,
-        }}
-        onPress={() => alert("onPress")}
-        onChangeText={(text) => console.log(text)}
-       />
-       <ScrollView>
-        <View style={{ display: "flex", flexDirection: "column", padding: 25 }}>
-          {blog.map((blog, index) => (
-            <View key={blog + index}>
+      <TextInput style={styles.inputserach}    placeholder='Search for Blogs' value={search} onChangeText={(text)=>setSearch(text)} />
+
+<ScrollView>
+ <View style={{ display: "flex", flexDirection: "column", padding: 25 }}>
+ {(search === ''? blog: filterblogs).map((blog, index) => (
+   
+     <View key={blog + index}>
       <TouchableOpacity
        onPress={() => navigation.navigate("UserSpecificblog",{
         bid:blog._id,
@@ -66,12 +67,6 @@ export default function Userallblogs({ navigation }) {
        style={{ padding: 100, margin:-4, height:330, width:350, marginBottom:30}}
       
       >
-      {/* <Image
-        style={styles.blog1}
-        source={{
-          uri: "https://media.istockphoto.com/photos/sea-life-on-beautiful-coral-reef-with-blacktail-butterflyfish-on-red-picture-id1364050573?b=1&k=20&m=1364050573&s=170667a&w=0&h=RU5Bi5gDzop_fvqiQXAk7elW3l8mS0t52VjLwl29bc0=",
-        }}
-      /> */}
       <Image
              style={styles.blog1}
               source={{uri:blog.blogImage}}
@@ -80,7 +75,7 @@ export default function Userallblogs({ navigation }) {
                   style={{
                     marginVertical: 5,
                     fontSize: 20,
-
+                    fontWeight: "bold",
                     flexDirection: "row",
                     justifyContent: "flex-end",
                   }}
@@ -90,10 +85,10 @@ export default function Userallblogs({ navigation }) {
                 <Text
                   style={{
                     marginVertical: 5,
-                    fontSize: 20,
-
+                    fontSize: 15,
                     flexDirection: "row",
-                    justifyContent: "flex-end",
+                    textAlign: "justify",
+                    margin: -80,
                   }}
                 >
                   {blog.description}
@@ -132,7 +127,22 @@ export default function Userallblogs({ navigation }) {
             marginLeft: -99,
             marginTop: -100,
           },
-
+          inputserach:{
+            backgroundColor:'white',
+            shadowColor:'black',
+            shadowOffset:{width:5,height:5},
+            shadowOpacity:0.1,
+            elevation:3,
+            borderRadius:40,
+            padding:10,
+            marginTop:10,
+            width:370,
+            justifyContent:'center',
+            alignItems:'center',
+            marginLeft:12,
+            height:40
+        
+          },
         materialButtonDark: {
             height: 50,
             width: 160,

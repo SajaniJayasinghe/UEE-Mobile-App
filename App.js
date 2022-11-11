@@ -21,14 +21,13 @@ import SpecificEventUser from "./Screens/Events/SpecificEventUser";
 import Organizations from "./Screens/Organizations/Organizations";
 import SpecificOrganization from "./Screens/Organizations/SpecificOrganization";
 import Members from "./Screens/Organizations/Members";
-import DeleteBlogs from "./Screens/Blog/DeleteBlogs";
 import AddBlog from "./Screens/Blog/AddBlog";
 import AdditionalVideosImages from "./Screens/Blog/AdditionalVideosImages";
 import UpdateBlog from "./Screens/Blog/UpdateBlog";
 import Userallblogs from "./Screens/Blog/Userallblogs";
 import UserSpecificblog from "./Screens/Blog/UserSpecificblog";
 import AllAdditionalblogs from "./Screens/Blog/AllAdditionalblogs";
-
+import UserAdditionalblogs from "./Screens/Blog/UserAdditionalblogs";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -59,12 +58,13 @@ export default function App() {
         <Stack.Screen name="BlogsList" component={BlogsList} />
         <Stack.Screen name="UpdateBlog" component={UpdateBlog} />
         <Stack.Screen name="UpdateList" component={SpecificBlog} />
-        <Stack.Screen name="DeleteBlogs" component={DeleteBlogs} />
+
         <Stack.Screen name="AddBlog" component={AddBlog}/>
         <Stack.Screen name="Userallblogs" component={Userallblogs} />
         <Stack.Screen name="UserSpecificblog" component={UserSpecificblog} />
         <Stack.Screen name="AdditionalVideosImages" component={AdditionalVideosImages} />
         <Stack.Screen name="AllAdditionalblogs" component={AllAdditionalblogs} />
+        <Stack.Screen name="UserAdditionalblogs" component={UserAdditionalblogs} />
 
       </Stack.Navigator>
     </NavigationContainer>

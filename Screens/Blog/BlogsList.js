@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card } from "react-native-shadow-cards";
-import SearchBar from "react-native-dynamic-search-bar";
 import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView,TextInput,Button} from "react-native";
 import { printToFileAsync } from 'expo-print';
 import { shareAsync } from 'expo-sharing';
@@ -82,7 +81,7 @@ export default function BlogsList({ navigation }) {
     
     <div class="card">
       <img src="https://bokun.s3.amazonaws.com/b1e06f81-8717-4e42-90da-ae4fa6d76c24.png" alt="John" style="width:100%">
-      <h1>Job ID: ${blogName} </h1>
+      <h1> ${blogName} </h1>
       <p class="title"> </p>
       <p>Job Period : ${description}</p>
       <div style="margin: 24px 0;">
@@ -136,12 +135,10 @@ export default function BlogsList({ navigation }) {
       >
         <Text style={styles.addnewblog}>Add New Blog</Text>
       </TouchableOpacity>
-      <TextInput style={styles.inputserach}    placeholder='Search for Blogs' value={search} onChangeText={(text)=>setSearch(text)} />
-
+      <TextInput style={styles.inputserach} placeholder='Search for Blogs' value={search} onChangeText={(text)=>setSearch(text)} />
        <ScrollView>
         <View style={{ display: "flex", flexDirection: "column", padding: 25 }}>
         {(search === ''? blog: filterblogs).map((blog, index) => (
-          
             <View key={blog + index}>
       <TouchableOpacity
        onPress={() => navigation.navigate("UpdateList",{

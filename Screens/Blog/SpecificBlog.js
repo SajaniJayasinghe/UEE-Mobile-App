@@ -44,6 +44,10 @@ const SpecificBlog = ({ navigation }) => {
             });
         },
       },
+      {
+        text: "Cancel",
+        onPress: () => console.log("UpdateList"),
+      },
     ]);
   };
 
@@ -69,7 +73,7 @@ const SpecificBlog = ({ navigation }) => {
       </Text>
       <TouchableOpacity
          onPress={() => navigation.navigate("UpdateBlog",{
-          bid:blog.id,
+          bid:blog._id,
           blogName:blog.blogName,
           description:blog.description,
           blogImage:blog.blogImage

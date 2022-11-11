@@ -4,7 +4,7 @@ import { Card } from "react-native-shadow-cards";
 import SearchBar from "react-native-dynamic-search-bar";
 import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView,TextInput} from "react-native";
 
-export default function AllAdditionalblogs({ navigation }) {
+export default function UserAdditionalblogs({ navigation }) {
   const [userblog, setuserblog] = useState([]);
   const [search, setSearch] = useState('')
   const [filteruserblog, setfilteruserblog] = useState([]);
@@ -50,24 +50,12 @@ export default function AllAdditionalblogs({ navigation }) {
       >
        ADDITIONAL BLOGS LIST
       </Text>
-      <TouchableOpacity
-        style={[styles.containerx, styles.materialButtonDark]}
-        onPress={() => navigation.navigate("AdditionalVideosImages")}
-      >
-        <Text style={styles.addnewblog}>Add New Blog</Text>
-      </TouchableOpacity>
       <TextInput style={styles.inputserach}    placeholder='Search for Blogs' value={search} onChangeText={(text)=>setSearch(text)} />
        <ScrollView>
         <View style={{ display: "flex", flexDirection: "column", padding: 25 }}>
         {(search === ''? userblog: filteruserblog).map((userblog, index) => (
             <View key={userblog + index}>
-     <TouchableOpacity
-       onPress={() => navigation.navigate("UpdateList",{
-        bid:userblog._id,
-        blogNamea:userblog.blogNamea,
-        blogurl:userblog.blogurl,
-        blogImagea:userblog.blogImagea
-       })}>
+      <TouchableOpacity>
       
       <Card
        style={{ padding: 100, margin:-4, height:300, width:350, marginBottom:30}}
@@ -88,7 +76,7 @@ export default function AllAdditionalblogs({ navigation }) {
                 >
                   {userblog.blogNamea}
                 </Text>
-               
+                <TouchableOpacity>
                 <Text
                   style={{
                     marginVertical: 5,
@@ -99,10 +87,10 @@ export default function AllAdditionalblogs({ navigation }) {
                 >
                   {userblog.blogurl}
                 </Text>
-                
+                </TouchableOpacity>
       </Card>
-      
       </TouchableOpacity>
+     
             </View>
           ))}
         </View>
