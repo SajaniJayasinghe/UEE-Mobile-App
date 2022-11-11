@@ -25,6 +25,8 @@ import DeleteBlogs from "./Screens/Blog/DeleteBlogs";
 import AddBlog from "./Screens/Blog/AddBlog";
 import AdditionalVideosImages from "./Screens/Blog/AdditionalVideosImages";
 import UpdateBlog from "./Screens/Blog/UpdateBlog";
+import Userallblogs from "./Screens/Blog/Userallblogs";
+import UserSpecificblog from "./Screens/Blog/UserSpecificblog";
 
 
 export default function App() {
@@ -56,9 +58,10 @@ export default function App() {
         <Stack.Screen name="BlogsList" component={BlogsList} />
         <Stack.Screen name="UpdateBlog" component={UpdateBlog} />
         <Stack.Screen name="UpdateList" component={SpecificBlog} />
-        
         <Stack.Screen name="DeleteBlogs" component={DeleteBlogs} />
-        <Stack.Screen name="AddBlog" component={AddBlog} />
+        <Stack.Screen name="AddBlog" component={AddBlog}/>
+        <Stack.Screen name="Userallblogs" component={Userallblogs} />
+        <Stack.Screen name="UserSpecificblog" component={UserSpecificblog} />
         <Stack.Screen name="AdditionalVideosImages" component={AdditionalVideosImages} />
 
       </Stack.Navigator>

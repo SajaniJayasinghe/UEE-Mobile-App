@@ -7,7 +7,7 @@ import axios from "axios";
 
 import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView, Alert,UpdateBlogs} from "react-native";
 
-const SpecificBlog = ({ navigation }) => {
+const UserSpecificblog = ({ navigation }) => {
   const [blog, setblog] = useState([]);
   const route = useRoute();
 
@@ -25,27 +25,7 @@ const SpecificBlog = ({ navigation }) => {
     setblog(data);
   }, []);
   
-  const deleteblog = async () => { 
-    
-    Alert.alert("Are you sure?", "This will permanently delete Blog!", [
-      {
-        text: "OK",
-        onPress: async () => {
-         
-          axios
-            .delete(
-              `https://life-below-water.herokuapp.com/api/blog/delete/${bID}`
-            )
-            .then((res) => {
-              navigation.push("BlogsList");
-            })
-            .catch((e) => {
-              console.error(e);
-            });
-        },
-      },
-    ]);
-  };
+ 
 
     return (
         <View style={styles.container}>
@@ -67,34 +47,8 @@ const SpecificBlog = ({ navigation }) => {
       >
          {blog.blogName}
       </Text>
-      <TouchableOpacity
-         onPress={() => navigation.navigate("UpdateBlog",{
-          bid:blog._id,
-          blogName:blog.blogName,
-          description:blog.description,
-          blogImage:blog.blogImage
-        })}
-      >
-        <Icon 
-      name="edit" 
-      size={30} 
-      color="#0020C2"
-      style={{marginLeft:280,marginTop:20}} />
-        
-      </TouchableOpacity>
 
-      <TouchableOpacity
-       
-        onPress={() => deleteblog(blog.id)}
-      >
-        <Icona
-      name="delete" 
-      size={30} 
-      color="#E41B17"
-      style={{marginLeft:330,marginTop:-30}} />
-      </TouchableOpacity>
-      
-        <Image
+      <Image
              style={styles.blog1}
               source={{uri:blog.blogImage}}
             />
@@ -110,18 +64,6 @@ const SpecificBlog = ({ navigation }) => {
         }}
       >
       {blog.description}
-        </Text>
-        <Text
-        style={{
-          color: "#000000",
-          marginRight:15,
-          marginLeft:20,
-          marginTop: 15,
-          fontSize: 15,
-          fontWeight: "bold",
-        }}
-      >
-      {blog.blogImage}
         </Text>
         </ScrollView> 
       <TouchableOpacity
@@ -215,4 +157,4 @@ paddingRight: 16,
     });
   
 
-    export default SpecificBlog;
+    export default UserSpecificblog;

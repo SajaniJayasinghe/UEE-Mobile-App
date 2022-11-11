@@ -9,6 +9,7 @@ import {
   ScrollView,
   TextInput,
   Alert,
+  Item,
 } from "react-native";
 import axios from "axios";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -24,47 +25,36 @@ export default function UpdateBlog({  navigation }) {
   const [description, setdescription] = useState("");
   const [blogImage, setblogImage] = useState("");
   
-  useEffect(() => {
-    axios
-    .get(`https://life-below-water.herokuapp.com/api/blog/getblog/${bID}`
-    )
-    .then((res)=>{
-      // setbID(res.data.blog.bID)
-      setblogName(res.data.blog.blogName);
-      setdescription(res.data.description);
-      setblogImage(res.data.blogImage)
-    })
-    .catch((e)=>{
-    console.log(e);
-  })
+//   useEffect(() => {
+//     axios
+//     .get(`https://life-below-water.herokuapp.com/api/blog/getblog/${bID}`
+//     )
+//     .then((res)=>{
+//       // setbID(res.data.blog.bID)
+//       setblogName(res.data.blog.blogName);
+//       setdescription(res.data.description);
+//       setblogImage(res.data.blogImage)
+//     })
+//     .catch((e)=>{
+//     console.log(e);
+//   })
   
-},[]);
+// },[]);
  
-// useEffect(() => {
-//   const data = {
-//     id:route.params.bid,
-//     blogName: route.params.blogName,
-//     description: route.params.description,
-//     blogImage:route.params.blogImage
-//   };
-//   setblog(data);
-// }, []);
-
-  const renderItem = (item) => {
-    return (
-      <View style={styles.item}>
-        <Text style={styles.textItem}>{item.label}</Text>
-        {item.value === value && (
-          <AntDesign
-            style={styles.icon}
-            color="black"
-            name="Safety"
-            size={20}
-          />
-        )}
-      </View>
-    );
+useEffect(() => {
+  
+  const data = {
+    id:route.params.bid,
+    blogName: route.params.blogName,
+    description: route.params.description,
+    blogImage:route.params.blogImage
   };
+  setblog(data);
+}, []);
+
+
+   
+  
 
   const updateBlog = async () => {
     const URL = `https://life-below-water.herokuapp.com/api/blog/update/${bID}`;
