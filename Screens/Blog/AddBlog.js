@@ -35,6 +35,8 @@ export default function AddBlog({ route, navigation }) {
 
     return (
         <View style={styles.container}>
+
+<ScrollView style={{ width: "100%", margin: 1 }}>
            <Text
         style={{
           fontWeight: "800",
@@ -97,7 +99,7 @@ export default function AddBlog({ route, navigation }) {
           Add Image
         </Text>
         <TextInput
-          keyboardType="Description"
+          keyboardType="Blog Image"
           style={styles.input2}
           onChange={(e) => setblogImage(e.nativeEvent.text)}
           value={blogImage}
@@ -111,6 +113,7 @@ export default function AddBlog({ route, navigation }) {
       >
         <Text style={styles.letsGetStarted}> CREATE BLOG </Text>
       </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 }

@@ -9,8 +9,8 @@ import SignInScreen from "./Screens/CommonScreen/SignInScreen";
 import SignUpScreen from "./Screens/CommonScreen/SignUpScreen";
 import Dashboard from "./Screens/CommonScreen/Dashboard";
 import BlogsList from "./Screens/Blog/BlogsList";
-import UpdateDeleteList from "./Screens/Blog/UpdateDeleteList";
-import UpdateBlogs from "./Screens/Blog/UpdateBlogs";
+import SpecificBlog from "./Screens/Blog/SpecificBlog";
+
 
 import AddOrganization from "./Screens/Organizations/AddOrganization";
 import AllOrganizations from "./Screens/Organizations/AllOrganizations";
@@ -22,13 +22,9 @@ import Organizations from "./Screens/Organizations/Organizations";
 import SpecificOrganization from "./Screens/Organizations/SpecificOrganization";
 import Members from "./Screens/Organizations/Members";
 import DeleteBlogs from "./Screens/Blog/DeleteBlogs";
-
-import AddDonations from "./Screens/Donation/AddDonations";
-import SpecificEventUser from "./Screens/Events/SpecificEventUser";
-
 import AddBlog from "./Screens/Blog/AddBlog";
 import AdditionalVideosImages from "./Screens/Blog/AdditionalVideosImages";
-
+import UpdateBlog from "./Screens/Blog/UpdateBlog";
 
 
 export default function App() {
@@ -56,11 +52,11 @@ export default function App() {
         <Stack.Screen name="SignInScreen" component={SignInScreen} />
         <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
         <Stack.Screen name="Dashboard" component={Dashboard} />
-        <Stack.Screen name="AddDonations" component={AddDonations} />
+        
         <Stack.Screen name="BlogsList" component={BlogsList} />
-
-        <Stack.Screen name="UpdateList" component={UpdateDeleteList} />
-        <Stack.Screen name="UpdateBlogs" component={UpdateBlogs} />
+        <Stack.Screen name="UpdateBlog" component={UpdateBlog} />
+        <Stack.Screen name="UpdateList" component={SpecificBlog} />
+        
         <Stack.Screen name="DeleteBlogs" component={DeleteBlogs} />
         <Stack.Screen name="AddBlog" component={AddBlog} />
         <Stack.Screen name="AdditionalVideosImages" component={AdditionalVideosImages} />

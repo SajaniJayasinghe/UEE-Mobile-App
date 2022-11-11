@@ -1,10 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Icon from 'react-native-vector-icons/Entypo';
 import Icona from 'react-native-vector-icons/AntDesign';
+import { useRoute } from "@react-navigation/native";
+import axios from "axios";
 
-import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView} from "react-native";
 
-const UpdateDeleteList = ({ navigation }) => {
+import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView, Alert,UpdateBlogs} from "react-native";
+
+const SpecificBlog = ({ navigation }) => {
+  const [blog, setblog] = useState([]);
+  const route = useRoute();
+
+  const bID = route.params.bid
+  console.log(bID);
+
+
+  useEffect(() => {
+    const data = {
+      id:route.params.bid,
+      blogName: route.params.blogName,
+      description: route.params.description,
+      blogImage:route.params.blogImage
+    };
+    setblog(data);
+  }, []);
+  
+  const deleteblog = async () => {
+    
+    Alert.alert("Are you sure?", "This will permanently delete Blog!", [
+      {
+        text: "OK",
+        onPress: async () => {
+         
+          axios
+            .delete(
+              `https://life-below-water.herokuapp.com/api/blog/delete/${bID}`
+            )
+            .then((res) => {
+              navigation.push("BlogsList");
+            })
+            .catch((e) => {
+              console.error(e);
+            });
+        },
+      },
+    ]);
+  };
+
     return (
         <View style={styles.container}>
            <Image
@@ -23,10 +65,15 @@ const UpdateDeleteList = ({ navigation }) => {
           
         }}
       >
-       Saving Marine Life
+         {blog.blogName}
       </Text>
       <TouchableOpacity
-        onPress={() => navigation.navigate("UpdateBlogs")}
+        onPress={() => navigation.navigate("UpdateBlog",{
+          id:route.params.bid,
+          blogName: route.params.blogName,
+          description: route.params.description,
+          blogImage:route.params.blogImage
+        })}
       >
         <Icon 
       name="edit" 
@@ -38,7 +85,7 @@ const UpdateDeleteList = ({ navigation }) => {
 
       <TouchableOpacity
        
-        onPress={() => navigation.navigate("DeleteBlogs")}
+        onPress={() => deleteblog(blog.id)}
       >
         <Icona
       name="delete" 
@@ -64,10 +111,7 @@ const UpdateDeleteList = ({ navigation }) => {
           fontWeight: "bold",
         }}
       >
-      The first observations were made in the Mediterranean, by Pliny the Elder (1st century AD) on red coral (the one from which jewellery is made). 
-      Once brought to the surface, the coral would quickly die. Thus, it was considered a sea plant that turned into stone when taken out of th
-      e water. It was not until the middle of the 18th century that it was recognized as an animal that was classified in the large 
-      family of stinging animals, the Cnidaria.
+      {blog.description}
         </Text>
         </ScrollView> 
       <TouchableOpacity
@@ -161,4 +205,4 @@ paddingRight: 16,
     });
   
 
-    export default UpdateDeleteList ;
+    export default SpecificBlog;
