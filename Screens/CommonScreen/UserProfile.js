@@ -122,7 +122,7 @@ export default function UserProfile({ route, navigation }) {
         <Text
           style={{
             marginLeft: 65,
-            fontSize: 20,
+            fontSize: 18,
             marginTop: 10,
             marginRight: 20,
           }}
@@ -133,7 +133,7 @@ export default function UserProfile({ route, navigation }) {
         <Text
           style={{
             marginLeft: 65,
-            fontSize: 20,
+            fontSize: 18,
             marginTop: 20,
             marginRight: 20,
           }}
@@ -145,7 +145,7 @@ export default function UserProfile({ route, navigation }) {
         <Text
           style={{
             marginLeft: 65,
-            fontSize: 20,
+            fontSize: 18,
             marginTop: 20,
             marginRight: 20,
           }}
@@ -157,7 +157,7 @@ export default function UserProfile({ route, navigation }) {
 
         <TouchableOpacity
           style={[styles.containerx, styles.ButtonDark1]}
-          onPress={() => navigation.navigate("UpdateUserProfile", {})}
+          onPress={() => navigation.navigate("UpdateUserProfile")}
         >
           <Text style={styles.loginText3}>Update Profile</Text>
         </TouchableOpacity>
@@ -299,7 +299,7 @@ const styles = StyleSheet.create({
   },
   tinyLogo4: {
     width: 450,
-    height: 50,
+    height: 60,
     marginLeft: -15,
     marginTop: 40,
   },

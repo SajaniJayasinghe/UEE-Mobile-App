@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -11,8 +11,14 @@ import {
 import axios from "axios";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { Dropdown } from "react-native-element-dropdown";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function EditDonations({ route, navigation }) {
+  useEffect(() => {
+    if (!!!route.prams) {
+    }
+  }, []);
+
   const [donatorName, setdonatorName] = useState("");
   const [depositeDate, setdepositeDate] = useState("");
   const [receipt, setreceipt] = useState("");
@@ -20,10 +26,75 @@ export default function EditDonations({ route, navigation }) {
   const [paymenttype, setpaymenttype] = useState("");
   const [value, setValue] = useState(null);
 
+  // const did = route.params.did;
+
   const data = [
     { label: "Cash", value: "Cash" },
     { label: "Online", value: "Online" },
   ];
+
+  const getDonation = async () => {
+    var Token = await AsyncStorage.getItem("token");
+    console.log(Token);
+    // console.log({ did: did });
+    await axios
+      // .get(
+      //   `https://life-below-water.herokuapp.com/api/donation/updatedonation/${did}`,
+      //   {
+      //     headers: {
+      //       Authorization: Token,
+      //     },
+      //   }
+      // )
+      .then((res) => {
+        if (res.data.status) {
+          setdonatorName(res.data.User.donatorName);
+          setdepositeDate(res.data.User.depositeDate);
+          setreceipt(res.data.User.receipt);
+          setamount(res.data.User.amount);
+          setpaymenttype(res.data.User.paymenttype);
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+  useEffect(() => {
+    getDonation();
+  }, []);
+
+  const updateDonation = async () => {
+    const Token = await AsyncStorage.getItem("token");
+    // const URL = `https://life-below-water.herokuapp.com/api/donation/updatedonation/${did}`;
+
+    const payload = {
+      donatorName: donatorName,
+      depositeDate: depositeDate,
+      receipt: receipt,
+      amount: amount,
+      paymenttype: paymenttype,
+    };
+
+    axios
+      .put(URL, payload, {
+        headers: {
+          Authorization: Token,
+        },
+      })
+      .then((_response) => {
+        Alert.alert("Donation Updated Successfull");
+        navigation.navigate("UserDashboard");
+      })
+      .catch((error) => {
+        console.error(error);
+        Alert.alert(
+          "Error",
+          "Updating Unsuccessful",
+          [{ text: "Check Again" }],
+          { cancelable: false }
+        );
+      });
+  };
 
   const renderItem = (item) => {
     return (
@@ -57,6 +128,37 @@ export default function EditDonations({ route, navigation }) {
       />
       <Text style={styles.loginText1}>Edit Your Donator</Text>
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
+        <Text style={styles.loginText}>Name Of Donator</Text>
+        <TextInput
+          placeholder="Name Of Donator"
+          style={styles.textInput2}
+          value={donatorName}
+          onChange={(e) => setdonatorName(e.nativeEvent.text)}
+        ></TextInput>
+
+        <Text style={styles.loginText}>Enter Deposite Date</Text>
+        <TextInput
+          placeholder="Enter Deposite Date"
+          style={styles.textInput2}
+          value={depositeDate}
+          onChange={(e) => setdepositeDate(e.nativeEvent.text)}
+        ></TextInput>
+
+        <Text style={styles.loginText}>Please Upload Your Receipt</Text>
+        <TextInput
+          placeholder="Upload Your Receipt"
+          style={styles.textInput2}
+          value={receipt}
+          onChange={(e) => setreceipt(e.nativeEvent.text)}
+        ></TextInput>
+
+        <Text style={styles.loginText}>Enter Your Amount</Text>
+        <TextInput
+          placeholder="Enter Your Amount"
+          style={styles.textInput2}
+          value={amount}
+          onChange={(e) => setamount(e.nativeEvent.text)}
+        ></TextInput>
         <Dropdown
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
@@ -71,7 +173,7 @@ export default function EditDonations({ route, navigation }) {
           placeholder="Select Payment Type"
           searchPlaceholder="Search..."
           statusBarIsTranslucent={true}
-          value={value}
+          value={paymenttype}
           renderItem={renderItem}
           onChange={(item) => {
             setpaymenttype(item.value);
@@ -86,30 +188,12 @@ export default function EditDonations({ route, navigation }) {
           )}
         />
 
-        <Text style={styles.loginText}>Name Of Donator</Text>
-        <TextInput
-          placeholder="Name Of Donator"
-          style={styles.textInput2}
-        ></TextInput>
-
-        <Text style={styles.loginText}>Enter Deposite Date</Text>
-        <TextInput
-          placeholder="Enter Deposite Date"
-          style={styles.textInput2}
-        ></TextInput>
-
-        <Text style={styles.loginText}>Please Upload Your Receipt</Text>
-        <TextInput
-          placeholder="Enter Deposite Date"
-          style={styles.textInput2}
-        ></TextInput>
-
-        <Text style={styles.loginText}>Enter Your Amount</Text>
-        <TextInput
-          placeholder="Enter Your Amount"
-          style={styles.textInput2}
-        ></TextInput>
-        <TouchableOpacity style={[styles.containerx, styles.ButtonDark]}>
+        <TouchableOpacity
+          style={[styles.containerx, styles.ButtonDark]}
+          onPress={() => {
+            updateDonation();
+          }}
+        >
           <Text style={styles.loginText3}>Update</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -135,24 +219,24 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderWidth: 1,
     borderRadius: 25,
-    marginTop: 20,
-    marginLeft: 50,
+    marginTop: 14,
+    marginLeft: 45,
     marginBottom: 10,
   },
   loginText: {
     color: "black",
-    fontSize: 18,
+    fontSize: 16,
     lineHeight: 18,
     marginBottom: -10,
     marginLeft: 50,
   },
   loginText1: {
-    marginLeft: 120,
+    marginLeft: 100,
     fontSize: 28,
     color: "#151B54",
     fontWeight: "bold",
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 30,
   },
   loginText2: {
     marginTop: 30,
@@ -203,8 +287,8 @@ const styles = StyleSheet.create({
     borderColor: "#FFBC26",
     borderWidth: 2,
     borderRadius: 25,
-    marginTop: 30,
-    marginLeft: 50,
+    marginTop: 5,
+    marginLeft: 45,
   },
   icon: {
     marginRight: 5,

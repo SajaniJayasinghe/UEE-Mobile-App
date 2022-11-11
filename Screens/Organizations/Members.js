@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SearchBar from "react-native-dynamic-search-bar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import {
   ScrollView,
@@ -8,6 +9,8 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  Alert,
+  Image,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
 
@@ -19,6 +22,30 @@ export default function Members({ navigation }) {
   const organizationName = route.params.organizationName;
   console.log("organizationMembers", organizationName);
 
+  const AddMe = async () => {
+    const userToken = await AsyncStorage.getItem("token");
+    console.log(userToken);
+    console.log(oid);
+    await axios
+      .post(
+        `https://life-below-water.herokuapp.com/api/organization/addmember/${oid}`,
+        {
+          headers: {
+            Authorization: userToken,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        Alert.alert("Member added");
+      })
+      .catch((error) => {
+        console.error(error);
+        Alert.alert("Error", "Added Unsuccessful", [{ text: "Check Again" }], {
+          cancelable: false,
+        });
+      });
+  };
   useEffect(() => {
     axios
       .get(
@@ -32,6 +59,26 @@ export default function Members({ navigation }) {
   }, []);
   return (
     <View style={styles.container}>
+      <Image
+        style={styles.tinyLogo}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
+      <Image
+        style={styles.event1}
+        source={require("../../assets/partner.png")}
+      />
+      <SearchBar
+        placeholder="Search here"
+        fontColor="#000000"
+        iconColor="#000000"
+        shadowColor="#000000"
+        cancelIconColor="#000000"
+        style={{ borderWidth: 1, marginTop: -265, marginBottom: 210 }}
+        onPress={() => alert("onPress")}
+        onChangeText={(text) => console.log(text)}
+      />
       <Text
         style={{
           fontWeight: "900",
@@ -44,28 +91,19 @@ export default function Members({ navigation }) {
       >
         {organizationName}
       </Text>
-      <SearchBar
-        placeholder="Search here"
-        fontColor="#000000"
-        iconColor="#000000"
-        shadowColor="#000000"
-        cancelIconColor="#000000"
-        onPress={() => alert("onPress")}
-        onChangeText={(text) => console.log(text)}
-      />
+
       <TouchableOpacity
         style={[styles.containerx1, styles.materialButtonDark1]}
-        onPress={() => navigation.navigate("Members")}
+        onPress={AddMe}
       >
-        <Text style={styles.addnewblog}>Members</Text>
+        <Text style={styles.addnewblog}>Add Me</Text>
       </TouchableOpacity>
       <Text
         style={{
           fontWeight: "900",
-          // opacity: 0.6,
-          marginLeft: 20,
+          marginLeft: 30,
           textAlign: "left",
-          fontSize: 26,
+          fontSize: 20,
           marginTop: 10,
         }}
       >
@@ -96,6 +134,12 @@ export default function Members({ navigation }) {
       ) : (
         <Text>No Members</Text>
       )}
+      <Image
+        style={styles.tinyLogo4}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
     </View>
   );
 }
@@ -103,6 +147,23 @@ export default function Members({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  event1: {
+    width: 430,
+    height: 230,
+    marginTop: 40,
+  },
+  tinyLogo: {
+    width: 470,
+    height: 100,
+    marginLeft: -15,
+    marginTop: -50,
+  },
+  tinyLogo4: {
+    width: 450,
+    height: 50,
+    marginLeft: -15,
+    marginTop: 10,
   },
   logo: {
     width: 430,
@@ -130,7 +191,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   ButtonDark: {
-    height: 70,
+    height: 0,
     width: 350,
     shadowOffset: {
       width: 3,
@@ -157,6 +218,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
+    marginTop: -10,
+    marginBottom: -50,
   },
   containerx1: {
     backgroundColor: "#C2DFFF",
@@ -177,8 +240,8 @@ const styles = StyleSheet.create({
     paddingRight: 16,
   },
   materialButtonDark1: {
-    height: 50,
-    width: 160,
+    height: 30,
+    width: 100,
     borderRadius: 130,
     shadowColor: "rgba(0,0,0,1)",
     shadowOffset: {
@@ -188,8 +251,8 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 1,
     shadowRadius: 0,
-    marginTop: 25,
-    marginLeft: 220,
-    marginBottom: 15,
+    marginTop: -5,
+    marginLeft: 300,
+    marginBottom: 10,
   },
 });

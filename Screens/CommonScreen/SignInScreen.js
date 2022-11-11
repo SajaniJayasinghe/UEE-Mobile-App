@@ -32,7 +32,6 @@ export default function SignInScreen({ navigation }) {
             case "Admin":
               console.log("Admin");
               navigation.navigate("AdminDashboard");
-
               break;
             case "User":
               navigation.navigate("UserDashboard");

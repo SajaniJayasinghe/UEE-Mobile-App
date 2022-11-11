@@ -75,7 +75,7 @@ export default function AllEvents({ navigation }) {
                 padding: 20,
                 margin: 10,
                 height: 100,
-                width: 400,
+                width: 390,
                 marginLeft: 15,
                 borderRadius: 25,
               }}

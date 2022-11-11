@@ -201,9 +201,9 @@ const styles = StyleSheet.create({
 
   tinyLogo4: {
     width: 450,
-    height: 50,
+    height: 80,
     marginLeft: -15,
-    marginTop: 10,
+    marginTop: -20,
   },
   no1: {
     color: "rgba(155,155,155,1)",

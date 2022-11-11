@@ -4,10 +4,6 @@ import LoadingScreen from "./Screens/CommonScreen/LoadingScreen";
 import HomeScreen from "./Screens/CommonScreen/HomeScreen";
 import SignInScreen from "./Screens/CommonScreen/SignInScreen";
 import SignUpScreen from "./Screens/CommonScreen/SignUpScreen";
-import BlogsList from "./Screens/Blog/BlogsList";
-import UpdateDeleteList from "./Screens/Blog/UpdateDeleteList";
-import UpdateBlogs from "./Screens/Blog/UpdateBlogs";
-import DeleteBlogs from "./Screens/Blog/DeleteBlogs";
 import AddDonations from "./Screens/Donation/AddDonations";
 import DisplayAllDonations from "./Screens/Donation/DisplayAllDonations";
 import UserProfile from "./Screens/CommonScreen/UserProfile";
@@ -28,6 +24,12 @@ import EditOrganizaton from "./Screens/Organizations/EditOrganizaton";
 import Organizations from "./Screens/Organizations/Organizations";
 import SpecificOrganization from "./Screens/Organizations/SpecificOrganization";
 import Members from "./Screens/Organizations/Members";
+import DeleteBlogs from "./Screens/Blog/DeleteBlogs";
+import AddBlog from "./Screens/Blog/AddBlog";
+import AdditionalVideosImages from "./Screens/Blog/AdditionalVideosImages";
+import UpdateBlog from "./Screens/Blog/UpdateBlog";
+import BlogsList from "./Screens/Blog/BlogsList";
+import SpecificBlog from "./Screens/Blog/SpecificBlog";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -48,10 +50,6 @@ export default function App() {
         <Stack.Screen name="DonationsList" component={DonationsList} />
         <Stack.Screen name="ReceivedDonations" component={ReceivedDonations} />
         <Stack.Screen name="UserProfile" component={UserProfile} />
-        <Stack.Screen name="BlogsList" component={BlogsList} />
-        <Stack.Screen name="UpdateList" component={UpdateDeleteList} />
-        <Stack.Screen name="UpdateBlogs" component={UpdateBlogs} />
-        <Stack.Screen name="DeleteBlogs" component={DeleteBlogs} />
         <Stack.Screen name="UserDashboard" component={UserDashboard} />
         <Stack.Screen name="UpdateUserProfile" component={UpdateUserProfile} />
         <Stack.Screen name="AllEvents" component={AllEvents} />
@@ -72,6 +70,15 @@ export default function App() {
           component={SpecificOrganization}
         />
         <Stack.Screen name="Members" component={Members} />
+        <Stack.Screen name="BlogsList" component={BlogsList} />
+        <Stack.Screen name="UpdateBlog" component={UpdateBlog} />
+        <Stack.Screen name="UpdateList" component={SpecificBlog} />
+        <Stack.Screen name="DeleteBlogs" component={DeleteBlogs} />
+        <Stack.Screen name="AddBlog" component={AddBlog} />
+        <Stack.Screen
+          name="AdditionalVideosImages"
+          component={AdditionalVideosImages}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

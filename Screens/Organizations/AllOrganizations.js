@@ -42,7 +42,6 @@ export default function AllOrganizations({ navigation }) {
       <Text
         style={{
           fontWeight: "900",
-          // opacity: 0.6,
           textAlign: "center",
           fontSize: 26,
           marginTop: 10,
@@ -72,31 +71,45 @@ export default function AllOrganizations({ navigation }) {
                   marginBottom: 40,
                 }}
               >
-                <Text
+                <View
                   style={{
-                    marginVertical: 5,
-                    fontSize: 20,
+                    marginTop: 10,
+                  }}
+                >
+                  <Text
+                    style={{
+                      marginVertical: 5,
+                      fontSize: 20,
+                      flexDirection: "row",
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    {organization.organizationName}
+                  </Text>
+                </View>
 
+                <View
+                  style={{
+                    marginTop: 10,
+                    marginLeft: 100,
                     flexDirection: "row",
                     justifyContent: "flex-end",
                   }}
                 >
-                  {organization.organizationName}
-                </Text>
-                <View
-                  style={{
-                    paddingBottom: 30,
-                    marginTop: 0,
-                    marginLeft: 100,
-                    flexDirection: "row",
-                  }}
-                >
                   <TouchableOpacity
-                    style={{ marginLeft: 170, marginTop: -50 }}
+                    style={{ marginLeft: 10 }}
                     onPress={() => navigation.navigate("EditOrganizaton")}
                   >
-                    <Icon name="edit" size={20} color="black" />
+                    <Icon name="edit" size={30} color="black" />
                   </TouchableOpacity>
+                  {/* </View>
+              <View
+                style={{
+                  marginLeft: 100,
+                  flexDirection: "row",
+                  justifyContent: "flex-end",
+                }}
+              > */}
                   <TouchableOpacity
                     onPress={() =>
                       navigation.navigate("ForiegnPassengerDashboard")
@@ -104,13 +117,21 @@ export default function AllOrganizations({ navigation }) {
                   >
                     <Icona
                       name="delete"
-                      size={20}
-                      color="#660000"
-                      style={{ marginLeft: 20, marginTop: -50 }}
+                      size={30}
+                      color="black"
+                      style={{ marginLeft: 5 }}
                     />
                   </TouchableOpacity>
+                  {/* </View>
+            <View
+              style={{
+                marginLeft: 100,
+                flexDirection: "column",
+                justifyContent: "flex-end",
+              }}
+            > */}
                   <TouchableOpacity
-                    style={[styles.containerx1, styles.ButtonDark1]}
+                    style={[styles.containerx, styles.ButtonDark]}
                     onPress={() =>
                       navigation.navigate("AddEvent", {
                         organizationID: organization.organizationID,
@@ -121,6 +142,7 @@ export default function AllOrganizations({ navigation }) {
                     <Text
                       style={{ justifyContent: "center", alignItems: "center" }}
                     >
+                      {"  "}
                       ADD EVENT
                     </Text>
                   </TouchableOpacity>
@@ -147,63 +169,62 @@ const styles = StyleSheet.create({
   logo: {
     width: 430,
     height: 200,
-    marginTop: 0,
-    justifyContent: "center",
+    marginTop: -100,
     alignItems: "center",
     flexDirection: "row",
   },
-  log: {
-    width: 350,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 30,
-    flexDirection: "row",
-  },
-  log2: {
-    width: 375,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: -10,
-    marginLeft: -10,
-    flexDirection: "row",
-  },
+  // log: {
+  //   width: 350,
+  //   height: 40,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   marginTop: 30,
+  //   flexDirection: "row",
+  // },
+  // log2: {
+  //   width: 375,
+  //   height: 40,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   marginTop: -10,
+  //   marginLeft: -10,
+  //   flexDirection: "row",
+  // },
   tinyLogo: {
     width: 450,
     height: 50,
     marginLeft: -15,
   },
-  ButtonDark: {
-    height: 40,
-    width: 90,
-    borderRadius: 100,
-    shadowOffset: {
-      width: 3,
-      height: 3,
-    },
-    elevation: 5,
-    shadowOpacity: 1,
-    shadowRadius: 0,
-    marginTop: 10,
-    marginLeft: 320,
-    marginBottom: 10,
-  },
-  containerx: {
-    marginTop: -20,
-    backgroundColor: "#79BAEC",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    elevation: 2,
-    minWidth: 88,
-    paddingLeft: 20,
-    paddingRight: 16,
-  },
+  // ButtonDark: {
+  //   height: 40,
+  //   width: 90,
+  //   borderRadius: 100,
+  //   shadowOffset: {
+  //     width: 3,
+  //     height: 3,
+  //   },
+  //   elevation: 5,
+  //   shadowOpacity: 1,
+  //   shadowRadius: 0,
+  //   marginTop: 10,
+  //   marginLeft: 320,
+  //   marginBottom: 10,
+  // },
+  // containerx: {
+  //   marginTop: -20,
+  //   backgroundColor: "#79BAEC",
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   flexDirection: "row",
+  //   shadowOffset: {
+  //     width: 0,
+  //     height: 1,
+  //   },
+  //   elevation: 2,
+  //   minWidth: 88,
+  //   paddingLeft: 20,
+  //   paddingRight: 16,
+  // },
   ButtonDark1: {
     height: 40,
     width: 120,
@@ -233,5 +254,90 @@ const styles = StyleSheet.create({
     minWidth: 88,
     paddingLeft: 20,
     paddingRight: 16,
+  },
+  logo: {
+    width: 430,
+    height: 300,
+    marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  log: {
+    width: 350,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 30,
+    flexDirection: "row",
+  },
+  log2: {
+    width: 375,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: -10,
+    marginLeft: -10,
+    flexDirection: "row",
+  },
+  ButtonDark: {
+    height: 40,
+    width: 20,
+    shadowOffset: {
+      width: 3,
+      height: 3,
+    },
+    elevation: 5,
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    marginLeft: 5,
+  },
+  containerx: {
+    backgroundColor: "#ADDFFF",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    elevation: 2,
+    minWidth: 78,
+    paddingLeft: 3,
+    paddingRight: 3,
+  },
+  containerx1: {
+    backgroundColor: "#C2DFFF",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    borderRadius: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.35,
+    shadowRadius: 5,
+    elevation: 2,
+    minWidth: 88,
+    paddingLeft: 26,
+    paddingRight: 16,
+  },
+  materialButtonDark1: {
+    height: 50,
+    width: 160,
+    borderRadius: 130,
+    shadowColor: "rgba(0,0,0,1)",
+    shadowOffset: {
+      width: 3,
+      height: 3,
+    },
+    elevation: 5,
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    marginTop: 25,
+    marginLeft: 220,
+    marginBottom: 15,
   },
 });

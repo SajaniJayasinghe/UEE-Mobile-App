@@ -33,9 +33,9 @@ export default function AdminDashboard({ navigation }) {
               style={{
                 color: "#000000",
                 textAlign: "center",
-                marginTop: 20,
-                marginBottom: -30,
-                fontSize: 25,
+                marginTop: 40,
+                marginBottom: 10,
+                fontSize: 20,
                 fontWeight: "bold",
                 fontFamily: "Times New Roman",
               }}
@@ -58,9 +58,9 @@ export default function AdminDashboard({ navigation }) {
               style={{
                 color: "#000000",
                 textAlign: "center",
-                marginTop: 20,
-                marginBottom: -30,
-                fontSize: 25,
+                marginTop: 40,
+                marginBottom: 10,
+                fontSize: 20,
                 fontWeight: "bold",
                 fontFamily: "Times New Roman",
               }}
@@ -72,7 +72,7 @@ export default function AdminDashboard({ navigation }) {
       </View>
       <View style={styles.rect5Row}>
         <View style={styles.rect5}>
-          <TouchableOpacity onPress={() => navigation.navigate("")}>
+          <TouchableOpacity onPress={() => navigation.navigate("BlogsList")}>
             <Image
               style={styles.tinyLogo7}
               source={{
@@ -83,9 +83,9 @@ export default function AdminDashboard({ navigation }) {
               style={{
                 color: "#000000",
                 textAlign: "center",
-                marginTop: 20,
-                marginBottom: -30,
-                fontSize: 25,
+                marginTop: 40,
+                marginBottom: 10,
+                fontSize: 20,
                 fontWeight: "bold",
                 fontFamily: "Times New Roman",
               }}
@@ -108,9 +108,9 @@ export default function AdminDashboard({ navigation }) {
               style={{
                 color: "#000000",
                 textAlign: "center",
-                marginTop: 20,
-                marginBottom: -30,
-                fontSize: 25,
+                marginTop: 40,
+                marginBottom: 10,
+                fontSize: 20,
                 fontWeight: "bold",
                 fontFamily: "Times New Roman",
               }}
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     elevation: 39,
     shadowOpacity: 1,
     shadowRadius: 13,
-    marginLeft: 12,
+    marginLeft: 9,
     marginTop: -100,
   },
   image2: {
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     height: 200,
     flexDirection: "row",
     marginTop: 364,
-    marginLeft: 14,
+    marginLeft: 11,
     marginRight: 22,
     marginBottom: 14,
   },
@@ -288,14 +288,14 @@ const styles = StyleSheet.create({
     elevation: 39,
     shadowOpacity: 1,
     shadowRadius: 13,
-    marginLeft: 12,
+    marginLeft: 9,
     marginTop: -100,
   },
   rect5Row: {
     height: 169,
     flexDirection: "row",
     marginTop: 14,
-    marginLeft: 14,
+    marginLeft: 9,
     marginRight: 22,
   },
   rect7: {

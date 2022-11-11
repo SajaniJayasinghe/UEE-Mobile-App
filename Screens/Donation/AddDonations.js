@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { Dropdown } from "react-native-element-dropdown";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Donations({ route, navigation }) {
   const [donatorName, setdonatorName] = useState("");
@@ -21,6 +22,9 @@ export default function Donations({ route, navigation }) {
   const [paymenttype, setpaymenttype] = useState("");
   const [value, setValue] = useState(null);
 
+  const storetoken = async (value) => {
+    var token = await AsyncStorage.getItem("token");
+  };
   // const oid = route.params.oid;
   const eid = route.params.eid;
   const data = [
@@ -44,7 +48,10 @@ export default function Donations({ route, navigation }) {
     );
   };
 
-  const addDonation = () => {
+  const addDonation = async () => {
+    const Token = await AsyncStorage.getItem("token");
+    console.log(Token);
+    console.log({ eid: eid });
     const URL = `https://life-below-water.herokuapp.com/api/donation/adddonation/${eid}`;
 
     const payload = {
@@ -56,21 +63,26 @@ export default function Donations({ route, navigation }) {
     };
 
     axios
-      .post(URL, payload)
-      .then((res) => {
+      .post(URL, payload, {
+        headers: {
+          Authorization: Token,
+        },
+      })
+      .then((_response) => {
         Alert.alert("Donation Added Successfull");
         navigation.navigate("UserDashboard");
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         Alert.alert(
           "Error",
-          "Donation added Unsuccessful",
+          "Inserting Unsuccessful",
           [{ text: "Check Again" }],
           { cancelable: false }
         );
       });
   };
+
   return (
     <View style={styles.container}>
       <Image
@@ -82,7 +94,7 @@ export default function Donations({ route, navigation }) {
       <Image
         style={styles.tinyLogo1}
         source={{
-          uri: "https://cdn1.vectorstock.com/i/1000x1000/73/40/young-woman-sitting-on-the-floor-with-laptop-near-vector-24597340.jpg",
+          uri: "https://www.rwdigital.ca/wp-content/uploads/2022/07/Google-Analytics-4-GA4-for-WordPress.png",
         }}
       />
       <Text
@@ -90,7 +102,7 @@ export default function Donations({ route, navigation }) {
           color: "#000000",
           textAlign: "center",
           marginTop: -10,
-          marginBottom: 6,
+          marginBottom: 25,
           fontSize: 28,
           fontWeight: "bold",
           fontFamily: "Times New Roman",
@@ -185,7 +197,7 @@ const styles = StyleSheet.create({
   },
   loginText3: {
     color: "black",
-    fontSize: 18,
+    fontSize: 15,
     lineHeight: 18,
   },
   textInput2: {
@@ -193,7 +205,7 @@ const styles = StyleSheet.create({
     width: 334,
     backgroundColor: "#fff",
     textAlign: "center",
-    fontSize: 18,
+    fontSize: 15,
     borderWidth: 1,
     marginTop: 20,
     marginLeft: 45,
@@ -219,10 +231,11 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: "black",
-    fontSize: 18,
+    fontSize: 16,
     lineHeight: 18,
-    marginBottom: -10,
+    marginBottom: -20,
     marginLeft: 44,
+    marginTop: 5,
   },
   dropdown: {
     margin: 16,
@@ -232,7 +245,7 @@ const styles = StyleSheet.create({
     padding: 12,
     width: 334,
     marginLeft: 45,
-    marginTop: 25,
+    marginTop: 5,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -282,8 +295,8 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 1,
     shadowRadius: 0,
-    marginTop: 10,
-    marginLeft: 120,
+    marginTop: 0,
+    marginLeft: 135,
   },
   containerx: {
     marginTop: -20,

@@ -9,6 +9,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
+  Image,
 } from "react-native";
 
 export default function Organizations({ navigation }) {
@@ -32,13 +33,20 @@ export default function Organizations({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Image
+        style={styles.tinyLogo}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
       <Text
         style={{
           fontWeight: "900",
 
           textAlign: "center",
           fontSize: 26,
-          marginTop: 10,
+          marginTop: 20,
+          marginBottom: 20,
         }}
       >
         Organizations
@@ -49,6 +57,7 @@ export default function Organizations({ navigation }) {
         iconColor="#000000"
         shadowColor="#000000"
         cancelIconColor="#000000"
+        style={{ borderWidth: 1 }}
         onPress={() => alert("onPress")}
         onChangeText={(text) => console.log(text)}
       />
@@ -94,6 +103,12 @@ export default function Organizations({ navigation }) {
           // </View>
         ))}
       </ScrollView>
+      <Image
+        style={styles.tinyLogo4}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
     </View>
   );
 }
@@ -105,6 +120,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: 2,
   },
+  tinyLogo: {
+    width: 470,
+    height: 100,
+    marginLeft: -15,
+    marginTop: -50,
+  },
   logo: {
     width: 430,
     height: 300,
@@ -112,6 +133,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
+  },
+  tinyLogo4: {
+    width: 450,
+    height: 50,
+    marginLeft: -15,
+    marginTop: 0,
+    marginBottom: -10,
   },
   log: {
     width: 350,

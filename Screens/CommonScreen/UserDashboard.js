@@ -23,7 +23,7 @@ export default function UserDashboard({ navigation }) {
       <View style={styles.rect3Row}>
         <View style={styles.rect3}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("AllOrganizations")}
+            onPress={() => navigation.navigate("Organizations")}
           >
             <Image
               style={styles.tinyLogo5}
@@ -35,9 +35,9 @@ export default function UserDashboard({ navigation }) {
               style={{
                 color: "#000000",
                 textAlign: "center",
-                marginTop: 20,
-                marginBottom: -30,
-                fontSize: 25,
+                marginTop: 40,
+                marginBottom: 10,
+                fontSize: 20,
                 fontWeight: "bold",
                 fontFamily: "Times New Roman",
               }}
@@ -58,9 +58,9 @@ export default function UserDashboard({ navigation }) {
               style={{
                 color: "#000000",
                 textAlign: "center",
-                marginTop: 20,
-                marginBottom: -30,
-                fontSize: 25,
+                marginTop: 40,
+                marginBottom: 10,
+                fontSize: 20,
                 fontWeight: "bold",
                 fontFamily: "Times New Roman",
               }}
@@ -72,7 +72,7 @@ export default function UserDashboard({ navigation }) {
       </View>
       <View style={styles.rect5Row}>
         <View style={styles.rect5}>
-          <TouchableOpacity onPress={() => navigation.navigate("Blogs")}>
+          <TouchableOpacity onPress={() => navigation.navigate("BlogsList")}>
             <Image
               style={styles.tinyLogo7}
               source={{
@@ -83,9 +83,9 @@ export default function UserDashboard({ navigation }) {
               style={{
                 color: "#000000",
                 textAlign: "center",
-                marginTop: 20,
-                marginBottom: -30,
-                fontSize: 25,
+                marginTop: 40,
+                marginBottom: 10,
+                fontSize: 20,
                 fontWeight: "bold",
                 fontFamily: "Times New Roman",
               }}
@@ -108,9 +108,9 @@ export default function UserDashboard({ navigation }) {
               style={{
                 color: "#000000",
                 textAlign: "center",
-                marginTop: 20,
-                marginBottom: -30,
-                fontSize: 25,
+                marginTop: 40,
+                marginBottom: 10,
+                fontSize: 20,
                 fontWeight: "bold",
                 fontFamily: "Times New Roman",
               }}
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
     marginTop: -40,
   },
   rect3: {
-    width: 194,
+    width: 190,
     height: 200,
     backgroundColor: "rgba(255,255,255,1)",
     borderRadius: 22,
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     shadowRadius: 13,
   },
   rect4: {
-    width: 194,
+    width: 190,
     height: 200,
     backgroundColor: "rgba(255,255,255,1)",
     borderRadius: 22,
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
   rect5: {
-    width: 194,
+    width: 190,
     height: 200,
     backgroundColor: "rgba(255,255,255,1)",
     borderRadius: 22,
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     marginTop: -100,
   },
   rect6: {
-    width: 194,
+    width: 190,
     height: 200,
     backgroundColor: "rgba(255,255,255,1)",
     borderRadius: 22,

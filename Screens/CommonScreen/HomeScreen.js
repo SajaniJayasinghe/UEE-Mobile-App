@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
-import axios from "axios";
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -53,9 +52,9 @@ const styles = StyleSheet.create({
   },
   tinyLogo4: {
     width: 450,
-    height: 60,
+    height: 70,
     marginLeft: -15,
-    marginTop: 200,
+    marginTop: 160,
   },
   logo: {
     width: 250,
@@ -63,7 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginLeft: 90,
-    marginTop: 50,
+    marginTop: 90,
     flexDirection: "row",
   },
   containerx: {

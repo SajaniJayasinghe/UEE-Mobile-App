@@ -20,7 +20,7 @@ const LoadingScreen = ({ navigation }) => {
         style={{
           color: "#000000",
           textAlign: "center",
-          marginTop: 20,
+          marginTop: 10,
           fontSize: 28,
           fontWeight: "bold",
           fontFamily: "Times New Roman",
@@ -36,7 +36,7 @@ const LoadingScreen = ({ navigation }) => {
           fontSize: 28,
           fontWeight: "bold",
           fontFamily: "Times New Roman",
-          marginBottom: 22,
+          marginBottom: 20,
         }}
       >
         LIFE BELOW WATER
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   tinyLogo4: {
     width: 450,
-    height: 60,
+    height: 80,
     marginLeft: -15,
     marginTop: 20,
   },

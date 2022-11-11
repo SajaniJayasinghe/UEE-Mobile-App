@@ -86,13 +86,13 @@ export default function SignUpScreen({ navigation }) {
       />
       <Image
         style={styles.tinyLogo2}
-        source={require("../../assets/signup.jpg")}
+        source={require("../../assets/left-box.png")}
       />
       <Text
         style={{
           fontSize: 28,
           marginLeft: 130,
-          marginTop: -30,
+          marginTop: -35,
           fontWeight: "bold",
           marginBottom: 30,
         }}
@@ -199,15 +199,16 @@ const styles = StyleSheet.create({
   },
   tinyLogo2: {
     width: 470,
-    height: 150,
+    height: 160,
     marginLeft: -15,
     marginBottom: 30,
+    marginTop: 0,
   },
   loginText: {
     color: "black",
     fontSize: 18,
     lineHeight: 18,
-    marginBottom: -10,
+    marginBottom: -18,
     marginLeft: 54,
     marginTop: 0,
   },
@@ -220,7 +221,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 20,
     marginLeft: 45,
-    marginBottom: 10,
+    marginBottom: 13,
     borderRadius: 25,
   },
   ButtonDark: {
@@ -234,8 +235,8 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 1,
     shadowRadius: 0,
-    marginTop: 10,
-    marginLeft: 140,
+    marginTop: 0,
+    marginLeft: 130,
   },
   containerx: {
     marginTop: -20,

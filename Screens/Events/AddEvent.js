@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
   loginlogo: {
     width: 440,
     height: 300,
-    justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
     marginLeft: 0,
@@ -172,7 +171,6 @@ const styles = StyleSheet.create({
   logo1: {
     width: 300,
     height: 60,
-    justifyContent: "center",
     alignItems: "center",
     marginLeft: 60,
     marginRight: 60,
@@ -197,7 +195,6 @@ const styles = StyleSheet.create({
   },
   containerx: {
     backgroundColor: "#ADDFFF",
-    justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
     shadowOffset: {
@@ -220,7 +217,6 @@ const styles = StyleSheet.create({
   loading: {
     width: 150,
     height: 40,
-    justifyContent: "center",
     alignItems: "center",
     borderRadius: 50,
     marginLeft: 140,
@@ -228,6 +224,7 @@ const styles = StyleSheet.create({
   },
   letsGetStarted: {
     fontSize: 20,
+    marginLeft: 30,
   },
   tinyLogo: {
     width: 450,
@@ -247,7 +244,6 @@ const styles = StyleSheet.create({
     height: 200,
     marginTop: -20,
     marginLeft: 0,
-    justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
   },

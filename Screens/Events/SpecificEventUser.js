@@ -72,10 +72,10 @@ export default function SpecificEventUser({ navigation }) {
           style={{
             padding: 60,
             height: 380,
-            width: 400,
+            width: 390,
             marginTop: 20,
             marginBottom: 10,
-            marginLeft: 13,
+            marginLeft: 14,
             borderRadius: 25,
           }}
         >
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
   },
   ButtonDark: {
     height: 30,
-    width: 100,
+    width: 120,
     borderRadius: 100,
     shadowOffset: {
       width: 3,
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 0,
     marginTop: 10,
-    marginLeft: 310,
+    marginLeft: 270,
   },
   containerx: {
     marginTop: -20,

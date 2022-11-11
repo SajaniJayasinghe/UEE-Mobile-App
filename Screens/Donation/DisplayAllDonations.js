@@ -1,14 +1,40 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text, View, StyleSheet, Image } from "react-native";
+import {
+  ScrollView,
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import SearchBar from "react-native-dynamic-search-bar";
 import { Card } from "react-native-shadow-cards";
 import { LinearGradient } from "expo-linear-gradient";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Icon from "react-native-vector-icons/Entypo";
 
 export default function DisplayAllDonations({ navigation }) {
   const [donations, setdonations] = useState([]);
 
+  const [userID, setuserID] = useState("");
+
+  const getuserID = async () => {
+    const userToken = await AsyncStorage.getItem("token");
+    console.log(userToken);
+
+    await axios
+      .get("https://life-below-water.herokuapp.com/api/user/userprofile", {
+        headers: {
+          Authorization: userToken,
+        },
+      })
+      .then((res) => {
+        setuserID(res.data.User._id);
+      });
+  };
   useEffect(() => {
+    getuserID();
     axios
       .get("https://life-below-water.herokuapp.com/api/donation/getdonation")
       .then((res) => {
@@ -72,13 +98,16 @@ export default function DisplayAllDonations({ navigation }) {
             >
               <LinearGradient
                 colors={["#79BAEC", "#C2DFFF"]}
-                style={styles.log2}
+                style={{
+                  borderRadius: 25,
+                  alignItems: "center",
+                }}
               >
                 <Text
                   style={{
                     marginVertical: 2,
                     fontSize: 25,
-                    marginLeft: -260,
+                    marginLeft: -200,
                   }}
                 >
                   {donations.eventTitle}
@@ -91,6 +120,26 @@ export default function DisplayAllDonations({ navigation }) {
               <Text style={{ marginVertical: 2 }}>
                 Amount : {donations.amount}
               </Text>
+
+              {userID == donations.userID ? (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("EditDonations")}
+                >
+                  <Icon
+                    name="edit"
+                    size={18}
+                    color="black"
+                    style={{
+                      marginLeft: 100,
+                      marginTop: -20,
+                      marginLeft: 323,
+                      marginBottom: -30,
+                    }}
+                  />
+                </TouchableOpacity>
+              ) : (
+                ""
+              )}
             </Card>
           </View>
         ))}
@@ -113,28 +162,26 @@ const styles = StyleSheet.create({
     width: 430,
     height: 300,
     marginTop: -30,
-    justifyContent: "center",
+
     alignItems: "center",
     flexDirection: "row",
   },
   log: {
     width: 350,
     height: 40,
-    justifyContent: "center",
     alignItems: "center",
     marginTop: 30,
     flexDirection: "row",
   },
-  log2: {
-    width: 389,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: -10,
-    marginLeft: -10,
-    borderRadius: 25,
-    flexDirection: "row",
-  },
+  // log2: {
+  //   width: 375,
+  //   height: 40,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   marginLeft: -2,
+  //   borderRadius: 25,
+  //   flexDirection: "row",
+  // },
   tinyLogo: {
     width: 450,
     height: 50,
