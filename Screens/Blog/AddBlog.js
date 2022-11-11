@@ -57,6 +57,7 @@ export default function AddBlog({ route, navigation }) {
             fontSize: 20,
             marginLeft: 20,
             marginTop: 20,
+            
           }}
         >
           Blog Name

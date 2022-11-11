@@ -27,6 +27,7 @@ import AdditionalVideosImages from "./Screens/Blog/AdditionalVideosImages";
 import UpdateBlog from "./Screens/Blog/UpdateBlog";
 import Userallblogs from "./Screens/Blog/Userallblogs";
 import UserSpecificblog from "./Screens/Blog/UserSpecificblog";
+import AllAdditionalblogs from "./Screens/Blog/AllAdditionalblogs";
 
 
 export default function App() {
@@ -63,6 +64,7 @@ export default function App() {
         <Stack.Screen name="Userallblogs" component={Userallblogs} />
         <Stack.Screen name="UserSpecificblog" component={UserSpecificblog} />
         <Stack.Screen name="AdditionalVideosImages" component={AdditionalVideosImages} />
+        <Stack.Screen name="AllAdditionalblogs" component={AllAdditionalblogs} />
 
       </Stack.Navigator>
     </NavigationContainer>

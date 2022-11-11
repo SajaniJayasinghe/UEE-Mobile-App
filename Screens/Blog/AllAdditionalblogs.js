@@ -4,17 +4,17 @@ import { Card } from "react-native-shadow-cards";
 import SearchBar from "react-native-dynamic-search-bar";
 import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView} from "react-native";
 
-export default function BlogsList({ navigation }) {
-  const [blog, setblog] = useState([]);
+export default function AllAdditionalblogs({ navigation }) {
+  const [userblog, setuserblog] = useState([]);
 
  
 
   useEffect(() => {
     axios
-      .get("https://life-below-water.herokuapp.com/api/blog/getblog")
+      .get("https://life-below-water.herokuapp.com/api/userblog/getuserblog")
       .then((res) => {
         if (res.data.success) {
-          setblog(res.data.existingBlogs);
+          setuserblog(res.data.existingUserBlogs);
         }
       });
   }, []);
@@ -37,11 +37,11 @@ export default function BlogsList({ navigation }) {
           
         }}
       >
-        BLOGS LIST
+       ADDITIONAL BLOGS LIST
       </Text>
       <TouchableOpacity
         style={[styles.containerx, styles.materialButtonDark]}
-        onPress={() => navigation.navigate("AddBlog")}
+        onPress={() => navigation.navigate("AdditionalVideosImages")}
       >
         <Text style={styles.addnewblog}>Add New Blog</Text>
       </TouchableOpacity>
@@ -60,15 +60,17 @@ export default function BlogsList({ navigation }) {
        />
        <ScrollView>
         <View style={{ display: "flex", flexDirection: "column", padding: 25 }}>
-          {blog.map((blog, index) => (
-            <View key={blog + index}>
+          {userblog.map((userblog, index) => (
+            <View key={userblog + index}>
       <TouchableOpacity
-       onPress={() => navigation.navigate("UpdateList",{
-        bid:blog._id,
-        blogName:blog.blogName,
-        description:blog.description,
-        blogImage:blog.blogImage
-       })}>
+    //    onPress={() => navigation.navigate("UpdateList",{
+    //     bid:blog._id,
+    //     blogName:blog.blogName,
+    //     description:blog.description,
+    //     blogImage:blog.blogImage
+    //    })} 
+   
+    >
       <Card
        style={{ padding: 100, margin:-4, height:300, width:350, marginBottom:30}}
       
@@ -81,30 +83,31 @@ export default function BlogsList({ navigation }) {
       /> */}
       <Image
              style={styles.blog1}
-              source={{uri:blog.blogImage}}
+              source={{uri:userblog.blogImagea}}
             />
          <Text
                   style={{
                     marginVertical: 5,
                     fontSize: 20,
+                    fontWeight: "bold",
                     flexDirection: "row",
                     justifyContent: "flex-end",
-                    fontWeight: "bold"
                   }}
                 >
-                  {blog.blogName}
+                  {userblog.blogNamea}
                 </Text>
+                <TouchableOpacity>
                 <Text
                   style={{
                     marginVertical: 5,
                     fontSize: 20,
-                    flexDirection: "row",
                     textAlign: "justify",
                     margin: -80
                   }}
                 >
-                  {blog.description}
+                  {userblog.blogurl}
                 </Text>
+                </TouchableOpacity>
       </Card>
       </TouchableOpacity>
      
