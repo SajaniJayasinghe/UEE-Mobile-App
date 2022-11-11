@@ -10,6 +10,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
+// import * as ImagePicker from "expo-image-picker";
+// import { firebase } from "../Firebase";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { Dropdown } from "react-native-element-dropdown";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -21,6 +23,7 @@ export default function Donations({ route, navigation }) {
   const [amount, setamount] = useState("");
   const [paymenttype, setpaymenttype] = useState("");
   const [value, setValue] = useState(null);
+  // const [uploading, setuploading] = useState(false);
 
   const storetoken = async (value) => {
     var token = await AsyncStorage.getItem("token");
@@ -31,6 +34,25 @@ export default function Donations({ route, navigation }) {
     { label: "Cash", value: "Cash" },
     { label: "Online", value: "Online" },
   ];
+
+  // const pickImage = async () => {
+  //   let result = await ImagePicker.launchImageLibraryAsync({
+  //     mediaTypes: ImagePicker.MediaTypeOptions.All,
+  //     allowsEditing: true,
+  //     aspect: [4, 3],
+  //     quality: 1,
+  //   });
+  //   const source = { uri: result.uri };
+  //   console.log(source);
+  //   setreceipt(source);
+  // };
+
+  // const uploadImage = async () => {
+  //   setuploading(true);
+  //   const _response = await fetch(receipt.uri);
+  //   const blob = await _response.blob();
+  //   const filename = image.uri.substring(receipt.uri.lastIndexOf("/") + 1);
+  // };
 
   const renderItem = (item) => {
     return (

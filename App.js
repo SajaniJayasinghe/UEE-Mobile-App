@@ -16,6 +16,7 @@ import AllEvents from "./Screens/Events/AllEvents";
 import SpecificEventAdmin from "./Screens/Events/SpecificEventAdmin";
 import SpecificEventUser from "./Screens/Events/SpecificEventUser";
 import AddEvent from "./Screens/Events/AddEvent";
+import EditEvent from "./Screens/Events/EditEvent";
 import AdminDashboard from "./Screens/CommonScreen/AdminDashboard";
 import AllEventsAdmin from "./Screens/Events/AllEventsAdmin";
 import AddOrganization from "./Screens/Organizations/AddOrganization";
@@ -59,6 +60,7 @@ export default function App() {
         />
         <Stack.Screen name="SpecificEventUser" component={SpecificEventUser} />
         <Stack.Screen name="AddEvent" component={AddEvent} />
+        <Stack.Screen name="EditEvent" component={EditEvent} />
         <Stack.Screen name="AdminDashboard" component={AdminDashboard} />
         <Stack.Screen name="AllEventsAdmin" component={AllEventsAdmin} />
         <Stack.Screen name="AddOrganization" component={AddOrganization} />

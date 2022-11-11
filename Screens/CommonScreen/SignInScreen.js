@@ -42,7 +42,7 @@ export default function SignInScreen({ navigation }) {
         }
       })
       .catch((error) => {
-        Alert.alert("Loging Faild");
+        Alert.alert("Logging Failed");
       });
   };
 

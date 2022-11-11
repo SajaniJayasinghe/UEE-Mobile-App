@@ -10,26 +10,29 @@ import {
   ScrollView,
 } from "react-native";
 import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRoute } from "@react-navigation/native";
+//import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function AddEvent({ route, navigation }) {
+export default function AddEvent({ navigation }) {
   const [eventTitle, setEventTitle] = useState("");
   const [venue, setVenue] = useState("");
   const [eventTime, setEventTime] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [description, setDescription] = useState("");
   const [eventImage, setEventImage] = useState("");
+  const route = useRoute();
+  const { id } = route.params;
 
   const addEvent = async () => {
-    var organizationID = await AsyncStorage.getItem("organizationID");
-    const URL = `https://life-below-water.herokuapp.com/api/event/addevent/${organizationID}`;
+    //var organizationID = await AsyncStorage.getItem("organizationID");
+    const URL = `https://life-below-water.herokuapp.com/api/event/addevent/${id}`;
 
     const payload = {
       eventTitle: eventTitle,
       venue: venue,
       eventTime: eventTime,
       eventDate: eventDate,
-      description: description,
+      eventdescription: description,
       eventImage: eventImage,
     };
 
@@ -37,7 +40,7 @@ export default function AddEvent({ route, navigation }) {
       .post(URL, payload)
       .then((res) => {
         Alert.alert("Your Event has been created successfully!!");
-        navigation.navigate("Organizations");
+        navigation.navigate("AllEventsAdmin");
       })
       .catch((error) => {
         console.log(error);

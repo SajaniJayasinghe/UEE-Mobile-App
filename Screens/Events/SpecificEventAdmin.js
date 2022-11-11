@@ -11,13 +11,13 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
 
 export default function SpecificEventUser({ navigation }) {
   const [specificevent, setSpecificEvent] = useState([]);
   const route = useRoute();
-  const { id } = route.params;
 
   useEffect(() => {
     const data = {
@@ -30,6 +30,34 @@ export default function SpecificEventUser({ navigation }) {
     };
     setSpecificEvent(data);
   }, []);
+
+  const deleteevent = async () => {
+    const { id } = route.params;
+
+    Alert.alert(
+      "Are you sure?",
+      "This will permanently delete the event!",
+      [
+        {
+          text: "OK",
+          onPress: async () => {
+            console.log(id);
+            axios
+              .delete(
+                `https://life-below-water.herokuapp.com/api/event/deleteevent/${id}`
+              )
+              .then((res) => {
+                navigation.push("AllEventsAdmin");
+              })
+              .catch((e) => {
+                console.error(e);
+              });
+          },
+        },
+      ],
+      { cancelable: true }
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -58,7 +86,7 @@ export default function SpecificEventUser({ navigation }) {
         {specificevent.eventTitle}
       </Text>
 
-      <TouchableOpacity onPress={() => navigation.navigate("EditEvent")}>
+      <TouchableOpacity onPress={() => deleteevent(specificevent._id)}>
         <Icona
           name="delete"
           size={24}

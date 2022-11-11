@@ -44,12 +44,12 @@ export default function SignUpScreen({ navigation }) {
         )
         .then((res) => {
           if (res.data.status) {
-            Alert.alert("Success", "User Registered Successfully");
+            Alert.alert("Success", "Registered Successfully");
             setTimeout(() => {
               navigation.push("SignInScreen");
             }, 2000);
           } else {
-            Alert.alert("Error", "User Registration Failed");
+            Alert.alert("Error", "Registration Failed");
           }
         })
         .catch((err) => {

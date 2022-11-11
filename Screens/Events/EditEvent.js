@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-export default function EditOrganizaton({ navigation }) {
+export default function EditEvent({ navigation }) {
   return (
     <View style={styles.container}>
       <Image

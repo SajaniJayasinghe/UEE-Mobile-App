@@ -4,6 +4,7 @@ import {
   View,
   Image,
   Text,
+  Alert,
   TouchableOpacity,
   ScrollView,
   TextInput,
@@ -12,12 +13,16 @@ import axios from "axios";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { Dropdown } from "react-native-element-dropdown";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useRoute } from "@react-navigation/native";
 
-export default function EditDonations({ route, navigation }) {
-  useEffect(() => {
-    if (!!!route.prams) {
-    }
-  }, []);
+export default function EditDonations({ navigation }) {
+  const [token, settoken] = useState("");
+  const route = useRoute();
+  const getToken = async () => {
+    settoken(await AsyncStorage.getItem("token"));
+  };
+
+  console.log(route.params.donationID);
 
   const [donatorName, setdonatorName] = useState("");
   const [depositeDate, setdepositeDate] = useState("");
@@ -38,21 +43,21 @@ export default function EditDonations({ route, navigation }) {
     console.log(Token);
     // console.log({ did: did });
     await axios
-      // .get(
-      //   `https://life-below-water.herokuapp.com/api/donation/updatedonation/${did}`,
-      //   {
-      //     headers: {
-      //       Authorization: Token,
-      //     },
-      //   }
-      // )
+      .get(
+        `https://life-below-water.herokuapp.com/api/donation/getonedonation/${route.params.donationID}`,
+        {
+          headers: {
+            Authorization: Token,
+          },
+        }
+      )
       .then((res) => {
-        if (res.data.status) {
-          setdonatorName(res.data.User.donatorName);
-          setdepositeDate(res.data.User.depositeDate);
-          setreceipt(res.data.User.receipt);
-          setamount(res.data.User.amount);
-          setpaymenttype(res.data.User.paymenttype);
+        if (res.data.success) {
+          setdonatorName(res.data.existingDonations.donatorName);
+          setdepositeDate(res.data.existingDonations.depositeDate);
+          setreceipt(res.data.existingDonations.receipt);
+          setamount(res.data.existingDonations.amount);
+          setpaymenttype(res.data.existingDonations.paymenttype);
         }
       })
       .catch((e) => {
@@ -63,9 +68,11 @@ export default function EditDonations({ route, navigation }) {
     getDonation();
   }, []);
 
+  console.log({ donatorName: donatorName });
+
   const updateDonation = async () => {
     const Token = await AsyncStorage.getItem("token");
-    // const URL = `https://life-below-water.herokuapp.com/api/donation/updatedonation/${did}`;
+    const URL = `https://life-below-water.herokuapp.com/api/donation/updatedonation/${route.params.donationID}`;
 
     const payload = {
       donatorName: donatorName,

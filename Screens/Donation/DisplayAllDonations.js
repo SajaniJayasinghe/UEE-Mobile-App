@@ -123,7 +123,11 @@ export default function DisplayAllDonations({ navigation }) {
 
               {userID == donations.userID ? (
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("EditDonations")}
+                  onPress={() =>
+                    navigation.navigate("EditDonations", {
+                      donationID: donations._id,
+                    })
+                  }
                 >
                   <Icon
                     name="edit"

@@ -22,7 +22,9 @@ export default function AdminDashboard({ navigation }) {
 
       <View style={styles.rect3Row}>
         <View style={styles.rect3}>
-          <TouchableOpacity onPress={() => navigation.navigate("")}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("AllOrganizations")}
+          >
             <Image
               style={styles.tinyLogo5}
               source={{
@@ -40,7 +42,7 @@ export default function AdminDashboard({ navigation }) {
                 fontFamily: "Times New Roman",
               }}
             >
-              Organization
+              Organizations
             </Text>
           </TouchableOpacity>
         </View>
