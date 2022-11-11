@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "react-native-shadow-cards";
+import { useRoute } from "@react-navigation/native";
 
 import {
   View,

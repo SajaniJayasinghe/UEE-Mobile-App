@@ -110,7 +110,13 @@ export default function AllOrganizations({ navigation }) {
               >
                 <TouchableOpacity
                   style={{ marginLeft: 10 }}
-                  onPress={() => navigation.navigate("EditOrganizaton")}
+                  onPress={() =>
+                    navigation.navigate("EditOrganizaton", {
+                      organizationName: organization.organizationName,
+                      organizationImage: organization.organizationImage,
+                      description: organization.description,
+                    })
+                  }
                 >
                   <Icon name="edit" size={30} color="black" />
                 </TouchableOpacity>

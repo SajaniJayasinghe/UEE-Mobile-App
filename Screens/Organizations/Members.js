@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SearchBar from "react-native-dynamic-search-bar";
+import { useRoute } from "@react-navigation/native";
 
 import {
   ScrollView,
@@ -177,27 +177,43 @@ const styles = StyleSheet.create({
     marginLeft: -10,
     flexDirection: "row",
   },
-  ButtonDark: {
-    height: 70,
-    width: 350,
+  materialButtonDark: {
+    height: 50,
+    width: 160,
+    borderRadius: 130,
+    shadowColor: "rgba(0,0,0,1)",
     shadowOffset: {
       width: 3,
       height: 3,
     },
     elevation: 5,
     shadowOpacity: 1,
-    borderRadius: 100,
-    marginLeft: 5,
+    shadowRadius: 0,
+    marginTop: 25,
+    marginLeft: 220,
+    marginBottom: 15,
   },
+
+  addnewblog: {
+    color: "black",
+    fontWeight: "bold",
+    fontSize: 18,
+    lineHeight: 18,
+  },
+
   containerx: {
     backgroundColor: "#ADDFFF",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
+    borderRadius: 2,
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 1,
     },
+    shadowOpacity: 0.35,
+    shadowRadius: 5,
     elevation: 2,
     minWidth: 78,
     paddingLeft: 3,

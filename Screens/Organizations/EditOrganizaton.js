@@ -9,6 +9,51 @@ import {
 } from "react-native";
 
 export default function EditOrganizaton({ navigation }) {
+  const updateUser = async () => {
+    const Token = await AsyncStorage.getItem("token");
+    const URL = `https://csse-hosting-app.herokuapp.com/api/user/updateUser`;
+
+    const payload = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phoneNo: phoneNo,
+      nic: nic,
+    };
+
+    axios
+      .patch(URL, payload, {
+        headers: {
+          Authorization: Token,
+        },
+      })
+      .then((_response) => {
+        Alert.alert(
+          "Use Profile Updated",
+          "Your Profile has updated successfully!!",
+          [
+            {
+              text: "OK",
+              onPress: () =>
+                navigation.navigate("Dashboard", {
+                  userId: route.params.userId,
+                  role: route.params.role,
+                }),
+            },
+          ],
+          { cancelable: false }
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+        Alert.alert(
+          "Error",
+          "Inserting Unsuccessful",
+          [{ text: "Check Again" }],
+          { cancelable: false }
+        );
+      });
+  };
   return (
     <View style={styles.container}>
       <Image
