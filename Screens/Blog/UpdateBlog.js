@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { useRoute } from "@react-navigation/native";
 import {
   StyleSheet,
   View,
@@ -7,17 +8,47 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  Alert,
 } from "react-native";
 import axios from "axios";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { Dropdown } from "react-native-element-dropdown";
 
-export default function UpdateBlog({ route, navigation }) {
+export default function UpdateBlog({  navigation }) {
+  const [blog, setblog] = useState([]);
+  const route = useRoute();
+
+  const bID = route.params.bid
+
   const [blogName, setblogName] = useState("");
   const [description, setdescription] = useState("");
   const [blogImage, setblogImage] = useState("");
   
+  useEffect(() => {
+    axios
+    .get(`https://life-below-water.herokuapp.com/api/blog/getblog/${bID}`
+    )
+    .then((res)=>{
+      // setbID(res.data.blog.bID)
+      setblogName(res.data.blog.blogName);
+      setdescription(res.data.description);
+      setblogImage(res.data.blogImage)
+    })
+    .catch((e)=>{
+    console.log(e);
+  })
+  
+},[]);
  
+// useEffect(() => {
+//   const data = {
+//     id:route.params.bid,
+//     blogName: route.params.blogName,
+//     description: route.params.description,
+//     blogImage:route.params.blogImage
+//   };
+//   setblog(data);
+// }, []);
 
   const renderItem = (item) => {
     return (
@@ -34,6 +65,28 @@ export default function UpdateBlog({ route, navigation }) {
       </View>
     );
   };
+
+  const updateBlog = async () => {
+    const URL = `https://life-below-water.herokuapp.com/api/blog/update/${bID}`;
+    const payload = {
+      blogName: blogName,
+      description: description,
+      blogImage: blogImage,
+    };
+    axios.put(URL,payload).then((res)=>{
+      Alert.alert("Blog update successfull")
+      navigation.navigate("UpdateList");
+    })
+    .catch((error) => {
+      console.error(error);
+      Alert.alert(
+        "Error",
+        "Inserting Unsuccessful",
+        [{ text: "Check Again" }],
+        { cancelable: false }
+      );
+    }); 
+  }
 
   return (
     <View style={styles.container}>
@@ -54,23 +107,31 @@ export default function UpdateBlog({ route, navigation }) {
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
         <Text style={styles.loginText}>Name Of Blog</Text>
         <TextInput
+        value={blog.blogName}
           placeholder="Name Of Blog"
+          onChange={(e)=>setblogName(e.nativeEvent.text)}
           style={styles.textInput2}
         ></TextInput>
 
         <Text style={styles.loginText}>Description</Text>
         <TextInput
+         value={blog.description}
           placeholder="Description"
+          onChange={(e)=>setdescription(e.nativeEvent.text)}
           style={styles.textInput2}
         ></TextInput>
 
         <Text style={styles.loginText}>Image</Text>
         <TextInput
+         value={blog.blogImage}
           placeholder="Enter Image"
+          onChange={(e)=>setblogImage(e.nativeEvent.text)}
           style={styles.textInput2}
         ></TextInput>
 
-        <TouchableOpacity style={[styles.containerx, styles.ButtonDark]}>
+        <TouchableOpacity style={[styles.containerx, styles.ButtonDark]}
+        onPress={()=>updateBlog()}>
+
           <Text style={styles.loginText3}>Update</Text>
         </TouchableOpacity>
       </ScrollView>

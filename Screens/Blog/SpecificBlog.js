@@ -12,7 +12,7 @@ const SpecificBlog = ({ navigation }) => {
   const route = useRoute();
 
   const bID = route.params.bid
-  console.log(bID);
+  // console.log(bID);
 
 
   useEffect(() => {
@@ -68,11 +68,11 @@ const SpecificBlog = ({ navigation }) => {
          {blog.blogName}
       </Text>
       <TouchableOpacity
-        onPress={() => navigation.navigate("UpdateBlog",{
-          id:route.params.bid,
-          blogName: route.params.blogName,
-          description: route.params.description,
-          blogImage:route.params.blogImage
+         onPress={() => navigation.navigate("UpdateBlog",{
+          bid:blog._id,
+          blogName:blog.blogName,
+          description:blog.description,
+          blogImage:blog.blogImage
         })}
       >
         <Icon 

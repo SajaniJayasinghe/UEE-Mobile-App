@@ -7,6 +7,8 @@ import { View, Image, StyleSheet, Text, TouchableOpacity, ScrollView} from "reac
 export default function BlogsList({ navigation }) {
   const [blog, setblog] = useState([]);
 
+ 
+
   useEffect(() => {
     axios
       .get("https://life-below-water.herokuapp.com/api/blog/getblog")
