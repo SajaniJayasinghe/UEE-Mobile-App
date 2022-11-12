@@ -116,7 +116,7 @@ export default function Dashboard({ navigation }) {
             </Text>
           </Card>
         </TouchableOpacity>
-        {/* <TouchableOpacity onPress={() => navigation.navigate("Donations")}> */}
+        <TouchableOpacity onPress={() => navigation.navigate("ReceivedDonations")}>
           <Card
             style={{
               padding: 50,
@@ -145,7 +145,7 @@ export default function Dashboard({ navigation }) {
               Donations
             </Text>
           </Card>
-        {/* </TouchableOpacity> */}
+        </TouchableOpacity>
       </ScrollView>
       <Image
         style={styles.tinyLogo4}

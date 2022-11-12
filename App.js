@@ -11,6 +11,7 @@ import Dashboard from "./Screens/CommonScreen/Dashboard";
 import BlogsList from "./Screens/Blog/BlogsList";
 import SpecificBlog from "./Screens/Blog/SpecificBlog";
 
+import ReceivedDonations from "./Screens/Donation/ReceivedDonations";
 
 import AddOrganization from "./Screens/Organizations/AddOrganization";
 import AllOrganizations from "./Screens/Organizations/AllOrganizations";
@@ -65,6 +66,10 @@ export default function App() {
         <Stack.Screen name="AdditionalVideosImages" component={AdditionalVideosImages} />
         <Stack.Screen name="AllAdditionalblogs" component={AllAdditionalblogs} />
         <Stack.Screen name="UserAdditionalblogs" component={UserAdditionalblogs} />
+
+       
+<Stack.Screen name="ReceivedDonations" component={ReceivedDonations} />
+
 
       </Stack.Navigator>
     </NavigationContainer>

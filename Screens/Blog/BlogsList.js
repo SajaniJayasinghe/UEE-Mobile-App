@@ -28,7 +28,7 @@ export default function BlogsList({ navigation }) {
   useEffect(() => {
     setfilterblogs(searchFunc(search))
   }, [search])
-
+''
 
   let generatePdf = async (blogName,description) => {
 
@@ -127,7 +127,7 @@ export default function BlogsList({ navigation }) {
           
         }}
       >
-        BLOGS LIST
+        BLOGS  LIST
       </Text>
       <TouchableOpacity
         style={[styles.containerx, styles.materialButtonDark]}

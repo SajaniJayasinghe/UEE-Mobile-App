@@ -35,7 +35,13 @@ export default function AddBlog({ route, navigation }) {
 
     return (
         <View style={styles.container}>
-
+  <Image
+        style={styles.tinyLogo}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
+      <Image style={styles.tinyLogo1} source={require("../../assets/rr.png")} />
 <ScrollView style={{ width: "100%", margin: 1 }}>
            <Text
         style={{
@@ -52,12 +58,11 @@ export default function AddBlog({ route, navigation }) {
         <Text
           style={{
             fontWeight: "800",
-            //   opacity: 0.6,
             textAlign: "left",
             fontSize: 20,
             marginLeft: 20,
             marginTop: 20,
-            
+            marginBottom: -10,
           }}
         >
           Blog Name
@@ -72,11 +77,11 @@ export default function AddBlog({ route, navigation }) {
         <Text
           style={{
             fontWeight: "800",
-            //   opacity: 0.6,
             textAlign: "left",
             fontSize: 20,
             marginLeft: 20,
             marginTop: 20,
+            marginBottom: -10,
           }}
         >
           Description
@@ -90,11 +95,11 @@ export default function AddBlog({ route, navigation }) {
         <Text
           style={{
             fontWeight: "800",
-            //   opacity: 0.6,
             textAlign: "left",
             fontSize: 20,
             marginLeft: 20,
             marginTop: 100,
+            marginBottom: -10,
           }}
         >
           Add Image
@@ -115,12 +120,29 @@ export default function AddBlog({ route, navigation }) {
         <Text style={styles.letsGetStarted}> CREATE BLOG </Text>
       </TouchableOpacity>
       </ScrollView>
+      <Image
+        style={styles.tinyLogo}
+        source={{
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
+        }}
+      />
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  tinyLogo: {
+    width: 450,
+    height: 40,
+    marginLeft: -15,
+    marginTop: 0,
+  },
+  tinyLogo1: {
+    width: 450,
+    height: 200,
+    marginBottom: 20,
   },
   input: {
     height: 50,
