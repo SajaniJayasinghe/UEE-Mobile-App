@@ -31,6 +31,9 @@ import UpdateBlog from "./Screens/Blog/UpdateBlog";
 import BlogsList from "./Screens/Blog/BlogsList";
 import SpecificBlog from "./Screens/Blog/SpecificBlog";
 import AllAdditionalblogs from "./Screens/Blog/AllAdditionalblogs";
+import Userallblogs from "./Screens/Blog/Userallblogs";
+import UserSpecificblog from "./Screens/Blog/UserSpecificblog";
+import UserAdditionalblogs from "./Screens/Blog/UserAdditionalblogs";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -83,6 +86,12 @@ export default function App() {
         <Stack.Screen
           name="AllAdditionalblogs"
           component={AllAdditionalblogs}
+        />
+        <Stack.Screen name="Userallblogs" component={Userallblogs} />
+        <Stack.Screen name="UserSpecificblog" component={UserSpecificblog} />
+        <Stack.Screen
+          name="UserAdditionalblogs"
+          component={UserAdditionalblogs}
         />
       </Stack.Navigator>
     </NavigationContainer>

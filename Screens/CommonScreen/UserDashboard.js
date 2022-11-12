@@ -72,7 +72,7 @@ export default function UserDashboard({ navigation }) {
       </View>
       <View style={styles.rect5Row}>
         <View style={styles.rect5}>
-          <TouchableOpacity onPress={() => navigation.navigate("BlogsList")}>
+          <TouchableOpacity onPress={() => navigation.navigate("Userallblogs")}>
             <Image
               style={styles.tinyLogo7}
               source={{
