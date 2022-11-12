@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Card } from "react-native-shadow-cards";
-import SearchBar from "react-native-dynamic-search-bar";
 import Icon from "react-native-vector-icons/AntDesign";
 import axios from "axios";
 
 import {
   View,
+  TextInput,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -15,6 +15,8 @@ import {
 
 export default function AllEventsAdmin({ navigation }) {
   const [event, setEvent] = useState([]);
+  const [filterEvent, setfilterEvent] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     axios
@@ -25,6 +27,14 @@ export default function AllEventsAdmin({ navigation }) {
         }
       });
   }, []);
+
+  const searchFunc = (text) => {
+    return event.filter((event) => event.eventTitle === text);
+  };
+
+  useEffect(() => {
+    setfilterEvent(searchFunc(search));
+  }, [search]);
 
   return (
     <View style={styles.container}>
@@ -54,89 +64,86 @@ export default function AllEventsAdmin({ navigation }) {
         EVENTS LIST
       </Text>
 
-      <SearchBar
-        placeholder="Search here"
-        fontColor="#000000"
-        iconColor="#000000"
-        shadowColor="#000000"
-        cancelIconColor="#000000"
-        style={{
-          borderWidth: 1,
-          marginBottom: 10,
-        }}
-        onPress={() => alert("onPress")}
-        onChangeText={(text) => console.log(text)}
+      <TextInput
+        style={styles.inputserach}
+        placeholder="Search for Event Title"
+        value={search}
+        onChangeText={(text) => setSearch(text)}
       />
-      <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        {event.map((event, index) => (
-          <View key={event + index}>
-            <Card
-              style={{
-                padding: 20,
-                margin: 10,
-                height: 100,
-                width: 400,
-                marginLeft: 15,
-                borderRadius: 25,
-              }}
-            >
-              <Text
-                style={{
-                  color: "#000000",
-                  textAlign: "left",
-                  marginTop: 10,
-                  fontSize: 15,
-                  fontWeight: "bold",
-                }}
-              ></Text>
-              <Text
-                style={{
-                  marginTop: -20,
-                  marginBottom: 10,
-                }}
-              >
-                Event : {event.eventTitle}
-              </Text>
 
-              <Text
+      <ScrollView style={{ display: "flex", flexDirection: "column" }}>
+        <View style={{ display: "flex", flexDirection: "column", padding: 25 }}>
+          {(search === "" ? event : filterEvent).map((event, index) => (
+            <View key={event + index}>
+              <Card
                 style={{
-                  color: "#000000",
-                  textAlign: "left",
-                  marginTop: 10,
-                  fontSize: 12,
-                  fontWeight: "bold",
-                }}
-              ></Text>
-              <Text
-                style={{
-                  marginTop: -20,
+                  padding: 20,
+                  margin: 10,
+                  height: 100,
+                  width: 390,
+                  marginLeft: -12,
+                  borderRadius: 25,
                 }}
               >
-                Organization : {event.organizationName}
-              </Text>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("SpecificEventAdmin", {
-                    id: event._id,
-                    organizationID: event.organizationID,
-                    eventTitle: event.eventTitle,
-                    venue: event.venue,
-                    eventTime: event.eventTime,
-                    eventDate: event.eventDate,
-                    eventdescription: event.eventdescription,
-                  })
-                }
-              >
-                <Icon
-                  name="eye"
-                  size={30}
-                  color="black"
-                  style={{ marginLeft: 320, marginTop: -30 }}
-                />
-              </TouchableOpacity>
-            </Card>
-          </View>
-        ))}
+                <Text
+                  style={{
+                    color: "#000000",
+                    textAlign: "left",
+                    marginTop: 10,
+                    fontSize: 15,
+                    fontWeight: "bold",
+                  }}
+                ></Text>
+                <Text
+                  style={{
+                    marginTop: -20,
+                    marginBottom: 10,
+                  }}
+                >
+                  Event : {event.eventTitle}
+                </Text>
+
+                <Text
+                  style={{
+                    color: "#000000",
+                    textAlign: "left",
+                    marginTop: 10,
+                    fontSize: 12,
+                    fontWeight: "bold",
+                  }}
+                ></Text>
+                <Text
+                  style={{
+                    marginTop: -20,
+                  }}
+                >
+                  Organization : {event.organizationName}
+                </Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("SpecificEventAdmin", {
+                      eID: event._id,
+                      organizationID: event.organizationID,
+                      eventTitle: event.eventTitle,
+                      venue: event.venue,
+                      eventTime: event.eventTime,
+                      eventDate: event.eventDate,
+                      eventdescription: event.eventdescription,
+                      eventImage: event.eventImage,
+                    })
+                  }
+                >
+                  <Icon
+                    name="eye"
+                    size={30}
+                    color="black"
+                    style={{ marginLeft: 320, marginTop: -30 }}
+                  />
+                </TouchableOpacity>
+              </Card>
+            </View>
+          ))}
+        </View>
       </ScrollView>
       <Image
         style={styles.tinyLogo}
@@ -164,5 +171,21 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginBottom: -35,
     marginTop: 0,
+  },
+  inputserach: {
+    backgroundColor: "white",
+    shadowColor: "black",
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.1,
+    elevation: 3,
+    borderRadius: 40,
+    padding: 10,
+    marginTop: 10,
+    width: 350,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 35,
+    height: 40,
+    borderWidth: 1,
   },
 });

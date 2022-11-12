@@ -10,10 +10,25 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
+  TextInput,
 } from "react-native";
+import { printToFileAsync } from "expo-print";
+import { shareAsync } from "expo-sharing";
 
 export default function Organizations({ navigation }) {
   const [organization, setorganization] = useState([]);
+  const [filterorganization, setfilterorganization] = useState([]);
+  const [search, setSearch] = useState("");
+
+  const searchFunc = (text) => {
+    return organization.filter(
+      (organization) => organization.organizationName === text
+    );
+  };
+
+  useEffect(() => {
+    setfilterorganization(searchFunc(search));
+  }, [search]);
 
   const image = {
     uri: "https://assets.puzzlefactory.pl/puzzle/193/194/original.jpg",
@@ -51,15 +66,11 @@ export default function Organizations({ navigation }) {
       >
         Organizations
       </Text>
-      <SearchBar
-        placeholder="Search here"
-        fontColor="#000000"
-        iconColor="#000000"
-        shadowColor="#000000"
-        cancelIconColor="#000000"
-        style={{ borderWidth: 1 }}
-        onPress={() => alert("onPress")}
-        onChangeText={(text) => console.log(text)}
+      <TextInput
+        style={styles.inputserach}
+        placeholder="Search for Organization name"
+        value={search}
+        onChangeText={(text) => setSearch(text)}
       />
 
       <ScrollView
@@ -68,40 +79,45 @@ export default function Organizations({ navigation }) {
           flexDirection: "column",
         }}
       >
-        {organization.map((organization, index) => (
-          <View key={organization + index}>
-            <TouchableOpacity
-              style={styles.containerx}
-              onPress={() =>
-                navigation.navigate("SpecificOrganization", {
-                  organizationID: organization._id,
-                  organizationName: organization.organizationName,
-                  description: organization.description,
-                })
-              }
-              // source={{
-              //   uri: "https://previews.123rf.com/images/scusi/scusi1309/scusi130900039/22719918-city-travel-by-bus.jpg",
-              // }}
-            >
-              <ImageBackground
-                source={image}
-                resizeMode="cover"
-                style={styles.image}
-              ></ImageBackground>
-              <View
-                style={{
-                  padding: 5,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
+        {(search === "" ? organization : filterorganization).map(
+          (organization, index) => (
+            <View key={organization + index}>
+              <TouchableOpacity
+                style={styles.containerx}
+                onPress={() =>
+                  navigation.navigate("SpecificOrganization", {
+                    organizationID: organization._id,
+                    organizationName: organization.organizationName,
+                    description: organization.description,
+                    organizationImage: organization.organizationImage,
+                  })
+                }
+                // source={{
+                //   uri: "https://previews.123rf.com/images/scusi/scusi1309/scusi130900039/22719918-city-travel-by-bus.jpg",
+                // }}
               >
-                <Text style={styles.text}>{organization.organizationName}</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-          // </View>
-        ))}
+                <ImageBackground
+                  source={image}
+                  resizeMode="cover"
+                  style={styles.image}
+                ></ImageBackground>
+                <View
+                  style={{
+                    padding: 5,
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text style={styles.text}>
+                    {organization.organizationName}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+            // </View>
+          )
+        )}
       </ScrollView>
       <Image
         style={styles.tinyLogo4}
@@ -183,5 +199,22 @@ const styles = StyleSheet.create({
       width: 0,
       height: 1,
     },
+  },
+  inputserach: {
+    backgroundColor: "white",
+    shadowColor: "black",
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.1,
+    elevation: 3,
+    borderRadius: 40,
+    padding: 10,
+    marginTop: 10,
+    width: 350,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 5,
+    height: 40,
+    borderWidth: 1,
+    marginBottom: 20,
   },
 });

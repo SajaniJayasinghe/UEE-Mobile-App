@@ -27,7 +27,7 @@ export default function AddOrganization({ route, navigation }) {
       .post(URL, payload)
       .then((res) => {
         Alert.alert("Organization Added Successfully");
-        navigation.navigate("Organizations");
+        navigation.navigate("AllOrganizations");
       })
       .catch((error) => {
         console.log(error);
@@ -47,13 +47,19 @@ export default function AddOrganization({ route, navigation }) {
           uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
         }}
       />
+      <Image
+        style={styles.tinyLogo1}
+        source={{
+          uri: "https://images7.alphacoders.com/678/678600.jpg",
+        }}
+      />
       <Text
         style={{
           fontWeight: "800",
           textAlign: "center",
           fontSize: 26,
           marginLeft: -10,
-          marginTop: 30,
+          marginTop: 10,
           marginBottom: 20,
         }}
       >
@@ -68,7 +74,7 @@ export default function AddOrganization({ route, navigation }) {
             textAlign: "left",
             fontSize: 20,
             marginLeft: 20,
-            marginTop: 30,
+            marginTop: 10,
           }}
         >
           Organization Name
@@ -87,7 +93,7 @@ export default function AddOrganization({ route, navigation }) {
             textAlign: "left",
             fontSize: 20,
             marginLeft: 20,
-            marginTop: 20,
+            marginTop: 10,
           }}
         >
           Description
@@ -105,14 +111,14 @@ export default function AddOrganization({ route, navigation }) {
             textAlign: "left",
             fontSize: 20,
             marginLeft: 20,
-            marginTop: 100,
+            marginTop: 10,
           }}
         >
           Add Image
         </Text>
         <TextInput
           keyboardType="Description"
-          style={styles.input2}
+          style={styles.input3}
           onChange={(e) => setorganizationImage(e.nativeEvent.text)}
           value={organizationImage}
         />
@@ -126,7 +132,7 @@ export default function AddOrganization({ route, navigation }) {
         <Text style={styles.letsGetStarted}> CREATE</Text>
       </TouchableOpacity>
       <Image
-        style={styles.tinyLogo1}
+        style={styles.tinyLogo2}
         source={{
           uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
         }}
@@ -150,9 +156,21 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   input2: {
-    height: 125,
+    height: 100,
     margin: 12,
-    marginTop: 15,
+    marginTop: 10,
+    borderWidth: 1,
+    padding: 10,
+    marginLeft: 20,
+    width: 290,
+    marginBottom: 0,
+    width: 380,
+    borderRadius: 25,
+  },
+  input3: {
+    height: 50,
+    margin: 12,
+    marginTop: 10,
     borderWidth: 1,
     padding: 10,
     marginLeft: 20,
@@ -238,8 +256,14 @@ const styles = StyleSheet.create({
   },
   tinyLogo1: {
     width: 450,
-    height: 50,
+    height: 200,
     marginLeft: -15,
-    marginTop: 0,
+    marginTop: -10,
+  },
+  tinyLogo2: {
+    width: 450,
+    height: 200,
+    marginLeft: -15,
+    marginTop: -20,
   },
 });

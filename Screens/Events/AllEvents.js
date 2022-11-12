@@ -11,10 +11,15 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  TextInput,
 } from "react-native";
+import { printToFileAsync } from "expo-print";
+import { shareAsync } from "expo-sharing";
 
 export default function AllEvents({ navigation }) {
   const [event, setEvent] = useState([]);
+  const [filterevents, setfilterevents] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     axios
@@ -25,6 +30,14 @@ export default function AllEvents({ navigation }) {
         }
       });
   }, []);
+
+  const searchFunc = (text) => {
+    return event.filter((event) => event.eventTitle === text);
+  };
+
+  useEffect(() => {
+    setfilterevents(searchFunc(search));
+  }, [search]);
 
   return (
     <View style={styles.container}>
@@ -54,21 +67,15 @@ export default function AllEvents({ navigation }) {
         EVENTS LIST
       </Text>
 
-      <SearchBar
-        placeholder="Search here"
-        fontColor="#000000"
-        iconColor="#000000"
-        shadowColor="#000000"
-        cancelIconColor="#000000"
-        style={{
-          borderWidth: 1,
-          marginBottom: 10,
-        }}
-        onPress={() => alert("onPress")}
-        onChangeText={(text) => console.log(text)}
+      <TextInput
+        style={styles.inputserach}
+        placeholder="Search for Event Name"
+        value={search}
+        onChangeText={(text) => setSearch(text)}
       />
+
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        {event.map((event, index) => (
+        {(search === "" ? event : filterevents).map((event, index) => (
           <View key={event + index}>
             <Card
               style={{
@@ -123,6 +130,7 @@ export default function AllEvents({ navigation }) {
                     eventTime: event.eventTime,
                     eventDate: event.eventDate,
                     eventdescription: event.eventdescription,
+                    eventImage: event.eventImage,
                   })
                 }
               >
@@ -163,5 +171,22 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginBottom: -35,
     marginTop: 0,
+  },
+  inputserach: {
+    backgroundColor: "white",
+    shadowColor: "black",
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.1,
+    elevation: 3,
+    borderRadius: 40,
+    padding: 10,
+    marginTop: 10,
+    width: 350,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 35,
+    marginBottom: 20,
+    height: 40,
+    borderWidth: 1,
   },
 });

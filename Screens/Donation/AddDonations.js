@@ -7,6 +7,7 @@ import {
   Alert,
   ScrollView,
   TextInput,
+  Button,
   TouchableOpacity,
 } from "react-native";
 import axios from "axios";
@@ -17,7 +18,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Donations({ route, navigation }) {
   const [donatorName, setdonatorName] = useState("");
   const [depositeDate, setdepositeDate] = useState("");
-  const [receipt, setreceipt] = useState("");
   const [amount, setamount] = useState("");
   const [paymenttype, setpaymenttype] = useState("");
   const [value, setValue] = useState(null);
@@ -57,7 +57,7 @@ export default function Donations({ route, navigation }) {
     const payload = {
       donatorName: donatorName,
       depositeDate: depositeDate,
-      receipt: receipt,
+      // receipt: receipt,
       amount: amount,
       paymenttype: paymenttype,
     };
@@ -126,14 +126,14 @@ export default function Donations({ route, navigation }) {
           value={depositeDate}
           style={styles.textInput2}
         ></TextInput>
-
+        {/* 
         <Text style={styles.loginText}>Please Upload Your Receipt</Text>
         <TextInput
           placeholder="Enter Deposite Date"
           onChange={(e) => setreceipt(e.nativeEvent.text)}
           value={receipt}
           style={styles.textInput2}
-        ></TextInput>
+        ></TextInput> */}
 
         <Text style={styles.loginText}>Enter Your Amount</Text>
         <TextInput
@@ -219,9 +219,10 @@ const styles = StyleSheet.create({
     marginTop: 0,
   },
   tinyLogo1: {
-    width: 450,
-    height: 200,
+    width: 500,
+    height: 250,
     marginBottom: 20,
+    marginLeft: -30,
   },
   tinyLogo4: {
     width: 450,

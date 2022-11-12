@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Card } from "react-native-shadow-cards";
 import Icon from "react-native-vector-icons/Entypo";
 import Icona from "react-native-vector-icons/AntDesign";
+import Icons from "react-native-vector-icons/Entypo";
 
 import {
   View,
@@ -12,8 +13,11 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
+  TextInput,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
+import { printToFileAsync } from "expo-print";
+import { shareAsync } from "expo-sharing";
 
 export default function SpecificEventUser({ navigation }) {
   const [specificevent, setSpecificEvent] = useState([]);
@@ -21,42 +25,130 @@ export default function SpecificEventUser({ navigation }) {
 
   useEffect(() => {
     const data = {
+      eid: route.params.eID,
       eventTitle: route.params.eventTitle,
       organizationID: route.params.organizationID,
       venue: route.params.venue,
       eventTime: route.params.eventTime,
       eventDate: route.params.eventDate,
       eventdescription: route.params.eventdescription,
+      eventImage: route.params.eventImage,
     };
+
     setSpecificEvent(data);
   }, []);
 
   const deleteevent = async () => {
     const { id } = route.params;
 
-    Alert.alert(
-      "Are you sure?",
-      "This will permanently delete the event!",
-      [
-        {
-          text: "OK",
-          onPress: async () => {
-            console.log(id);
-            axios
-              .delete(
-                `https://life-below-water.herokuapp.com/api/event/deleteevent/${id}`
-              )
-              .then((res) => {
-                navigation.push("AllEventsAdmin");
-              })
-              .catch((e) => {
-                console.error(e);
-              });
-          },
+    Alert.alert("Are you sure?", "This will permanently delete the event!", [
+      {
+        text: "OK",
+        onPress: async () => {
+          console.log(id);
+          axios
+            .delete(
+              `https://life-below-water.herokuapp.com/api/event/deleteevent/${id}`
+            )
+            .then((res) => {
+              navigation.push("AllEventsAdmin");
+            })
+            .catch((e) => {
+              console.error(e);
+            });
         },
-      ],
-      { cancelable: true }
-    );
+      },
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+      },
+    ]);
+  };
+
+  let generatePdf = async (
+    eventTitle,
+    venue,
+    eventTime,
+    eventDate,
+    eventdescription
+  ) => {
+    const html = `
+ 
+    <html>
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      margin: auto;
+      text-align: center;
+      font-family: arial;
+      hight:800;
+   width:300;
+    }
+   
+    .title {
+      color: grey;
+      font-size: 18px;
+    }
+   
+    button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 8px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+    }
+   
+    a {
+      text-decoration: none;
+      font-size: 22px;
+      color: black;
+    }
+   
+    button:hover, a:hover {
+      opacity: 0.7;
+    }
+    </style>
+    </head>
+    <body>
+   
+    <h2 style="text-align:center">Event Details  </h2>
+   
+    <div class="card">
+      <h1> Event Title :${eventTitle} </h1>
+      <p class="title"> </p>
+      <p>Venue: ${venue}</p>
+      <h1> Event Time :${eventTime} </h1>
+      <p class="title"> </p>
+      <h1> Event Date :${eventDate} </h1>
+      <p class="title"> </p>
+      <h1> Event Description :${eventdescription} </h1>
+      <p class="title"> </p>
+      <div style="margin: 24px 0;">
+        <a href="#"><i class="fa fa-dribbble"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>  
+        <a href="#"><i class="fa fa-linkedin"></i></a>  
+        <a href="#"><i class="fa fa-facebook"></i></a>
+      </div>
+    </div>
+   
+    </body>
+    </html>
+   
+`;
+
+    const file = await printToFileAsync({
+      html: html,
+      base64: false,
+    });
+
+    await shareAsync(file.uri);
   };
 
   return (
@@ -67,13 +159,8 @@ export default function SpecificEventUser({ navigation }) {
           uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
         }}
       />
+      <Image style={styles.event1} source={{ uri: specificevent.eventImage }} />
 
-      <Image
-        style={styles.event1}
-        source={{
-          uri: "https://media.istockphoto.com/photos/sea-life-on-beautiful-coral-reef-with-blacktail-butterflyfish-on-red-picture-id1364050573?b=1&k=20&m=1364050573&s=170667a&w=0&h=RU5Bi5gDzop_fvqiQXAk7elW3l8mS0t52VjLwl29bc0=",
-        }}
-      />
       <Text
         style={{
           color: "#000000",
@@ -86,12 +173,32 @@ export default function SpecificEventUser({ navigation }) {
         {specificevent.eventTitle}
       </Text>
 
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("EditEvent", {
+            eID: specificevent.eid,
+            eventTitle: specificevent.eventTitle,
+            venue: specificevent.venue,
+            eventTime: specificevent.eventTime,
+            eventDate: specificevent.eventDate,
+            eventdescription: specificevent.eventdescription,
+          })
+        }
+      >
+        <Icon
+          name="edit"
+          size={23}
+          color="#900"
+          style={{ marginLeft: 320, marginTop: 20 }}
+        />
+      </TouchableOpacity>
+
       <TouchableOpacity onPress={() => deleteevent(specificevent._id)}>
         <Icona
           name="delete"
           size={24}
           color="#900"
-          style={{ marginLeft: 370 }}
+          style={{ marginLeft: 370, marginTop: -25 }}
         />
       </TouchableOpacity>
 
@@ -100,31 +207,31 @@ export default function SpecificEventUser({ navigation }) {
           style={{
             padding: 60,
             height: 380,
-            width: 400,
+            width: 390,
             marginTop: 20,
             marginBottom: 10,
             marginLeft: 13,
             borderRadius: 25,
           }}
         >
-          <TouchableOpacity onPress={() => navigation.navigate("EditEvent")}>
-            <Icon
-              name="edit"
-              size={25}
-              color="#900"
-              style={{
-                marginLeft: 100,
-                marginTop: -50,
-                marginLeft: 250,
-                marginBottom: 20,
-              }}
-            />
-          </TouchableOpacity>
+          <Icons
+            name="print"
+            style={styles.icon7}
+            title="Generate PDF"
+            onPress={() =>
+              generatePdf(
+                specificevent.eventTitle,
+                specificevent.eventTime,
+                specificevent.eventDate,
+                specificevent.eventdescription
+              )
+            }
+          ></Icons>
           <Text
             style={{
               color: "#000000",
               textAlign: "left",
-              marginTop: -30,
+              marginTop: 50,
               fontSize: 15,
               marginLeft: -20,
               fontWeight: "bold",
@@ -177,11 +284,10 @@ export default function SpecificEventUser({ navigation }) {
               textAlign: "left",
               marginTop: 10,
               fontSize: 15,
-              marginLeft: 5,
+              marginLeft: -10,
               textAlign: "justify",
             }}
           >
-            {" "}
             {specificevent.eventdescription}
           </Text>
         </Card>
@@ -287,5 +393,14 @@ const styles = StyleSheet.create({
     minWidth: 88,
     paddingLeft: 26,
     paddingRight: 16,
+  },
+  icon7: {
+    color: "black",
+    fontSize: 20,
+    // marginLeft: 300,
+    // marginTop: -26,
+    marginLeft: 250,
+    marginTop: -40,
+    marginBottom: -30,
   },
 });

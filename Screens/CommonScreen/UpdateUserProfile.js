@@ -148,6 +148,7 @@ export default function UpdateUserProfile({ route, navigation }) {
         </Text>
         <TextInput
           keyboardType=" Email Address"
+          editable={false}
           value={email}
           onChange={(e) => setemail(e.nativeEvent.text)}
           style={styles.textView}

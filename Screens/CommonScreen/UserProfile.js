@@ -98,10 +98,10 @@ export default function UserProfile({ route, navigation }) {
       />
       <Image
         style={{
-          width: 300,
-          height: 210,
+          width: 280,
+          height: 150,
           marginTop: 10,
-          marginLeft: 70,
+          marginLeft: 80,
         }}
         source={{
           uri: "https://www.nicepng.com/png/detail/182-1829287_cammy-lin-ux-designer-circle-picture-profile-girl.png",
@@ -134,7 +134,7 @@ export default function UserProfile({ route, navigation }) {
           style={{
             marginLeft: 65,
             fontSize: 18,
-            marginTop: 20,
+            marginTop: 10,
             marginRight: 20,
           }}
         >
@@ -146,7 +146,7 @@ export default function UserProfile({ route, navigation }) {
           style={{
             marginLeft: 65,
             fontSize: 18,
-            marginTop: 20,
+            marginTop: 10,
             marginRight: 20,
           }}
         >
@@ -154,6 +154,19 @@ export default function UserProfile({ route, navigation }) {
         </Text>
 
         <Text style={styles.textView}>{profile.phoneNumber}</Text>
+
+        <Text
+          style={{
+            marginLeft: 65,
+            fontSize: 18,
+            marginTop: 10,
+            marginRight: 20,
+          }}
+        >
+          User Role :
+        </Text>
+
+        <Text style={styles.textView}>{profile.role}</Text>
 
         <TouchableOpacity
           style={[styles.containerx, styles.ButtonDark1]}
@@ -299,9 +312,9 @@ const styles = StyleSheet.create({
   },
   tinyLogo4: {
     width: 450,
-    height: 60,
+    height: 90,
     marginLeft: -15,
-    marginTop: 40,
+    marginTop: 27,
   },
   loremIpsum3: {
     color: "#121212",

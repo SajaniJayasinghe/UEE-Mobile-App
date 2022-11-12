@@ -50,7 +50,12 @@ export default function AddBlog({ route, navigation }) {
           uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
         }}
       />
-      <Image style={styles.tinyLogo1} source={require("../../assets/rr.png")} />
+      <Image
+        style={styles.tinyLogo1}
+        source={{
+          uri: "https://cdn.shopify.com/s/files/1/0024/1788/5284/files/most-endangered-marine-species.jpg?5290",
+        }}
+      />
       <ScrollView style={{ width: "100%", margin: 1 }}>
         <Text
           style={{
@@ -58,7 +63,7 @@ export default function AddBlog({ route, navigation }) {
             textAlign: "center",
             fontSize: 26,
             marginLeft: -10,
-            marginTop: 0,
+            marginTop: 20,
           }}
         >
           Create Blog
@@ -69,7 +74,7 @@ export default function AddBlog({ route, navigation }) {
               fontWeight: "800",
               textAlign: "left",
               fontSize: 20,
-              marginLeft: 30,
+              marginLeft: 60,
               marginTop: 20,
               marginBottom: -10,
             }}
@@ -88,8 +93,8 @@ export default function AddBlog({ route, navigation }) {
               fontWeight: "800",
               textAlign: "left",
               fontSize: 20,
-              marginLeft: 30,
-              marginTop: 10,
+              marginLeft: 60,
+              marginTop: 30,
               marginBottom: -10,
             }}
           >
@@ -106,8 +111,8 @@ export default function AddBlog({ route, navigation }) {
               fontWeight: "800",
               textAlign: "left",
               fontSize: 20,
-              marginLeft: 30,
-              marginTop: 90,
+              marginLeft: 60,
+              marginTop: 120,
               marginBottom: -10,
             }}
           >
@@ -130,7 +135,7 @@ export default function AddBlog({ route, navigation }) {
         </TouchableOpacity>
       </ScrollView>
       <Image
-        style={styles.tinyLogo}
+        style={styles.tinyLogo3}
         source={{
           uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
         }}
@@ -148,6 +153,12 @@ const styles = StyleSheet.create({
     marginLeft: -15,
     marginTop: 0,
   },
+  tinyLogo3: {
+    width: 490,
+    height: 30,
+    marginLeft: -15,
+    marginTop: -10,
+  },
   tinyLogo1: {
     width: 450,
     height: 200,
@@ -159,18 +170,21 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderWidth: 1,
     padding: 10,
-    marginLeft: 30,
-    width: 355,
+    marginLeft: 60,
+    width: 290,
+    marginBottom: -10,
+    borderRadius: 25,
   },
   input2: {
-    height: 70,
+    height: 125,
     margin: 12,
-    marginTop: 15,
+    marginTop: 10,
     borderWidth: 1,
     padding: 10,
-    marginLeft: 30,
-    width: 355,
-    marginBottom: -70,
+    marginLeft: 60,
+    width: 290,
+    marginBottom: -100,
+    borderRadius: 25,
   },
   loginlogo: {
     width: 440,
@@ -193,8 +207,8 @@ const styles = StyleSheet.create({
   },
 
   ButtonDark: {
-    height: 50,
-    width: 150,
+    height: 40,
+    width: 180,
     borderRadius: 100,
     shadowOffset: {
       width: 3,
@@ -203,8 +217,8 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 1,
     shadowRadius: 0,
-    marginLeft: 140,
-    marginTop: 100,
+    marginLeft: 120,
+    marginTop: 120,
   },
   containerx: {
     backgroundColor: "#ADDFFF",
@@ -238,6 +252,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   letsGetStarted: {
-    fontSize: 15,
+    fontSize: 20,
   },
 });

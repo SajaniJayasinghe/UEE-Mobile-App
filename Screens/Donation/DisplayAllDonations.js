@@ -6,6 +6,7 @@ import {
   View,
   StyleSheet,
   Image,
+  TextInput,
   TouchableOpacity,
 } from "react-native";
 import SearchBar from "react-native-dynamic-search-bar";
@@ -16,7 +17,8 @@ import Icon from "react-native-vector-icons/Entypo";
 
 export default function DisplayAllDonations({ navigation }) {
   const [donations, setdonations] = useState([]);
-
+  const [filterdonations, setfilterdonations] = useState([]);
+  const [search, setSearch] = useState("");
   const [userID, setuserID] = useState("");
 
   const getuserID = async () => {
@@ -44,6 +46,14 @@ export default function DisplayAllDonations({ navigation }) {
       });
   }, []);
 
+  const searchFunc = (text) => {
+    return donations.filter((donations) => donations.donatorName === text);
+  };
+
+  useEffect(() => {
+    setfilterdonations(searchFunc(search));
+  }, [search]);
+
   return (
     <View style={styles.container}>
       <Image
@@ -58,19 +68,11 @@ export default function DisplayAllDonations({ navigation }) {
           uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
         }}
       />
-      <SearchBar
-        placeholder="Search here"
-        fontColor="#000000"
-        iconColor="#000000"
-        shadowColor="#000000"
-        cancelIconColor="#000000"
-        onPress={() => alert("onPress")}
-        style={{
-          borderWidth: 1,
-          marginBottom: 10,
-          marginTop: 10,
-        }}
-        onChangeText={(text) => console.log(text)}
+      <TextInput
+        style={styles.inputserach}
+        placeholder="Search for Donator name"
+        value={search}
+        onChangeText={(text) => setSearch(text)}
       />
       <Text
         style={{
@@ -86,67 +88,69 @@ export default function DisplayAllDonations({ navigation }) {
       </Text>
 
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        {donations.map((donations, index) => (
-          <View style={styles.bus2} key={donations + index}>
-            <Card
-              style={{
-                padding: 10,
-                margin: 21,
-                marginTop: 0,
-                borderRadius: 25,
-              }}
-            >
-              <LinearGradient
-                colors={["#79BAEC", "#C2DFFF"]}
+        {(search === "" ? donations : filterdonations).map(
+          (donations, index) => (
+            <View style={styles.bus2} key={donations + index}>
+              <Card
                 style={{
+                  padding: 10,
+                  margin: 21,
+                  marginTop: 0,
                   borderRadius: 25,
-                  alignItems: "center",
                 }}
               >
-                <Text
+                <LinearGradient
+                  colors={["#79BAEC", "#C2DFFF"]}
                   style={{
-                    marginVertical: 2,
-                    fontSize: 25,
-                    marginLeft: -200,
+                    borderRadius: 25,
+                    alignItems: "center",
                   }}
                 >
-                  {donations.eventTitle}
-                </Text>
-              </LinearGradient>
-              <Text style={{ marginVertical: 2, marginTop: 10 }}>
-                Donator Name: {donations.donatorName}
-              </Text>
-
-              <Text style={{ marginVertical: 2 }}>
-                Amount : {donations.amount}
-              </Text>
-
-              {userID == donations.userID ? (
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate("EditDonations", {
-                      donationID: donations._id,
-                    })
-                  }
-                >
-                  <Icon
-                    name="edit"
-                    size={18}
-                    color="black"
+                  <Text
                     style={{
-                      marginLeft: 100,
-                      marginTop: -20,
-                      marginLeft: 323,
-                      marginBottom: -30,
+                      marginVertical: 2,
+                      fontSize: 25,
+                      marginLeft: -200,
                     }}
-                  />
-                </TouchableOpacity>
-              ) : (
-                ""
-              )}
-            </Card>
-          </View>
-        ))}
+                  >
+                    {donations.eventTitle}
+                  </Text>
+                </LinearGradient>
+                <Text style={{ marginVertical: 2, marginTop: 10 }}>
+                  Donator Name: {donations.donatorName}
+                </Text>
+
+                <Text style={{ marginVertical: 2 }}>
+                  Amount : {donations.amount}
+                </Text>
+
+                {userID == donations.userID ? (
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate("EditDonations", {
+                        donationID: donations._id,
+                      })
+                    }
+                  >
+                    <Icon
+                      name="edit"
+                      size={18}
+                      color="black"
+                      style={{
+                        marginLeft: 100,
+                        marginTop: -20,
+                        marginLeft: 323,
+                        marginBottom: -30,
+                      }}
+                    />
+                  </TouchableOpacity>
+                ) : (
+                  ""
+                )}
+              </Card>
+            </View>
+          )
+        )}
       </ScrollView>
       <Image
         style={styles.tinyLogo}
@@ -177,15 +181,22 @@ const styles = StyleSheet.create({
     marginTop: 30,
     flexDirection: "row",
   },
-  // log2: {
-  //   width: 375,
-  //   height: 40,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   marginLeft: -2,
-  //   borderRadius: 25,
-  //   flexDirection: "row",
-  // },
+  inputserach: {
+    backgroundColor: "white",
+    shadowColor: "black",
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.1,
+    elevation: 3,
+    borderRadius: 40,
+    padding: 10,
+    marginTop: 10,
+    width: 350,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 35,
+    height: 40,
+    borderWidth: 1,
+  },
   tinyLogo: {
     width: 450,
     height: 50,

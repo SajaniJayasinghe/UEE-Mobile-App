@@ -25,6 +25,7 @@ export default function SpecificEventUser({ navigation }) {
       eventTime: route.params.eventTime,
       eventDate: route.params.eventDate,
       eventdescription: route.params.eventdescription,
+      eventImage: route.params.eventImage,
     };
     setSpecificEvent(data);
     console.log(data);
@@ -39,12 +40,8 @@ export default function SpecificEventUser({ navigation }) {
         }}
       />
 
-      <Image
-        style={styles.event1}
-        source={{
-          uri: "https://media.istockphoto.com/photos/sea-life-on-beautiful-coral-reef-with-blacktail-butterflyfish-on-red-picture-id1364050573?b=1&k=20&m=1364050573&s=170667a&w=0&h=RU5Bi5gDzop_fvqiQXAk7elW3l8mS0t52VjLwl29bc0=",
-        }}
-      />
+      <Image style={styles.event1} source={{ uri: specificevent.eventImage }} />
+
       <Text
         style={{
           color: "#000000",

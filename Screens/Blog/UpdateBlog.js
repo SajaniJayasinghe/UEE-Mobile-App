@@ -9,67 +9,51 @@ import {
   ScrollView,
   TextInput,
   Alert,
+  Item,
 } from "react-native";
 import axios from "axios";
-import AntDesign from "react-native-vector-icons/AntDesign";
 
 export default function UpdateBlog({ navigation }) {
   const [blog, setblog] = useState([]);
   const route = useRoute();
 
-  // const bID = route.params.bid;
+  const [blogID, setblogID] = useState("");
+  const [blogName, setblogName] = useState("");
+  const [description, setdescription] = useState("");
+  const [blogImage, setblogImage] = useState("");
 
-  // const [blogName, setblogName] = useState("");
-  // const [description, setdescription] = useState("");
-  // const [blogImage, setblogImage] = useState("");
+  useEffect(() => {
+    setblogID(route.params.bid);
+    setblogName(route.params.blogName);
+    setdescription(route.params.description);
+    setblogImage(route.params.blogImage);
+  }, []);
+  console.log(blogID);
+  const updateBlog = async () => {
+    const URL = `https://life-below-water.herokuapp.com/api/blog/update/${blogID}`;
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`https://life-below-water.herokuapp.com/api/blog/getblog/${bID}`)
-  //     .then((res) => {
-  //       // setbID(res.data.blog.bID)
-  //       setblogName(res.data.blog.blogName);
-  //       setdescription(res.data.description);
-  //       setblogImage(res.data.blogImage);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // }, []);
-
-  // useEffect(() => {
-  //   const data = {
-  //     id:route.params.bid,
-  //     blogName: route.params.blogName,
-  //     description: route.params.description,
-  //     blogImage:route.params.blogImage
-  //   };
-  //   setblog(data);
-  // }, []);
-
-  // const updateBlog = async () => {
-  //   const URL = `https://life-below-water.herokuapp.com/api/blog/update/${bID}`;
-  //   const payload = {
-  //     blogName: blogName,
-  //     description: description,
-  //     blogImage: blogImage,
-  //   };
-  //   axios
-  //     .put(URL, payload)
-  //     .then((res) => {
-  //       Alert.alert("Blog update successfull");
-  //       navigation.navigate("UpdateList");
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //       Alert.alert(
-  //         "Error",
-  //         "Inserting Unsuccessful",
-  //         [{ text: "Check Again" }],
-  //         { cancelable: false }
-  //       );
-  //     });
-  // };
+    const payload = {
+      blogName: blogName,
+      description: description,
+      blogImage: blogImage,
+    };
+    console.log(payload);
+    await axios
+      .put(URL, payload)
+      .then((res) => {
+        Alert.alert("Blog update successfull");
+        navigation.navigate("BlogsList");
+      })
+      .catch((error) => {
+        console.error(error);
+        Alert.alert(
+          "Error",
+          "Inserting Unsuccessful",
+          [{ text: "Check Again" }],
+          { cancelable: false }
+        );
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -81,51 +65,35 @@ export default function UpdateBlog({ navigation }) {
       />
 
       <Text style={styles.loginText1}>UPDATE BLOG</Text>
-      <Image
-        style={styles.blog1}
-        source={{
-          uri: "https://media.istockphoto.com/photos/sea-life-on-beautiful-coral-reef-with-blacktail-butterflyfish-on-red-picture-id1364050573?b=1&k=20&m=1364050573&s=170667a&w=0&h=RU5Bi5gDzop_fvqiQXAk7elW3l8mS0t52VjLwl29bc0=",
-        }}
-      />
+      <Image style={styles.blog1} source={{ uri: blogImage }} />
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
-        <Text
-          style={{
-            color: "black",
-            fontSize: 18,
-            lineHeight: 18,
-            marginBottom: -10,
-            marginLeft: 40,
-            marginTop: 30,
-          }}
-        >
-          Name Of Blog
-        </Text>
+        <Text style={styles.loginText}>Name Of Blog</Text>
         <TextInput
-          // value={blog.blogName}
+          value={blogName}
           placeholder="Name Of Blog"
-          // onChange={(e) => setblogName(e.nativeEvent.text)}
+          onChange={(e) => setblogName(e.nativeEvent.text)}
           style={styles.textInput2}
         ></TextInput>
 
         <Text style={styles.loginText}>Description</Text>
         <TextInput
-          // value={blog.description}
+          value={description}
           placeholder="Description"
-          // onChange={(e) => setdescription(e.nativeEvent.text)}
+          onChange={(e) => setdescription(e.nativeEvent.text)}
           style={styles.textInput2}
         ></TextInput>
 
         <Text style={styles.loginText}>Image</Text>
         <TextInput
-          // value={blog.blogImage}
+          value={blogImage}
           placeholder="Enter Image"
-          // onChange={(e) => setblogImage(e.nativeEvent.text)}
+          onChange={(e) => setblogImage(e.nativeEvent.text)}
           style={styles.textInput2}
         ></TextInput>
 
         <TouchableOpacity
           style={[styles.containerx, styles.ButtonDark]}
-          // onPress={() => updateBlog()}
+          onPress={() => updateBlog()}
         >
           <Text style={styles.loginText3}>Update</Text>
         </TouchableOpacity>
@@ -152,25 +120,25 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderWidth: 1,
     borderRadius: 25,
-    marginTop: 15,
-    marginLeft: 40,
+    marginTop: 20,
+    marginLeft: 50,
     marginBottom: 10,
   },
-
   loginText: {
     color: "black",
     fontSize: 18,
     lineHeight: 18,
     marginBottom: -10,
-    marginLeft: 40,
-    marginTop: 10,
+    marginLeft: 50,
+    marginTop: 20,
+    fontWeight: "bold",
   },
   loginText1: {
     marginLeft: 120,
     fontSize: 28,
     color: "#151B54",
     fontWeight: "bold",
-    marginTop: 30,
+    marginTop: 20,
     marginBottom: 10,
   },
   loginText2: {
@@ -203,13 +171,60 @@ const styles = StyleSheet.create({
     marginLeft: -15,
     marginTop: 0,
   },
-
+  dropdown: {
+    margin: 16,
+    height: 40,
+    backgroundColor: "white",
+    borderRadius: 12,
+    padding: 12,
+    width: 334,
+    marginLeft: 45,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
+    borderColor: "#FFBC26",
+    borderWidth: 2,
+    borderRadius: 25,
+    marginTop: 30,
+    marginLeft: 50,
+  },
+  icon: {
+    marginRight: 5,
+  },
+  item: {
+    padding: 13,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  textItem: {
+    flex: 1,
+    fontSize: 16,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
+  },
   blog1: {
-    width: 390,
-    height: 200,
+    width: 350,
+    height: 180,
+    marginLeft: 37,
     marginTop: 20,
-    marginLeft: 14,
-    marginBottom: 20,
   },
   ButtonDark: {
     height: 50,
@@ -222,8 +237,8 @@ const styles = StyleSheet.create({
     elevation: 5,
     shadowOpacity: 1,
     shadowRadius: 0,
-    marginTop: 30,
-    marginLeft: 140,
+    marginTop: 40,
+    marginLeft: 130,
   },
   containerx: {
     marginTop: -20,

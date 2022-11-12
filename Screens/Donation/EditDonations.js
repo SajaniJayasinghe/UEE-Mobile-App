@@ -18,6 +18,7 @@ import { useRoute } from "@react-navigation/native";
 export default function EditDonations({ navigation }) {
   const [token, settoken] = useState("");
   const route = useRoute();
+
   const getToken = async () => {
     settoken(await AsyncStorage.getItem("token"));
   };
@@ -26,12 +27,10 @@ export default function EditDonations({ navigation }) {
 
   const [donatorName, setdonatorName] = useState("");
   const [depositeDate, setdepositeDate] = useState("");
-  const [receipt, setreceipt] = useState("");
+  // const [receipt, setreceipt] = useState("");
   const [amount, setamount] = useState("");
   const [paymenttype, setpaymenttype] = useState("");
   const [value, setValue] = useState(null);
-
-  // const did = route.params.did;
 
   const data = [
     { label: "Cash", value: "Cash" },
@@ -41,7 +40,7 @@ export default function EditDonations({ navigation }) {
   const getDonation = async () => {
     var Token = await AsyncStorage.getItem("token");
     console.log(Token);
-    // console.log({ did: did });
+
     await axios
       .get(
         `https://life-below-water.herokuapp.com/api/donation/getonedonation/${route.params.donationID}`,
@@ -55,7 +54,7 @@ export default function EditDonations({ navigation }) {
         if (res.data.success) {
           setdonatorName(res.data.existingDonations.donatorName);
           setdepositeDate(res.data.existingDonations.depositeDate);
-          setreceipt(res.data.existingDonations.receipt);
+          // setreceipt(res.data.existingDonations.receipt);
           setamount(res.data.existingDonations.amount);
           setpaymenttype(res.data.existingDonations.paymenttype);
         }
@@ -77,7 +76,7 @@ export default function EditDonations({ navigation }) {
     const payload = {
       donatorName: donatorName,
       depositeDate: depositeDate,
-      receipt: receipt,
+      // receipt: receipt,
       amount: amount,
       paymenttype: paymenttype,
     };
@@ -151,13 +150,13 @@ export default function EditDonations({ navigation }) {
           onChange={(e) => setdepositeDate(e.nativeEvent.text)}
         ></TextInput>
 
-        <Text style={styles.loginText}>Please Upload Your Receipt</Text>
+        {/* <Text style={styles.loginText}>Please Upload Your Receipt</Text>
         <TextInput
           placeholder="Upload Your Receipt"
           style={styles.textInput2}
           value={receipt}
           onChange={(e) => setreceipt(e.nativeEvent.text)}
-        ></TextInput>
+        ></TextInput> */}
 
         <Text style={styles.loginText}>Enter Your Amount</Text>
         <TextInput

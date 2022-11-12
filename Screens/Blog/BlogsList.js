@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card } from "react-native-shadow-cards";
-import SearchBar from "react-native-dynamic-search-bar";
 import {
   View,
   Image,
@@ -9,10 +8,16 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  TextInput,
+  Button,
 } from "react-native";
+import { printToFileAsync } from "expo-print";
+import { shareAsync } from "expo-sharing";
 
 export default function BlogsList({ navigation }) {
   const [blog, setblog] = useState([]);
+  const [filterblogs, setfilterblogs] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     axios
@@ -23,6 +28,92 @@ export default function BlogsList({ navigation }) {
         }
       });
   }, []);
+
+  const searchFunc = (text) => {
+    return blog.filter((blog) => blog.blogName === text);
+  };
+
+  useEffect(() => {
+    setfilterblogs(searchFunc(search));
+  }, [search]);
+  ("");
+
+  let generatePdf = async (blogName, description) => {
+    const html = `
+ 
+    <html>
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      margin: auto;
+      text-align: center;
+      font-family: arial;
+    }
+   
+    .title {
+      color: grey;
+      font-size: 18px;
+    }
+   
+    button {
+      border: none;
+      outline: 0;
+      display: inline-block;
+      padding: 8px;
+      color: white;
+      background-color: #000;
+      text-align: center;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+    }
+   
+    a {
+      text-decoration: none;
+      font-size: 22px;
+      color: black;
+    }
+   
+    button:hover, a:hover {
+      opacity: 0.7;
+    }
+    </style>
+    </head>
+    <body>
+   
+    <h2 style="text-align:center">Blogs Details  </h2>
+   
+    <div class="card">
+      <img src="https://bokun.s3.amazonaws.com/b1e06f81-8717-4e42-90da-ae4fa6d76c24.png" alt="John" style="width:100%">
+      <h1>BlogName : ${blogName} </h1>
+      <p class="title"> </p>
+      <p>Description : ${description}</p>
+      <div style="margin: 24px 0;">
+        <a href="#"><i class="fa fa-dribbble"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>  
+        <a href="#"><i class="fa fa-linkedin"></i></a>  
+        <a href="#"><i class="fa fa-facebook"></i></a>
+      </div>
+ 
+      <p> Thanks For view Our Blogs </p>
+ 
+    </div>
+   
+    </body>
+    </html>
+   
+`;
+
+    const file = await printToFileAsync({
+      html: html,
+      base64: false,
+    });
+
+    await shareAsync(file.uri);
+  };
 
   return (
     <View style={styles.container}>
@@ -47,34 +138,19 @@ export default function BlogsList({ navigation }) {
         style={[styles.containerx, styles.materialButtonDark]}
         onPress={() => navigation.navigate("AddBlog")}
       >
-        <Text style={styles.addnewblog}>Add Blogs</Text>
+        <Text style={styles.addnewblog}>Add New Blog</Text>
       </TouchableOpacity>
-
-      <SearchBar
-        placeholder="Search here"
-        fontColor="#000000"
-        iconColor="#000000"
-        shadowColor="#000000"
-        cancelIconColor="#000000"
-        style={{
-          borderWidth: 1,
-        }}
-        onPress={() => alert("onPress")}
-        onChangeText={(text) => console.log(text)}
+      <TextInput
+        style={styles.inputserach}
+        placeholder="Search for Blogs"
+        value={search}
+        onChangeText={(text) => setSearch(text)}
       />
       <ScrollView>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            marginTop: 20,
-            marginLeft: 35,
-          }}
-        >
-          {blog.map((blog, index) => (
+        <View style={{ display: "flex", flexDirection: "column", padding: 25 }}>
+          {(search === "" ? blog : filterblogs).map((blog, index) => (
             <View key={blog + index}>
               <TouchableOpacity
-                // onPress={() => navigation.navigate("UpdateList", blog._id)}
                 onPress={() =>
                   navigation.navigate("UpdateList", {
                     bid: blog._id,
@@ -88,9 +164,10 @@ export default function BlogsList({ navigation }) {
                   style={{
                     padding: 100,
                     margin: -4,
-                    height: 300,
-                    width: 350,
-                    marginBottom: 20,
+                    height: 460,
+                    width: 380,
+                    marginBottom: 50,
+                    marginLeft: -6,
                   }}
                 >
                   <Image
@@ -102,7 +179,8 @@ export default function BlogsList({ navigation }) {
                       marginVertical: 5,
                       fontSize: 20,
                       flexDirection: "row",
-                      justifyContent: "flex-end",
+                      textAlign: "center",
+                      fontWeight: "bold",
                     }}
                   >
                     {blog.blogName}
@@ -110,25 +188,27 @@ export default function BlogsList({ navigation }) {
                   <Text
                     style={{
                       marginVertical: 5,
-                      fontSize: 20,
+                      fontSize: 15,
                       flexDirection: "row",
-                      justifyContent: "flex-end",
+                      textAlign: "justify",
+                      margin: -80,
                     }}
                   >
                     {blog.description}
                   </Text>
+                  <TouchableOpacity
+                    style={[styles.containerx1, styles.materialButtonDark1]}
+                    title="Generate PDF"
+                    onPress={() => generatePdf(blog.blogName, blog.description)}
+                  >
+                    <Text style={styles.addnewblog}>Generate PDF</Text>
+                  </TouchableOpacity>
                 </Card>
               </TouchableOpacity>
             </View>
           ))}
         </View>
       </ScrollView>
-      <Image
-        style={styles.tiny1}
-        source={{
-          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
-        }}
-      />
     </View>
   );
 }
@@ -145,18 +225,12 @@ const styles = StyleSheet.create({
   },
   tiny1: {
     width: 470,
-    height: 20,
-    marginLeft: -15,
-    marginTop: -50,
-  },
-  tiny1: {
-    width: 470,
     height: 40,
     marginLeft: -15,
     marginTop: -50,
   },
   blog1: {
-    width: 350,
+    width: 380,
     height: 150,
     marginLeft: -99,
     marginTop: -100,
@@ -164,7 +238,7 @@ const styles = StyleSheet.create({
 
   materialButtonDark: {
     height: 40,
-    width: 140,
+    width: 180,
     borderRadius: 130,
     shadowColor: "rgba(0,0,0,1)",
     shadowOffset: {
@@ -175,8 +249,25 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 0,
     marginTop: 25,
-    marginLeft: 250,
+    marginLeft: 220,
     marginBottom: 15,
+  },
+  inputserach: {
+    backgroundColor: "white",
+    shadowColor: "black",
+    shadowOffset: { width: 5, height: 5 },
+    shadowOpacity: 0.1,
+    elevation: 3,
+    borderRadius: 40,
+    padding: 10,
+    marginTop: 10,
+    width: 350,
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 27,
+    height: 40,
+    borderWidth: 1,
+    marginBottom: 20,
   },
 
   addnewblog: {
@@ -213,5 +304,38 @@ const styles = StyleSheet.create({
     marginTop: -10,
     marginLeft: -10,
     flexDirection: "row",
+  },
+  materialButtonDark1: {
+    height: 30,
+    width: 180,
+    borderRadius: 130,
+    shadowColor: "rgba(0,0,0,1)",
+    shadowOffset: {
+      width: 3,
+      height: 3,
+    },
+    elevation: 5,
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    marginTop: 10,
+    marginLeft: 0,
+  },
+  containerx1: {
+    backgroundColor: "#C6DEFF",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    borderRadius: 2,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.35,
+    shadowRadius: 5,
+    elevation: 2,
+    minWidth: 88,
+    paddingLeft: 26,
+    paddingRight: 16,
   },
 });

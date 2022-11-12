@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -6,9 +6,79 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
+import axios from "axios";
+import { useRoute } from "@react-navigation/native";
 
 export default function EditOrganizaton({ navigation }) {
+  const [organizationName, setOrganizationName] = useState("");
+  const [description, setDescription] = useState("");
+  const [organizationImage, setOrganizationImage] = useState("");
+  const route = useRoute();
+
+  const getOrganization = async () => {
+    const organizationID = route.params.id;
+
+    await axios
+      .get(
+        `https://life-below-water.herokuapp.com/api/organization/${organizationID}`
+      )
+      .then((res) => {
+        if (res.data.success) {
+          setOrganizationName(res.data.existingOrganizations.organizationName);
+          setDescription(res.data.existingOrganizations.description);
+          setOrganizationImage(
+            res.data.existingOrganizations.organizationImage
+          );
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+  useEffect(() => {
+    getOrganization();
+  }, []);
+
+  const updateUser = () => {
+    const organizationID = route.params.id;
+    console.log(organizationID);
+
+    const URL = `https://life-below-water.herokuapp.com/api/organization/update/${organizationID}`;
+
+    const payload = {
+      organizationName: organizationName,
+      description: description,
+      organizationImage: organizationImage,
+    };
+
+    axios
+      .put(URL, payload)
+      .then((res) => {
+        Alert.alert(
+          "Use Profile Updated",
+          "Your Profile has updated successfully!!",
+          [
+            {
+              text: "OK",
+              onPress: () => navigation.navigate("AdminDashboard"),
+            },
+          ],
+          { cancelable: false }
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+        Alert.alert(
+          "Error",
+          "Inserting Unsuccessful",
+          [{ text: "Check Again" }],
+          { cancelable: false }
+        );
+      });
+  };
+
   return (
     <View style={styles.container}>
       <Image
@@ -42,8 +112,8 @@ export default function EditOrganizaton({ navigation }) {
         <TextInput
           keyboardType=" Organization Name"
           style={styles.textView}
-          // onChange={(e) => setEmail(e.nativeEvent.text)}
-          // value={email}
+          onChange={(e) => setOrganizationName(e.nativeEvent.text)}
+          value={organizationName}
           placeholder="    Organization Name"
         />
       </View>
@@ -51,15 +121,17 @@ export default function EditOrganizaton({ navigation }) {
         <TextInput
           keyboardType=" Description"
           style={styles.textView}
-          // onChange={(e) => setEmail(e.nativeEvent.text)}
-          // value={email}
+          onChange={(e) => setDescription(e.nativeEvent.text)}
+          value={description}
           placeholder="    Description"
         />
       </View>
 
       <TouchableOpacity
         style={[styles.containerbtn, styles.ButtonDark]}
-        onPress={() => navigation.navigate("AllOrganizations")}
+        onPress={() => {
+          updateUser();
+        }}
       >
         <Text
           style={{

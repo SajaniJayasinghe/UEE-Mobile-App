@@ -12,7 +12,6 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
-  UpdateBlogs,
 } from "react-native";
 
 const SpecificBlog = ({ navigation }) => {
@@ -49,6 +48,10 @@ const SpecificBlog = ({ navigation }) => {
             });
         },
       },
+      {
+        text: "Cancel",
+        onPress: () => console.log("UpdateList"),
+      },
     ]);
   };
 
@@ -74,7 +77,7 @@ const SpecificBlog = ({ navigation }) => {
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("UpdateBlog", {
-            bid: blog._id,
+            bid: blog.id,
             blogName: blog.blogName,
             description: blog.description,
             blogImage: blog.blogImage,
@@ -83,28 +86,36 @@ const SpecificBlog = ({ navigation }) => {
       >
         <Icon
           name="edit"
-          size={25}
+          size={30}
           color="#0020C2"
-          style={{ marginLeft: 310, marginTop: 20, marginRight: 10 }}
+          style={{ marginLeft: 280, marginTop: 20 }}
         />
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => deleteblog(blog.id)}>
         <Icona
           name="delete"
-          size={25}
+          size={30}
           color="#E41B17"
-          style={{ marginLeft: 350, marginTop: -29 }}
+          style={{ marginLeft: 330, marginTop: -30 }}
         />
       </TouchableOpacity>
 
-      <Image
-        style={styles.blog1}
-        source={{
-          uri: "https://media.istockphoto.com/photos/sea-life-on-beautiful-coral-reef-with-blacktail-butterflyfish-on-red-picture-id1364050573?b=1&k=20&m=1364050573&s=170667a&w=0&h=RU5Bi5gDzop_fvqiQXAk7elW3l8mS0t52VjLwl29bc0=",
-        }}
-      />
+      <Image style={styles.blog1} source={{ uri: blog.blogImage }} />
       <ScrollView style={{ display: "flex", flexDirection: "column" }}>
+        <Text
+          style={{
+            color: "#000000",
+            marginRight: 25,
+            marginTop: 25,
+            fontSize: 15,
+            fontWeight: "bold",
+            textAlign: "justify",
+            marginLeft: 20,
+          }}
+        >
+          {blog.description}
+        </Text>
         <Text
           style={{
             color: "#000000",
@@ -115,12 +126,12 @@ const SpecificBlog = ({ navigation }) => {
             fontWeight: "bold",
           }}
         >
-          {blog.description}
+          {blog.blogImage}
         </Text>
       </ScrollView>
       <TouchableOpacity
         style={[styles.containerxb, styles.materialButtonDarkb]}
-        onPress={() => navigation.navigate("AdditionalVideosImages")}
+        onPress={() => navigation.navigate("AllAdditionalblogs")}
       >
         <Text style={styles.addnewblog}>See More</Text>
       </TouchableOpacity>
@@ -150,10 +161,10 @@ const styles = StyleSheet.create({
     marginTop: -5,
   },
   blog1: {
-    width: 350,
+    width: 380,
     height: 220,
     marginLeft: 19,
-    marginTop: 20,
+    marginTop: 30,
   },
   addnewblog: {
     color: "black",
@@ -163,7 +174,7 @@ const styles = StyleSheet.create({
   },
   materialButtonDarkb: {
     height: 40,
-    width: 150,
+    width: 130,
     borderRadius: 130,
     shadowColor: "rgba(0,0,0,1)",
     shadowOffset: {
@@ -174,7 +185,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 0,
     marginTop: 15,
-    marginLeft: 240,
+    marginLeft: 150,
     marginBottom: 15,
   },
 

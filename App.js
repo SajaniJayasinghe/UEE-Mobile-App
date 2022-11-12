@@ -25,12 +25,12 @@ import EditOrganizaton from "./Screens/Organizations/EditOrganizaton";
 import Organizations from "./Screens/Organizations/Organizations";
 import SpecificOrganization from "./Screens/Organizations/SpecificOrganization";
 import Members from "./Screens/Organizations/Members";
-import DeleteBlogs from "./Screens/Blog/DeleteBlogs";
 import AddBlog from "./Screens/Blog/AddBlog";
 import AdditionalVideosImages from "./Screens/Blog/AdditionalVideosImages";
 import UpdateBlog from "./Screens/Blog/UpdateBlog";
 import BlogsList from "./Screens/Blog/BlogsList";
 import SpecificBlog from "./Screens/Blog/SpecificBlog";
+import AllAdditionalblogs from "./Screens/Blog/AllAdditionalblogs";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -75,11 +75,14 @@ export default function App() {
         <Stack.Screen name="BlogsList" component={BlogsList} />
         <Stack.Screen name="UpdateBlog" component={UpdateBlog} />
         <Stack.Screen name="UpdateList" component={SpecificBlog} />
-        <Stack.Screen name="DeleteBlogs" component={DeleteBlogs} />
         <Stack.Screen name="AddBlog" component={AddBlog} />
         <Stack.Screen
           name="AdditionalVideosImages"
           component={AdditionalVideosImages}
+        />
+        <Stack.Screen
+          name="AllAdditionalblogs"
+          component={AllAdditionalblogs}
         />
       </Stack.Navigator>
     </NavigationContainer>
