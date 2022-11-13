@@ -216,8 +216,8 @@ const styles = StyleSheet.create({
   icon7: {
     color: "black",
     fontSize: 20,
-    marginLeft: 300,
-    marginTop: -36,
+    marginLeft: 335,
+    marginTop: -80,
   },
   rect1: {
     width: 384,
