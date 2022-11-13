@@ -10,15 +10,29 @@ const LoadingScreen = ({ navigation }) => {
           uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667592233/Rectangle_6_xzuyuq.png",
         }}
       />
+
       <Image
         style={styles.tinyLogo2}
         source={{
-          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667591652/1421195_zbvn6n.webp",
+          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1668327712/Screenshot_2022-11-13_at_13.50.12-removebg-preview_iiviiw.png",
         }}
       />
       <Text
         style={{
-          color: "#000000",
+          color: "#fff",
+          textAlign: "center",
+          marginTop: 0,
+          fontSize: 20,
+          marginBottom: 20,
+          fontWeight: "bold",
+          fontFamily: "Times New Roman",
+        }}
+      >
+        Titans - Team
+      </Text>
+      <Text
+        style={{
+          color: "#fff",
           textAlign: "center",
           marginTop: 10,
           fontSize: 28,
@@ -30,10 +44,10 @@ const LoadingScreen = ({ navigation }) => {
       </Text>
       <Text
         style={{
-          color: "#000000",
+          color: "#ffff",
           textAlign: "center",
           marginTop: 10,
-          fontSize: 28,
+          fontSize: 30,
           fontWeight: "bold",
           fontFamily: "Times New Roman",
           marginBottom: 20,
@@ -41,12 +55,6 @@ const LoadingScreen = ({ navigation }) => {
       >
         LIFE BELOW WATER
       </Text>
-      <Image
-        style={styles.tinyLogo3}
-        source={{
-          uri: "https://res.cloudinary.com/nibmsa/image/upload/v1667591652/1319008_jazlut.jpg",
-        }}
-      />
       <TouchableOpacity
         style={[styles.containerx, styles.materialButtonDark]}
         onPress={() => navigation.navigate("HomeScreen")}
@@ -66,7 +74,16 @@ const LoadingScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#D3EAFF",
+    backgroundColor: "#4863A0",
+  },
+  text: {
+    color: "white",
+  },
+  tinyLogo2: {
+    width: 200,
+    height: 200,
+    marginTop: 150,
+    marginLeft: 125,
   },
   tinyLogo: {
     width: 470,
@@ -74,51 +91,12 @@ const styles = StyleSheet.create({
     marginLeft: -15,
     marginTop: -50,
   },
-  tinyLogo2: {
-    width: 470,
-    height: 300,
-    marginLeft: -15,
-  },
-  tinyLogo3: {
-    width: 450,
-    height: 310,
-    marginLeft: -15,
-  },
   tinyLogo4: {
     width: 450,
-    height: 80,
+    height: 60,
     marginLeft: -15,
-    marginTop: 20,
+    marginTop: 0,
   },
-  text: {
-    color: "black",
-    marginTop: 5,
-  },
-
-  materialButtonDark: {
-    height: 50,
-    width: 160,
-    borderRadius: 100,
-    shadowColor: "rgba(0,0,0,1)",
-    shadowOffset: {
-      width: 3,
-      height: 3,
-    },
-    elevation: 5,
-    shadowOpacity: 1,
-    shadowRadius: 0,
-    marginTop: -80,
-    marginBottom: 10,
-    marginLeft: 130,
-  },
-
-  letsGetStarted: {
-    color: "black",
-    fontWeight: "bold",
-    fontSize: 18,
-    lineHeight: 18,
-  },
-
   containerx: {
     backgroundColor: "#FFFFFF",
     justifyContent: "center",
@@ -137,16 +115,28 @@ const styles = StyleSheet.create({
     paddingLeft: 26,
     paddingRight: 16,
   },
+  materialButtonDark: {
+    height: 50,
+    width: 160,
+    borderRadius: 100,
+    shadowColor: "rgba(0,0,0,1)",
+    shadowOffset: {
+      width: 3,
+      height: 3,
+    },
+    elevation: 5,
+    shadowOpacity: 1,
+    shadowRadius: 0,
+    marginTop: 160,
+    marginBottom: 10,
+    marginLeft: 130,
+  },
 
-  loading: {
-    width: 150,
-    height: 40,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 50,
-    marginTop: 20,
-    marginLeft: 140,
-    flexDirection: "row",
+  letsGetStarted: {
+    color: "black",
+    fontWeight: "bold",
+    fontSize: 18,
+    lineHeight: 18,
   },
 });
 
