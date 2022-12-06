@@ -1,4 +1,4 @@
-#UEE_Project_Life_Below_Water
+UEE_Project_Life_Below_Water
 
 
 This is a mobile application which mainly targets conserving the marine habitats and the coastal area. Application brings four main functions to the users.
